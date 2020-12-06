@@ -7,16 +7,36 @@
 html, body {
   width: 100%;
   height: 100%;
-  background: #999;
 }
 
 body {
   font-family: "ProductSans";
+  
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.flex {
+  display: flex;
+}
+
+.fl-1 {
+  flex: 1;
+}
+
+.fl-2 {
+  flex: 2;
+}
+
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
 }
 
 /* Header START */
@@ -29,6 +49,8 @@ a {
   padding: 0 7%;
   border-radius: 0 0 40px 40px;
   justify-content: space-between;
+  margin-bottom: 50px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 #header .logo {
@@ -53,3 +75,288 @@ a {
 }
 
 /* Header END */
+
+.signup-container {
+  padding: 0 5%;
+}
+
+.signup-img {
+  width: 100%;
+  background-image: url(../jpg/galen-crout-fItRJ7AHak8-unsplash.jpg);
+  filter: blur(2px);
+  /* -webkit-filter: blur(2px); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+#signup .signup-form {
+  margin: 0 auto;
+  background-color: white;
+  margin: 0 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 25px;
+  padding: 10px 15px;
+
+}
+
+#signup form {
+  width: 100%;
+  height: 100%;
+}
+
+#signup form h1 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+#signup .signup-content {
+  position: absolute;
+  left: 0;
+  right: 45%;
+  z-index: 9999;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white;
+  margin-top: 250px;
+  font-size: 28px;
+  text-align: center;
+}
+
+
+#footer {
+  margin-top: 30px;
+  width: 100%;
+  background: #3e3e3e;
+  position: relative;
+}
+
+#footer .f {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 45px 7%;
+}
+
+#footer .logo {
+  flex-grow: 1;
+  flex-basis: 400px;
+  min-width: 300px;
+  margin-bottom: 30px;
+}
+
+#footer .logo img {
+  width: 120px;
+}
+
+#footer .logo .content {
+  margin-top: 20px;
+  color: #bababa;
+  max-width: 450px;
+  text-align: justify;
+}
+
+#footer .links {
+  flex-grow: 2;
+  flex-basis: 300px;
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+#footer .links .col {
+  width: 200px;
+}
+
+#footer .links .col li {
+  margin-bottom: 25px;
+  list-style-type: none;
+  font-weight: bold;
+}
+
+#footer .links .col a {
+  color: #dfdfdf;
+}
+
+#footer .links .col a:hover {
+  color: #f4f4f4;
+}
+
+#footer .footer-end {
+  background: #323232;
+  padding: 45px 7%;
+  color: #999;
+  height: 120px;
+}
+
+#footer .footer-end .legal {
+  float: right;
+}
+
+#footer .social {
+  float: left;
+  display: flex;
+}
+
+#footer .social a {
+  margin-right: 15px;
+}
+
+.top {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  position: absolute;
+  bottom: 140px;
+  left: 7%;
+  border-radius: 10px;
+  opacity: 0.6;
+  transition: opacity .2s;
+}
+
+.top:hover {
+  opacity: 1;
+}
+
+.input {
+  margin-top: 8px;
+  padding-left: 45px;
+  height: 50px;
+  outline: none;
+  font-size: 15px;
+  color: black;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: "ProductSans";
+}
+
+.icon {
+  font-size: 21px;
+  color: #a0a0a0;
+  position: absolute;
+  left: 15px;
+  z-index: 1;
+  bottom: 15px;
+}
+
+label {
+  position: relative;
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 15px;
+  cursor: default;
+  text-align: left;
+}
+
+.button-container {
+  text-align: center;
+  width: 100%;
+  margin: 30px;
+  margin-left: 11%;
+}
+
+.bButton {
+  width: 200px;
+  height: 50px;
+  background: none;
+  border: 3px solid rgba(1, 179, 1, 0.801);
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 500ms;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.bButtonb {
+  width: 200px;
+  height: 50px;
+  background: none;
+  border: 3px solid black;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 500ms;
+  outline: none;
+  color: white;
+  background-color: black;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.bButtonb span {
+  color: white;
+  font-weight: bold;
+}
+
+.span , .svg {
+  position: absolute;
+  color:  rgba(1, 179, 1, 0.801);
+  fill: transparent;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bButton:hover {
+  font-size: 14px;
+}
+
+.bButton:focus {
+  outline: none;
+  border: 2px solid transparent;
+  width: 50px;
+  border-left: 2px solid  rgba(1, 179, 1, 0.801);
+  border-bottom: 2px solid  rgba(1, 179, 1, 0.801);
+  animation: spin 2s 500ms forwards;
+}
+
+.bButton:focus .span {
+  color: transparent;
+}
+
+.bButton:focus .svg {
+  animation: check 500ms 2300ms forwards;
+}
+
+@keyframes spin {
+  80% {
+    border: 2px solid transparent;
+    border-left: 2px solid  rgba(1, 179, 1, 0.801);
+  }
+
+  100% {
+    transform: rotate(1080deg);
+    border: 2px solid  rgba(1, 179, 1, 0.801);
+  }
+}
+
+@keyframes check {
+  to {
+    fill:  rgba(1, 179, 1, 0.801);
+  }
+}
+
+@keyframes circle {
+  to {
+    border: 2px solid  rgba(1, 179, 1, 0.801);
+  }
+}
+
+

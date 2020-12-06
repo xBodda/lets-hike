@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="layout/css/productsans.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="layout/css/master.css">
-    <title>Hikingify</title>
+    <title>Hikingify | Home</title>
   </head>
   <body>
     <!-- Header START -->
