@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="layout/css/master.css">
     <!-- Link To Icons File -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <!-- Favicon  -->
+    <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
     <title>Hikingify | Signup</title>
   </head>
   <body id="signup">

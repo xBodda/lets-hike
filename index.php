@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="layout/css/productsans.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="layout/css/master.css">
+    <!-- Favicon  -->
+    <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
     <title>Hikingify | Home</title>
   </head>
   <body>
