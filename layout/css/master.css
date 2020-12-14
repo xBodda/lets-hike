@@ -11,7 +11,6 @@ html, body {
 
 body {
   font-family: "ProductSans";
-  
 }
 
 a {
@@ -49,8 +48,9 @@ a {
   padding: 0 7%;
   border-radius: 0 0 40px 40px;
   justify-content: space-between;
-  margin-bottom: 50px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  z-index: 999;
+  position: relative;
 }
 
 #header .logo {
@@ -74,8 +74,20 @@ a {
   font-weight: bold;
 }
 
-/* Header END */
+.xbutton {
+  background: #3dbc3d;
+  padding: 10px 30px;
+  display: table;
+  color: white;
+  box-shadow: 0 7px 7px 0 #3dbc3d99;
+  border-radius: 15px;
+}
 
+.xbutton.center {
+  margin: 0 auto;
+}
+
+/* Header END */
 .signup-container {
   padding: 0 5%;
 }
@@ -102,7 +114,6 @@ a {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
   border-radius: 25px;
   padding: 10px 15px;
-
 }
 
 #signup form {
@@ -127,7 +138,6 @@ a {
   font-size: 28px;
   text-align: center;
 }
-
 
 #footer {
   margin-top: 30px;
@@ -306,9 +316,9 @@ label {
   font-weight: bold;
 }
 
-.span , .svg {
+.span, .svg {
   position: absolute;
-  color:  rgba(1, 179, 1, 0.801);
+  color: rgba(1, 179, 1, 0.801);
   fill: transparent;
   font-size: 20px;
   font-weight: bold;
@@ -322,8 +332,8 @@ label {
   outline: none;
   border: 2px solid transparent;
   width: 50px;
-  border-left: 2px solid  rgba(1, 179, 1, 0.801);
-  border-bottom: 2px solid  rgba(1, 179, 1, 0.801);
+  border-left: 2px solid rgba(1, 179, 1, 0.801);
+  border-bottom: 2px solid rgba(1, 179, 1, 0.801);
   animation: spin 2s 500ms forwards;
 }
 
@@ -338,25 +348,102 @@ label {
 @keyframes spin {
   80% {
     border: 2px solid transparent;
-    border-left: 2px solid  rgba(1, 179, 1, 0.801);
+    border-left: 2px solid rgba(1, 179, 1, 0.801);
   }
 
   100% {
     transform: rotate(1080deg);
-    border: 2px solid  rgba(1, 179, 1, 0.801);
+    border: 2px solid rgba(1, 179, 1, 0.801);
   }
 }
 
 @keyframes check {
   to {
-    fill:  rgba(1, 179, 1, 0.801);
+    fill: rgba(1, 179, 1, 0.801);
   }
 }
 
 @keyframes circle {
   to {
-    border: 2px solid  rgba(1, 179, 1, 0.801);
+    border: 2px solid rgba(1, 179, 1, 0.801);
   }
 }
 
+.top-banner {
+  width: 100%;
+  height: 100vh;
+  max-height: 800px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: -35px;
+  flex-direction: column;
+  background-image: url('../jpg/pexels-mike-andrei-1271619.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
 
+.top-banner .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.top-banner .overlay {
+  background: #000;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.top-banner .content>h1 {
+  font-size: calc(2vw + 20px);
+}
+
+.top-banner .content>h2 {
+  margin-top: 20px;
+  font-size: calc(1vw + 15px);
+  font-weight: normal
+}
+
+.top-banner .search-box {
+  width: 90%;
+  max-width: 800px;
+  padding: 30px;
+  background: #fff;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.top-banner .search-box .item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.top-banner .search-box h1 {
+  font-size: 20px;
+}
+
+.top-banner .search-box p {
+  color: #999;
+}
