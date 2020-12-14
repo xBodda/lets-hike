@@ -11,6 +11,7 @@ html, body {
 
 body {
   font-family: "ProductSans";
+  background-color: #F0F0F0;
 }
 
 a {
@@ -137,6 +138,10 @@ a {
   margin-top: 250px;
   font-size: 28px;
   text-align: center;
+}
+
+.mt-100 {
+  margin-top: 8% !important;
 }
 
 #footer {

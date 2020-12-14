@@ -1,0 +1,31 @@
+Home Page == xTrimy
+Login.php == Ahmed Salah
+Signup.php == Ahmed Salah
+Search.php == Muhammed Tarek
+profile.php == Muhammed Tarek
+edit-profile.php == Muhammed Tarek
+reviews.php == Ahmed Salah
+contact-us.php == Ahmed Ashraf
+cart.php == Muhammed Tarek
+checkout.php == Ahmed Salah
+============
+<-- Control Panel -->
+add-group.php == Bodda
+edit-group.php == Bodda
+delete-group.php == Bodda
+view-profile.php == Ahmed Ashraf
+messages.php == Bodda
+edit-group-members.php == Bodda
+search.php == xTrimy
+edit-admins.php == xTrimy
+send-survey.php == xTrimy
+all-survey.php == xTrimy
+view-survey.php == xTrimy
+=============
+<-- Extras -->
+terms-conditions.php == Bodda
+privacy-policy.php == Bodda
+faq == xTrimy
+about-us == xTrimy
+arabic-language.php == Bodda
+change-currency.php == xTrimy
