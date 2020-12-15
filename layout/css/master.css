@@ -140,6 +140,18 @@ a {
   text-align: center;
 }
 
+.mt-20x {
+  margin-top: 20px !important;
+}
+
+.mt-30x {
+  margin-top: 30px !important;
+}
+
+.mt-40x {
+  margin-top: 40px !important;
+}
+
 .mt-100 {
   margin-top: 8% !important;
 }
@@ -552,8 +564,12 @@ label {
   justify-content: center;
 }
 
-.flex-container.j-sb {
+.flex-container.j-sa {
   justify-content: space-around;
+}
+
+.flex-container.j-sb {
+  justify-content: space-between;
 }
 
 .f-1 {
@@ -695,4 +711,49 @@ label {
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 5px;
+}
+
+.our-experts {
+  width: 100%;
+  padding: 0 7%;
+}
+
+.our-experts .item {
+  width: 90%;
+  max-width: 700px;
+  padding: 0 25px;
+  margin-top: 20px;
+}
+
+.our-experts .item .image {
+  width: 100%;
+  height: 300px;
+  background: #000;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid #777;
+}
+
+.our-experts .item .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.our-experts .item .name {
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.our-experts .item .title {
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #666;
+  margin-top: 5px;
+}
+
+.contact-us-button {
+  font-size: 20px;
+  border-radius: 30px;
 }

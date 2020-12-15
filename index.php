@@ -86,7 +86,7 @@
 
     <!-- Hikes preview START -->
     <div class="hikes-preview">
-      <div class="flex-container wrap j-sb">
+      <div class="flex-container wrap j-sa">
         <?php for($i=0;$i<7;$i++){
           ?>
           <div class="item">
@@ -110,7 +110,34 @@
       </div>
     </div>
     <!-- Hikes preview END -->
-
+        <!-- Team START -->
+        <div class="heading-line">
+          Our Experts
+        </div>
+        <div class="our-experts flex-container wrap j-sa">
+          <div class="item">
+            <div class="image"> <img src="layout/jpg/o-1.jpg"> </div>
+            <div class="name">
+              Mohammad Ashraf
+            </div>
+            <div class="title">
+              Chief Technology Officer
+            </div>
+          </div>
+          <div class="item">
+            <div class="image"> <img src="layout/jpg/o-2.jpg"> </div>
+            <div class="name">
+              Abdelrahman Sayed
+            </div>
+            <div class="title">
+              chief system engineer
+            </div>
+          </div>
+        </div>
+        <div class="xbutton center mt-40x contact-us-button">
+          <b>Contact Us</b>
+        </div>
+        <!-- Team END -->
     <!-- Footer START -->
     <?php include('includes/footer.php'); ?>
     <!-- Footer END -->
