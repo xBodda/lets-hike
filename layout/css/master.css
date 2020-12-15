@@ -690,7 +690,7 @@ label {
 .hikes-preview .item .rating .star {
   width: 20px;
   height: 20px;
-  background: url('layout/svg/Icon awesome-star.svg');
+  background: url('../svg/Icon awesome-star.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
