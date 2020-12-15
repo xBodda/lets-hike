@@ -544,6 +544,18 @@ label {
   display: flex;
 }
 
+.flex-container.wrap {
+  flex-wrap: wrap;
+}
+
+.flex-container.j-center {
+  justify-content: center;
+}
+
+.flex-container.j-sb {
+  justify-content: space-around;
+}
+
 .f-1 {
   flex: 1;
 }

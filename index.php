@@ -83,6 +83,78 @@
       </div>
     </div>
     <!-- Hikes Slider END  -->
+    <style media="screen">
+      .hikes-preview{
+        width:100%;
+        padding:0 7%;
+        margin-top:40px;
+      }
+
+      .hikes-preview .item{
+        width:300px;
+        margin-right:20px;
+        margin-bottom:20px;
+      }
+      .hikes-preview .item .image{
+        width:300px;
+        height:300px;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .hikes-preview .item .image img{
+        width:100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hikes-preview .item .title{
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top:10px;
+      }
+      .hikes-preview .item .rating{
+        width:50%;
+        display: flex;
+      }
+
+      .hikes-preview .item .rating .star{
+        width:20px;
+        height:20px;
+        background:url('layout/svg/Icon awesome-star.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right:5px;
+      }
+
+
+    </style>
+    <!-- Hikes preview START -->
+    <div class="hikes-preview">
+      <div class="flex-container wrap j-sb">
+        <?php for($i=0;$i<7;$i++){
+          ?>
+          <div class="item">
+            <div class="image"> <img src="layout/jpg/<?php echo $i%2+1; ?>.jpg"> </div>
+            <div class="title">Eagles Nest</div>
+            <div class="rating">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+          </div>
+          <?php
+        } ?>
+        <div class="item extra"></div>
+        <div class="item extra"></div>
+        <div class="item extra"></div>
+        <div class="item extra"></div>
+        <div class="item extra"></div>
+      </div>
+    </div>
+    <!-- Hikes preview END -->
 
     <!-- Footer START -->
     <?php include('includes/footer.php'); ?>
