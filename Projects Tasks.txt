@@ -1,6 +1,6 @@
-Home Page == xTrimy
-Login.php == Ahmed Salah
-Signup.php == Ahmed Salah
+Home Page == xTrimy (Frontend Done)
+Login.php == Ahmed Salah (Frontend Done)
+Signup.php == Ahmed Salah (Frontend Done)
 Search.php == Muhammed Tarek
 profile.php == Muhammed Tarek
 edit-profile.php == Muhammed Tarek
