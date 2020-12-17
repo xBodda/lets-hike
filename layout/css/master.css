@@ -907,3 +907,19 @@ label {
   background-size: contain;
   margin-right: 3px;
 }
+
+#review .review-comment {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 2px solid rgba(1, 179, 1, 0.801);;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-family: "ProductSans";
+  font-size: 18px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  margin-bottom: 20px;
+}

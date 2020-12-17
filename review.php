@@ -127,6 +127,7 @@
                 <div class="star"></div>
               </div>
             </div>
+            <textarea name="comment" class="review-comment" id="comment" cols="30" rows="7" placeholder="(Optional)"></textarea>
             <div class="mb-a xbutton mb-30">
               Submit reviews
             </div>
