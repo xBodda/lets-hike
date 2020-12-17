@@ -16,6 +16,14 @@
     <!-- Header START -->
     <?php include('includes/header.php'); ?>
     <!-- Header END -->
+    <!-- Top Banner START -->
+    <div class="top-banner"> 
+      <div class="overlay"></div>
+      <div class="content">
+        <h1>Login in to have some fun !</h1> 
+      </div>
+    </div>
+    <!-- Top Banner END -->
     <div class="signup-container flex mb-30">
         <div class="signup-img fl-1">
 
