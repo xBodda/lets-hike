@@ -18,7 +18,7 @@
     <!-- Header END -->
 
     <!-- Top Banner START -->
-    <div class="top-banner">
+    <div class="top-banner"> 
       <div class="overlay"></div>
       <div class="content">
         <h1>How do you rate your hike ?</h1> 

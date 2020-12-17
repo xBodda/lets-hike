@@ -4,7 +4,7 @@ Signup.php == Ahmed Salah (Frontend Done)
 Search.php == Muhammed Tarek (WIP)
 profile.php == Muhammed Tarek
 edit-profile.php == Muhammed Tarek
-reviews.php == Ahmed Salah
+reviews.php == Ahmed Salah (Frontend Done)
 contact-us.php == Ahmed Ashraf
 cart.php == Muhammed Tarek
 checkout.php == Ahmed Salah
