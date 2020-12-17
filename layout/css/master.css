@@ -529,17 +529,23 @@ label {
   z-index: 999;
 }
 
-.hikes-slide .slider .item .image {
+.item .image {
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
-.hikes-slide .slider .item .image img {
+.item .image img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.hikes-slide .slider .item .image {
+  position: relative;
+}
+
+.hikes-slide .slider .item .image img {
   transition: width .4s, height .4s;
 }
 
@@ -771,7 +777,7 @@ label {
   border-radius: 30px;
 }
 
-#review .top-banner{
+#review .top-banner {
   height: 300px !important;
   margin-bottom: 50px;
 }
@@ -789,7 +795,7 @@ label {
   box-sizing: border-box;
 }
 
-#review .questions h1{
+#review .questions h1 {
   text-align: center;
   margin-bottom: 30px;
 }
@@ -804,7 +810,7 @@ label {
   box-sizing: border-box;
 }
 
-#review .hike-image img{
+#review .hike-image img {
   width: 100%;
   height: 100%;
   border-radius: 20px;
@@ -817,7 +823,7 @@ label {
   margin-bottom: 20px;
 }
 
-#review .qr-review .ques p{
+#review .qr-review .ques p {
   font-size: 18px;
 }
 
@@ -837,9 +843,62 @@ label {
   font-size: 20px;
 }
 
-#review .hike-rev-props i{
+#review .hike-rev-props i {
   font-size: 22px;
   margin-right: 10px;
   width: 20px;
   text-align: center;
+}
+
+.search-body {
+  width: 100%;
+  padding: 0 7%;
+}
+
+.search-body .item {
+  width: 350px;
+  background: #fff;
+  border: 2px solid #e5e5e5;
+  margin: 10px;
+}
+
+.search-body .item.extra {
+  border: 0;
+  height: 0;
+}
+
+.search-body .item .image {
+  width: 100%;
+  height: 200px;
+  background: #000;
+}
+
+.search-body .item .content {
+  padding: 20px 10px;
+}
+
+.search-body .item h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.search-body .item .price {
+  font-size: 18px;
+  color: #555;
+  font-weight: normal;
+}
+
+.search-body .item .rating {
+  width: 50%;
+  display: flex;
+}
+
+.search-body .item .rating .star {
+  width: 15px;
+  height: 15px;
+  background: url('layout/svg/Icon awesome-star.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 3px;
 }
