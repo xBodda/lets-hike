@@ -42,7 +42,9 @@ a {
 .mb-30 {
   margin-bottom: 30px !important;
 }
-
+.mb-20 {
+  margin-bottom: 20px !important;
+}
 .mb-10 {
   margin-bottom: 10px !important;
 }
@@ -85,12 +87,19 @@ a {
 
 .xbutton {
   background: #3dbc3d;
-  padding: 10px 30px;
+  padding: 10px 40px;
   display: table;
   color: white;
   box-shadow: 0 7px 7px 0 #3dbc3d99;
-  border-radius: 15px;
+  border-radius: 30px;
   cursor: pointer;
+  border:2px solid transparent;
+}
+.xbutton.secondary {
+  border:2px solid #3dbc3d99;
+  color:#3dbc3d99;
+  background:transparent;
+  box-shadow:none;
 }
 
 .xbutton.center {
@@ -722,15 +731,7 @@ label {
   display: flex;
 }
 
-.hikes-preview .item .rating .star {
-  width: 20px;
-  height: 20px;
-  background: url('../svg/Icon awesome-star.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 5px;
-}
+
 
 .our-experts {
   width: 100%;
@@ -922,4 +923,94 @@ label {
   font-size: 18px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 20px;
+}
+.rating{
+  display:flex;
+}
+.rating .star {
+  width: 20px;
+  height: 20px;
+  background: url('../svg/Icon awesome-star.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 5px;
+}
+.rating .star.nostar {
+  background-image: url('../svg/rating-star-empty.svg') !important;
+}
+
+
+.hike-body .hike-details{
+  width:100%;
+  padding:20px 50px;
+  border-radius: 20px;
+  background-color: #fff;
+  border:1px solid #444;
+}
+.hike-body .right{
+  padding:0 !important;
+  padding-left:30px !important;
+}
+.hike-body .hike-details h1{
+font-size:20px;
+}
+.hike-body .hike-details .hike-heading{
+display:flex;
+align-items:center;
+}
+.hike-body .hike-details .hike-heading .sep::after{
+content:"·";
+margin:0 10px;
+color:#666;
+}
+.hike-body .hike-details p{
+color:#888;
+margin-top:20px;
+}
+.hike-body .book-container{
+width:100%;
+padding:50px 5%;
+box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.1);
+border-radius: 20px;
+margin:50px 0;
+background-color: #fff;
+align-items: center;
+height:130px;
+position:relative;
+}
+.hike-body .book-container .xbutton{
+position: absolute;
+top:calc(100% - 10px);
+right:100px;
+}
+.hike-body .book-container .price{
+color:#3dbc3d;
+font-size:40px;
+font-weight: bold;
+}
+.hike-body .book-container .price::before{
+content:"EGP";
+font-size: 20px;
+color:black;
+margin-right:5px;
+font-weight: normal;
+}
+.hike-body .book-container .price::after{
+content:"/person/day";
+font-size: 20px;
+}
+.hike-body .book-container input,.hike-body .book-container select{
+padding:10px 15px;
+border-radius: 14px;
+font-size:17px;
+outline:none;
+border:1px solid #666;
+width:300px;
+margin:0 15px;
+height:50px;
+}
+.hike-body .book-container .details table tr td:first-child{
+font-weight: bold;
+padding-right:10px;
 }
