@@ -178,6 +178,14 @@ a {
   margin-top: 8% !important;
 }
 
+.ta-c {
+  text-align: center !important;
+}
+
+.ta-r {
+  text-align: right !important;
+}
+
 #footer {
   margin-top: 30px;
   width: 100%;
@@ -783,16 +791,16 @@ label {
   margin-bottom: 50px;
 }
 
-#review .top-banner{
+#review .top-banner , #checkout .top-banner{
   height: 300px !important;
   margin-bottom: 50px;
 }
 
-#review .questions-container {
+#review .questions-container , #checkout .payment-container{
   width: 100%;
 }
 
-#review .questions {
+#review .questions , #checkout .payment-methods{
   background-color: white;
   height: 100%;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
@@ -806,7 +814,7 @@ label {
   margin-bottom: 30px;
 }
 
-#review .hike-image {
+#review .hike-image , #checkout .payment-desc{
   background-color: white;
   height: 300px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
@@ -1013,4 +1021,76 @@ height:50px;
 .hike-body .book-container .details table tr td:first-child{
 font-weight: bold;
 padding-right:10px;
+}
+
+hr {
+  width: 80%;
+  height: 1px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #7575754b;
+}
+
+.msg-sep {
+  width: 100%;
+  height: 1px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #b9b8b84b;
+}
+
+#checkout .payment-details {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#checkout .payment-desc {
+  height: 100%;
+}
+
+#checkout .pay-cod {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 30px 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+#checkout .pay-cod i , #checkout .pay-online i.icz{
+  font-size: 34px;
+  color: #3dbc3d99;
+}
+
+#checkout .payment-active {
+  border: 1px solid #3dbc3d99 !important;
+}
+
+#checkout .pay-online {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 30px 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
+}
+
+#checkout .card-entry {
+  display: none;
+  -webkit-transition: opacity 600ms, visibility 600ms;
+  transition: opacity 600ms, visibility 600ms;
 }
