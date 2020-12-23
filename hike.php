@@ -115,6 +115,9 @@
         }
         ?>
       </div>
+      <?php
+      // TODO: Gallery Image Selection
+      ?>
     </div>
     <!-- Gallery END -->
     <!-- Map Overview START -->
@@ -151,8 +154,6 @@
     <!-- Places you might like END -->
   </div>
   <!-- Hikes Body END  -->
-
-
   <!-- Footer START -->
   <?php include('includes/footer.php'); ?>
   <!-- Footer END -->
