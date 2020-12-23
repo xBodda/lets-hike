@@ -1,14 +1,14 @@
 Home Page == xTrimy (Frontend Done)
-Login.php == Ahmed Salah (Frontend Done)
-Signup.php == Ahmed Salah (Frontend Done)
-Search.php == Muhammed Tarek (WIP)
+Login.php == Bodda (Frontend Done)
+Signup.php == Bodda (Frontend Done)
+Search.php == xTrimy (WIP)
 profile.php == Muhammed Tarek 
 edit-profile.php == Muhammed Tarek
 reviews.php == Ahmed Salah (Frontend Done)
 contact-us.php == Ahmed Ashraf
 cart.php == Muhammed Tarek
-checkout.php == Ahmed Salah
-hike.php == xTrimy (WIP)
+checkout.php == Bodda (Frontend Done)
+hike.php == xTrimy (Frontend Done)
 ============
 <-- Control Panel -->
 add-group.php == Bodda
