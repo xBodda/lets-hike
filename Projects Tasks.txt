@@ -8,7 +8,7 @@ reviews.php == Ahmed Salah (Frontend Done)
 contact-us.php == Ahmed Ashraf
 cart.php == Muhammed Tarek
 checkout.php == Bodda (Frontend Done)
-hike.php == xTrimy (WIP)
+hike.php == xTrimy (Frontend Done)
 ============
 <-- Control Panel -->
 add-group.php == Bodda

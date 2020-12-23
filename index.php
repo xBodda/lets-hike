@@ -93,11 +93,6 @@
             <div class="image"> <img src="layout/jpg/<?php echo $i%2+1; ?>.jpg"> </div>
             <div class="title">Eagles Nest</div>
             <div class="rating">
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <div class="star"></div>
             </div>
           </div>
           <?php
