@@ -512,27 +512,33 @@ label {
 }
 
 .hikes-slide .slider {
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
   display: flex;
-  flex-wrap: nowrap;
-  padding-left: 7%;
+  user-select: none;
+  align-items: flex-start;
+  min-width:100%;
+  position: relative;
+  transform:translate3d(0%, 0px, 0px);
+  left:7%;
 }
 
-.hikes-slide .slider .item {
+.hikes-slide .slider>.item {
+  flex:1 0 300px;
   width: 300px;
   height: 300px;
-  background: red;
-  border-radius: 30px;
-  margin-right: 30px;
+  padding:0 10px;
   position: relative;
-  cursor: pointer;
-  overflow: hidden;
 }
-
-.hikes-slide .slider .item .title {
+.hikes-slide .slider .item.slide {
+    width: 100%;
+    height: 100%;
+    background: red;
+    border-radius: 30px;
+    margin-right: 30px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.hikes-slide .slider .item.slide .title {
   color: white;
   font-size: 30px;
   position: absolute;
@@ -558,21 +564,21 @@ label {
   object-position: center;
 }
 
-.hikes-slide .slider .item .image {
+.hikes-slide .slider .item.slide .image {
   position: relative;
 }
 
-.hikes-slide .slider .item .image img {
+.hikes-slide .slider .item.slide .image img {
   transition: width .4s, height .4s;
 }
 
-.hikes-slide .slider .item:hover .image img {
+.hikes-slide .slider .item.slide:hover .image img {
   height: calc(100% + 10px);
   width: calc(100% + 10px);
   object-position: center;
 }
 
-.hikes-slide .slider .item .image::after {
+.hikes-slide .slider .item.slide .image::after {
   content: "";
   width: 100%;
   left: 0;
@@ -584,7 +590,7 @@ label {
   transition: opacity .4s;
 }
 
-.hikes-slide .slider .item:hover .image::after {
+.hikes-slide .slider .item.slide:hover .image::after {
   opacity: .5;
 }
 
