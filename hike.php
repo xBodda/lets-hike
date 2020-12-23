@@ -95,58 +95,7 @@
       <div class="xbutton">Book Now</div>
     </form>
     <!-- Booking Box END -->
-    <style>
-      .hike-gallery {
-        width: 100%;
-        height: 600px;
-      }
 
-      .hike-gallery .image {
-        width: 100%;
-        height: 100%;
-        margin-right: 20px;
-        border-radius: 30px;
-        background-color: #000;
-        overflow: hidden;
-      }
-
-      .hike-gallery .image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .hike-gallery .gallery-images {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .hike-gallery .gallery-images .item {
-        width: 30%;
-        height: 185px;
-        background-color: #000;
-        margin: 0 20px 20px 0;
-        border-radius: 30px;
-        overflow: hidden;
-      }
-
-      .hike-gallery .gallery-images .item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .hike-body .hikes-preview {
-        padding: 0;
-      }
-      .map-container {
-        margin: 0 auto;
-        width: 70%;
-        border-radius: 20px;
-        border: 1px solid #999;
-        overflow: hidden;
-      }
-    </style>
     <!-- Gallery START -->
     <div class="heading-line mb-30">
       Gallery
