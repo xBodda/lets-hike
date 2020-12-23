@@ -1,2 +1,9 @@
 # lets-hike
-IS3 is a hiking arrangement web site that aims to let the different people and join groups for hiking. The main idea is to let iThe project allows the hiker to search for groups to join for hiking. On the other hand, the hiking administrators can add/edit/delete groups. Also, they can respond to hikers' reviews.
+
+## Project Description
+IS3 is a hiking arrangement website that aims to let different people join groups for hiking. The project allows the hiker to search for groups to join for hiking. On the other hand, the hiking administrators can add/edit/delete groups. Also, they can respond to hikers' reviews.
+
+
+## Website Preview
+![alt text](https://i.imgur.com/DNrOKEd.jpg "Lets Hike website preview")
+

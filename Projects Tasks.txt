@@ -1,0 +1,33 @@
+一  Front End
+Home-Page == xTrimy (Frontend Done)
+Login.php == Bodda (Frontend Done)
+Signup.php == Bodda (Frontend Done)
+Search.php == xTrimy (WIP)
+profile.php == Muhammed Tarek 
+edit-profile.php == Muhammed Tarek
+reviews.php == Ahmed Salah (Frontend Done)
+contact-us.php == Ahmed Ashraf
+cart.php == Muhammed Tarek
+checkout.php == Bodda (Frontend Done)
+hike.php == xTrimy (Frontend Done)
+.....................
+<-- Control Panel -->
+add-group.php == Bodda
+edit-group.php == Bodda
+delete-group.php == Bodda
+view-profile.php == Ahmed Ashraf
+messages.php == Bodda
+edit-group-members.php == Bodda
+search.php == xTrimy
+edit-admins.php == xTrimy
+send-survey.php == xTrimy
+all-survey.php == xTrimy
+view-survey.php == xTrimy
+.....................
+<-- Extras -->
+terms-conditions.php == Bodda
+privacy-policy.php == Bodda
+faq == xTrimy
+about-us == xTrimy
+arabic-language.php == Bodda
+change-currency.php == xTrimy
