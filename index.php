@@ -150,6 +150,15 @@
         chief system engineer
       </div>
     </div>
+    <div class="item">
+      <div class="image"> <img src="layout/jpg/o-3.jpg"> </div>
+      <div class="name">
+        Ahmed Ashraf
+      </div>
+      <div class="title">
+        Chief Content Officer
+      </div>
+    </div>
   </div>
   <div class="xbutton center mt-40x contact-us-button">
     <b>Contact Us</b>

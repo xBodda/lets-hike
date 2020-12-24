@@ -1373,3 +1373,84 @@ color: #3DBC41;
   font-size: 15px;
 }
 /*Cart Start*/
+
+/*Terms Start*/
+.terms-body .terms-container {
+      width: 100%;
+    padding: 50px 5%;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    margin: 10px 0;
+    background-color: #fff;
+    align-items: center;
+    position: relative;
+}
+.terms-body .right .terms-container {
+  display: flex;
+  padding: 20px 5%;
+
+}
+
+
+.terms-body .terms-container .xbutton{
+
+top:calc(100% - 10px);
+
+}
+.terms-body .terms-container .xbutton .sbutton{
+color:#000000;
+top:calc(100% - 10px);
+
+}
+.terms-body .terms-container .total{
+  text-align: center;
+color:#3dbc3d;
+font-size:40px;
+font-weight: bold;
+}
+.terms-body .terms-container .total::before{
+content:"Total";
+font-size: 20px;
+color:black;
+margin-right:5px;
+font-weight: normal;
+}
+.terms-body .terms-container .total::after{
+content:" £ EGP";
+font-size: 20px;
+}
+.terms-body .terms-container input,.terms-body .terms-container select{
+padding:10px 15px;
+border-radius: 14px;
+font-size:17px;
+outline:none;
+border:1px solid #666;
+width:300px;
+margin:0 15px;
+height:50px;
+}
+.terms-body .terms-container .details table tr td:first-child{
+font-weight: bold;
+padding-right:10px;
+}
+.terms-body{
+  width: 100%;
+  padding: 0 7%;
+  position: relative;
+}
+
+
+ .terms-container .t-item{
+    background: #3dbc3d;
+    text-align: left;
+    margin: 5px;
+    box-sizing: border-box;
+
+    padding: 10px 70px;
+    color: white;
+    box-shadow: 0 7px 7px 0 #3dbc3d99 !important;
+    border-radius: 30px !important;
+    cursor: pointer;
+    border:2px solid transparent !important;
+}
+/*Terms End*/
