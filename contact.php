@@ -44,11 +44,22 @@
                       <h1 class="highlight u-c">Get in touch</h1>
           <p>Feel free to drop us a line below!</p><br>
           <form method="post">
-            <input type="text" name="name"   placeholder="Your Name">
-            <input type="email" name="email" placeholder="Your Email">
-            <input type="text" name="subject"   placeholder="Subject">
+            <label for="name"> &nbsp Fullname
+
+                <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Name .." required/>
+            </label>
+            <label for="name"> &nbsp Email
+
+                <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Email .." required/>
+            </label>
+            <label for="name"> &nbsp Subject
+
+                <input class="input" type="text" name="name" id="name" placeholder=" Enter Subject .." required/>
+            </label>
+          <label for="name"> &nbsp Message <br>
             <textarea name="message" rows="8" cols="80" placeholder="Your Message"></textarea>
-            <input type="submit" class="xbutton" name="submit" value="Send">
+            </label>
+            <input type="submit" class="xbutton contact-box" name="submit" value="Send">
           </form>
         </div>
       </div>
