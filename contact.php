@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <title>Hikingify | Contact</title>
   </head>
-  <body id="Contact">
+  <body id="contact">
     <!-- Header START -->
     <?php include('includes/header.php'); ?>
     <!-- Header END -->
