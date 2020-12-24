@@ -30,9 +30,7 @@
 
   <!-- Search Body START -->
   <div class="search-body">
-    <?php
-    // TODO: Search Filters
-    ?>
+    <!-- // TODO: Search Filters -->
     <div class="heading-line">
       Results for "Search Input"
       <h6 style="color:#777;font-weight:normal;">3,412 results available</h6>

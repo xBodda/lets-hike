@@ -90,10 +90,10 @@ a {
   padding: 10px 40px;
   display: table;
   color: white;
-  box-shadow: 0 7px 7px 0 #3dbc3d99;
-  border-radius: 30px;
+  box-shadow: 0 7px 7px 0 #3dbc3d99 !important;
+  border-radius: 30px !important;
   cursor: pointer;
-  border:2px solid transparent;
+  border:2px solid transparent !important;
 }
 .xbutton.secondary {
   border:2px solid #3dbc3d99;
@@ -848,11 +848,11 @@ label {
   min-width: 600px;
   max-height: 300px;
 }
-.contact-box input:hover, .contact-box textarea:hover {
+.contact-box textarea:hover {
   box-shadow: 0px 0px 8px 1px rgba(0, 200, 0, 0.2);
 }
 
-.contact-box input:focus, .contact-box textarea:focus {
+.contact-box textarea:focus {
   box-shadow: 0px 0px 10px 1px rgba(0, 200, 0, 0.3);
 }
 

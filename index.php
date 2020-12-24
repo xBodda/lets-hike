@@ -159,6 +159,7 @@
   <?php include('includes/footer.php'); ?>
   <!-- Footer END -->
   <script>
+    // TODO: Move to all.js file
     var emblaNode = document.getElementById("embla");
     var embla = EmblaCarousel(emblaNode, {
       loop: true,

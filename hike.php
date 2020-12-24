@@ -115,9 +115,7 @@
         }
         ?>
       </div>
-      <?php
-      // TODO: Gallery Image Selection
-      ?>
+      <!-- // TODO: Gallery Image Selection -->
     </div>
     <!-- Gallery END -->
     <!-- Map Overview START -->
