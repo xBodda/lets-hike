@@ -173,6 +173,9 @@
 
 <!-- Cart Body END -->
 
+<!-- Places you might like START -->
+<?php include('includes/places-might-like.php'); ?>
+<!-- Places you might like END -->
 
     <!-- Footer START -->
     <?php include('includes/footer.php'); ?>
