@@ -32,7 +32,7 @@
             <li><a href='advertise.php'>Advertise</a></li>
             <li><a href='afilliates.php'>Afilliates</a></li>
             <li><a href='careers.php'>Careers</a></li>
-            <li><a href='contact-us.php'>Contact Us</a></li>
+            <li><a href='contact.php'>Contact Us</a></li>
           </ul>
         </div>
       </div>
