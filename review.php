@@ -77,7 +77,7 @@
               <div class="ques fl-3">
                 <p>How do you feel the weather in there ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
