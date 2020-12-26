@@ -13,27 +13,10 @@ if ( isset( $_POST['submit'] ) )
   DB::query('INSERT INTO faq VALUES(\'\',:question,:answer,:_date)',
   array(':question'=>$question,':answer'=>$answer,':_date'=>$date));
 
-  $faq_id = DB::query('SELECT id FROM faq ORDER BY id DESC LIMIT 1')[0]['id'];
-
-  DB::query('INSERT INTO deactivated VALUES(\'\',:item_id,1,0,0,1,:_date)',array(':item_id'=>$faq_id,':_date'=>$date));
-
   echo '<script>alert("FAQ Added")</script>';
 }
 
-if(isset($_GET["activate"]))  
-{
-  $faq_status = DB::query('SELECT status FROM deactivated WHERE isFaq=1 AND item_id=:item_id',array(':item_id'=>$_GET['activate']))[0]['status'];
-  if($faq_status == 0)
-  {
-    DB::query('UPDATE deactivated SET status = 1 WHERE isFaq=1 AND item_id=:item_id',array(':item_id'=>$_GET['activate']));
-    echo '<script>alert("Activated ")</script>';
-  }
-  else
-  {
-    echo '<script>alert("Already Activated")</script>';
-  }
-}
-elseif(isset($_GET["deactivate"]))
+if(isset($_GET["deactivate"]))
 {
   $faq_status = DB::query('SELECT status FROM deactivated WHERE isFaq=1 AND item_id=:item_id',array(':item_id'=>$_GET['deactivate']))[0]['status'];
   if($faq_status == 1)
@@ -53,7 +36,7 @@ elseif(isset($_GET["deactivate"]))
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | Edit FAQ</title>
+  <title>Hikingfy | Edit FAQ</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -219,16 +202,15 @@ elseif(isset($_GET["deactivate"]))
                             $faq_data = DB::query('SELECT * FROM faq');
                             foreach($faq_data as $fd)
                             {
-                              $faq_status = DB::query('SELECT status FROM deactivated WHERE isFaq=1 AND item_id=:item_id',array(':item_id'=>$fd['id']));
+                              
                             ?>
                             <tr>  
                                 <td><?php echo $fd['id'] ?></td>
                                 <td><abbr title="<?php echo $fd['question']; ?>"><?php echo truncate($fd['question'],35); ?></abbr></td>
                                 <td><abbr title="<?php echo $fd['answer']; ?>"><?php echo truncate($fd['answer'],35); ?></abbr></td>
                                 <td>
-                                  <button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='edit-faq.php?deactivate=<?php echo $fd['id']; ?>';return false;})();return false;">Deactivate</button>
+                                  <button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='edit-faq.php?deactivate=<?php echo $fd['id']; ?>';return false;})();return false;">Delete</button>
                                   &nbsp;&nbsp;
-                                  <button id="act" class="btn btn-outline-success btn-sm" onClick="(function(){window.location='edit-faq.php?activate=<?php echo $fd['id']; ?>';return false;})();return false;">Activate</button>
                                 </td>
                             </tr>
                             <?php } ?>

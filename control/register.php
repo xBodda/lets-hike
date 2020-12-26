@@ -1,25 +1,10 @@
 <?php
 include('includes/head.php');
 
-if (!Login::isLoggedIn()) 
-{
-  echo '<script>window.location="404.php"</script>';
-}
-
-function IsChecked($chkname,$value)
-{
-    if(!empty($_POST[$chkname]))
-    {
-        foreach($_POST[$chkname] as $chkval)
-        {
-            if($chkval == $value)
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
+// if (!Login::isLoggedIn()) 
+// {
+//   echo '<script>window.location="404.php"</script>';
+// }
 
 if ( isset( $_POST['submit'] ) )
 {
@@ -27,23 +12,12 @@ if ( isset( $_POST['submit'] ) )
   $email = $_POST['email'];
   $password = $_POST['password'];
   $repassword = $_POST['repassword'];
-
-  for($i=1;$i <= 8;$i++)
-  {
-    if(IsChecked('level','level'.$i))
-    {
-      $level[$i] = 1;
-    }
-    else
-    {
-      $level[$i] = 0;
-    }
-  }
+  $level = $_POST['level'];
 
 
   if (!DB::query('SELECT email FROM admins WHERE email=:email', array(':email'=>$email)))
   {
-      if (strlen($name) >= 3 && strlen($name) <= 30)
+      if (strlen($name) >= 3 && strlen($name) <= 64)
       {
           if (strlen($password) >= 8 && strlen($password) <= 60)
           {
@@ -51,49 +25,38 @@ if ( isset( $_POST['submit'] ) )
               {
                   if($password == $repassword)
                   {
-                      DB::query('INSERT INTO admins VALUES(\'\',:name,:email,:password,:level1,:level2,:level3,:level4,:level5,:level6,:level7,:level8)',
+                      DB::query('INSERT INTO admins VALUES(\'\',:name,:email,:password,:level)',
                       array(':name'=>$name,
                             ':email'=>$email,
                             ':password'=>password_hash($password, PASSWORD_BCRYPT),
-                            ':level1'=>$level[1],
-                            ':level2'=>$level[2],
-                            ':level3'=>$level[3],
-                            ':level4'=>$level[4],
-                            ':level5'=>$level[5],
-                            ':level6'=>$level[6],
-                            ':level7'=>$level[7],
-                            ':level8'=>$level[8]));
-                      
-                      $date = date('Y-m-d H:i:s');
-                      $admnid = DB::query('SELECT id FROM admins ORDER BY id DESC LIMIT 1')[0]['id'];
+                            ':level'=>$level));
 
-                      DB::query('INSERT INTO deactivated VALUES(\'\',:item_id,1,0,1,0,0,:_date)',array(':item_id'=>$admnid,':_date'=>$date));
-                      echo '<script>alert("تم انشاء الحساب بنجاح")</script>';
+                      echo '<script>alert("Admin Created")</script>';
                       echo '<script>window.location="index.php"</script>';
                   }
                   else
                   {
-                      echo '<script>alert("الباسورد غير مطابق  !")</script>';
+                      echo '<script>alert("Password Don\'t Match  !")</script>';
                   }
               }
               else
               {
-                  echo '<script>alert("خطأ في البريد الالكتروني!")</script>';
+                  echo '<script>alert("Error In Email!")</script>';
               }
           }
           else
           {
-              echo '<script>alert("خطأ في كلمة المرور!")</script>';
+              echo '<script>alert("Error In Password!")</script>';
           }
       }
       else
       {
-          echo '<script>alert(" خطأ في الاسم او يحتوي علي حروف غير مقبولة !")</script>';
+          echo '<script>alert(" Error In Name !")</script>';
       }
   }
   else
   {
-      echo '<script>alert("مسجل بالفعل!")</script>';
+      echo '<script>alert("Already Registerd!")</script>';
   }
 }
 ?>
@@ -102,7 +65,7 @@ if ( isset( $_POST['submit'] ) )
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | Registration Page</title>
+  <title>Hikingfy | Registration Page</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -116,7 +79,7 @@ if ( isset( $_POST['submit'] ) )
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="index2.php"><b>Zowjain</b></a>
+    <a href="index2.php"><b>Hikingfy</b></a>
   </div>
 
   <div class="card">
@@ -159,65 +122,25 @@ if ( isset( $_POST['submit'] ) )
         
         <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="level[]" value="level1" checked>
+              <input type="radio" id="agreeTerms" name="level" value="1" checked>
               <label for="agreeTerms">
-              All Privileges
+              Administrator
               </label>
             </div>
         </div>
         <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms2" name="level[]" value="level2">
+              <input type="radio" id="agreeTerms2" name="level" value="2">
               <label for="agreeTerms2">
-              Mange Admins Accounts
+              Auditor
               </label>
             </div>
         </div>
         <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms3" name="level[]" value="level3">
+              <input type="radio" id="agreeTerms3" name="level" value="3">
               <label for="agreeTerms3">
-              Mange Users Accounts
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms4" name="level[]" value="level4">
-              <label for="agreeTerms4">
-              Review New Users
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms5" name="level[]" value="level5">
-              <label for="agreeTerms5">
-              Handle Messages
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms6" name="level[]" value="level6">
-              <label for="agreeTerms6">
-              Handle Blog
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms7" name="level[]" value="level7">
-              <label for="agreeTerms7">
-              Handle Payments
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms8"  name="level[]" value="level8">
-              <label for="agreeTerms8">
-              Handle Complaints
+              HR partner
               </label>
             </div>
         </div>
