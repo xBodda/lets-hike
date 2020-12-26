@@ -10,7 +10,7 @@ if (isset($_POST['submit']))
     {
         if (password_verify($password, DB::query('SELECT password FROM admins WHERE email=:email', array(':email'=>$email))[0]['password']))
         {
-                echo '<script>alert("تم تسجيل الدخول")</script>';
+                echo '<script>alert("Logged In !")</script>';
                 echo '<script>window.location="index.php"</script>';
                 $cstrong = True;
                 $token = bin2hex(openssl_random_pseudo_bytes(64, $cstrong));
@@ -22,10 +22,10 @@ if (isset($_POST['submit']))
                 setcookie("ADMN_", '1', time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);
 
         } else {
-                echo '<script>alert("خطأ في كلمة المرور")</script>';
+                echo '<script>alert("Wrong Password")</script>';
         }
     } else {
-            echo '<script>alert( غير مسجل !")</script>';
+            echo '<script>alert( Not Registered !")</script>';
     }
 }
 ?>

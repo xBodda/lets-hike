@@ -55,58 +55,32 @@
                   <p>Edit FAQ</p>
                 </a>
               </li>
-
-              <?php
-              if(true) // if($level[4] || $level[1])
-              {
-                print '<li class="nav-item">
-                <a href="./pending-approval.php" class="nav-link">
-                  <i class="nav-icon far fa-image"></i>
-                  <p>
-                  Pending Approval
-                  <span class="badge badge-info right" id="pendingCount">5</span>
-                  </p>
-                </a>
-              </li>';
-              }
-              ?>
-              <?php
-              if(true) // if($level[3] || $level[1])
-              {
-                print '<li class="nav-item">
+              <li class="nav-item">
                 <a href="./view-users.php" class="nav-link">
                   <i class="nav-icon far fa-user"></i>
                   <p>View Users</p>
                 </a>
-              </li>';
-              }
+              </li>
               
-              ?>
-              <?php 
-              if(true) // if($level[2] || $level[1])
-              {
-
-                print "<li class='nav-item'>
+              <li class='nav-item'>
                 <a href='./view-admins.php' class='nav-link'>
                   <i class='nav-icon fas fa-users-cog'></i>
                   <p>View Admins</p>
                 </a>
-              </li>";
-              }
-              ?>
-
-              <?php
-              if(true) // if($level[8] || $level[1])
-              {
-                print '<li class="nav-item">
+              </li>
+                <li class="nav-item">
                 <a href="./view-complaints.php" class="nav-link">
                 <i class="nav-icon fas fa-exclamation-triangle"></i>
                   <p>View Complaints</p>
                 </a>
-              </li>';
-              }
-              ?>
-                            <li class="nav-item">
+              </li>
+              <li class="nav-item">
+                <a href="./view-groups.php" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                  <p>View Groups</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="./view-blogs.php" class="nav-link">
                 <i class="fas fa-pencil-alt nav-icon"></i>
                   <p>Blog</p>

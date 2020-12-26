@@ -1,7 +1,7 @@
 <?php
 class DB{
     private static function connect(){
-        $pdo = new PDO('mysql:host=localhost;dbname=zowjain;charset=utf8mb4;collation=utf8_general_ci', 'root', '');
+        $pdo = new PDO('mysql:host=localhost;dbname=lets-hike;charset=utf8mb4;collation=utf8_general_ci', 'root', '');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     }
