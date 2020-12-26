@@ -136,7 +136,7 @@ a {
   z-index: 1;
 }
 
-#signup .signup-form {
+#signup .signup-form , #edit-profile .edit-profile-form {
   margin: 0 auto;
   background-color: white;
   margin: 0 10px;
@@ -145,17 +145,17 @@ a {
   padding: 10px 15px;
 }
 
-#signup form {
+#signup form ,#edit-profile form {
   width: 100%;
   height: 100%;
 }
 
-#signup form h1 {
+#signup form h1 ,#edit-profile form h1{
   text-align: center;
   margin: 10px 0;
 }
 
-#signup .signup-content {
+#signup .signup-content , #edit-profile .edit-profile-content {
   position: absolute;
   left: 0;
   right: 45%;
@@ -334,6 +334,7 @@ label {
   width: 100%;
   margin: 30px;
   margin-left: 11%;
+
 }
 
 .bButton {
@@ -879,7 +880,7 @@ label {
 }
 /*Contact End*/
 
-#signup .top-banner{
+#signup .top-banner , #edit-profile .top-banner{
   height: 300px !important;
   margin-bottom: 50px;
 }
@@ -1452,5 +1453,26 @@ padding-right:10px;
     border-radius: 30px !important;
     cursor: pointer;
     border:2px solid transparent !important;
+}
+
+.edit-profile{
+  padding:15px;
+  background-color: white;
+  margin: 0 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 25px;
+  position: relative;
+  height: 100%;
+  margin-right: 50px;
+}
+
+#edit-profile .edit-profile p{
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#edit-profile .edit-profile p.backToProfile{
+color: #3dbc3d !important;
 }
 /*Terms End*/
