@@ -6,18 +6,6 @@ if (Login::isLoggedIn())
   $userid = Login::isLoggedIn();
   $fullname = DB::query('SELECT name FROM admins WHERE id=:id', array(':id'=>$userid))[0]['name'];
   // $total_messages = DB::query('SELECT COUNT(id) AS cnt FROM messages WHERE _to=:_to',array(':_to'=>$userid))[0]['cnt'];
-  // for($i=1;$i<=8;$i++)
-  // {
-  //   $level[$i] = DB::query('SELECT level'.$i.' FROM admins WHERE id=:id',array(':id'=>$userid))[0]['level'.$i];
-  //   if($level[$i] == 1)
-  //   {
-  //     $level[$i] = true;
-  //   }
-  //   else
-  //   {
-  //     $level[$i] = false;
-  //   }
-  // }
 }
 else
 {

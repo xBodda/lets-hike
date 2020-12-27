@@ -14,77 +14,106 @@ if ( isset( $_POST['submit'] ) )
     $safety = $_POST['safety'];
     $howtobook = $_POST['howtobook'];
     $price = $_POST['price'];
-    $images = $_POST['images'];
+	$images = $_POST['images'];
+	
+	if(strlen($name) >= 3 && strlen($name) < 128)
+	{
+		if(strlen($location) >= 3 && strlen($location) < 128)
+		{
+			if(strlen($overview) >= 3 && strlen($overview) < 1000)
+			{
+				if(strlen($route) >= 3 && strlen($route) < 1000)
+				{
+					if(strlen($safety) >= 3 && strlen($safety) < 1000)
+					{
+						if(strlen($howtobook) >= 3 && strlen($howtobook) < 1000)
+						{
+							if(strlen($price) >= 1 && strlen($price) <= 5)
+							{
+								DB::query('INSERT INTO hikes VALUES(\'\',:name,:location,:overview,:route,:safety,:howtobook,:price)',
+    							array(':name'=>$name,':location'=>$location,':overview'=>$overview,':route'=>$route,':safety'=>$safety,':howtobook'=>$howtobook,':price'=>$price));
 
-    DB::query('INSERT INTO hikes VALUES(\'\',:name,:location,:overview,:route,:safety,:howtobook,:price)',
-    array(':name'=>$name,':location'=>$location,':overview'=>$overview,':route'=>$route,':safety'=>$safety,':howtobook'=>$howtobook,':price'=>$price));
+								$hike_id = DB::query('SELECT id FROM hikes ORDER BY id DESC LIMIT 1')[0]['id'];
 
+								for ($z = 0; $z < $images; $z++)
+								{
+									$filename = $_FILES['image'.$z]['name'];
 
-    $hike_id = DB::query('SELECT id FROM hikes ORDER BY id DESC LIMIT 1')[0]['id'];
+									$destination = 'uploads/' . $filename;
 
+									$extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    for ($z = 0; $z < $images; $z++) 
-    {
-        $filename = $_FILES['image'.$z]['name'];
+									$file = $_FILES['image'.$z]['tmp_name'];
+									$size = $_FILES['image'.$z]['size'];
+									
+									if ($_FILES['image'.$z]['size'] > 1000000)
+									{ 
+										echo '<script>alert("File Too Large")</script>';
+									} 
+									else 
+									{ 
+										if (move_uploaded_file($file, $destination)) 
+										{
+											DB::query('INSERT INTO hike_images VALUES(\'\',:hike_id,:image)',
+											array(':image'=>$filename,':hike_id'=>$hike_id));
+										}
+										else
+										{
+											echo '<script>alert("Failed To Upload Image")</script>';
+										}
+									}
+								}
+								echo '<script>alert("Group Added")</script>';
+							}
+							else
+							{
+								echo '<script>alert("Price Length Out Of Bond")</script>';
+							}
+						}
+						else
+						{
+							echo '<script>alert("How To Book Length Out Of Bond")</script>';
+						}
+					}
+					else
+					{
+						echo '<script>alert("Safety Length Out Of Bond")</script>';
+					}
+				}
+				else
+				{
+					echo '<script>alert("Route Length Out Of Bond")</script>';
+				}
+			}
+			else
+			{
+				echo '<script>alert("Overview Length Out Of Bond")</script>';
+			}
+		}
+		else
+		{
+			echo '<script>alert("Location Length Out Of Bond")</script>';
+		}
+	}
+	else
+	{
+		echo '<script>alert("Name Length Out Of Bond")</script>';
+	}
 
-        $destination = 'uploads/' . $filename;
-
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        $file = $_FILES['image'.$z]['tmp_name'];
-        $size = $_FILES['image'.$z]['size'];
-        
-        if ($_FILES['image'.$z]['size'] > 1000000)
-        { 
-            echo "File too large!";
-        } 
-        else 
-        { 
-            if (move_uploaded_file($file, $destination)) 
-            {
-            DB::query('INSERT INTO hike_images VALUES(\'\',:hike_id,:image)',
-            array(':image'=>$filename,':hike_id'=>$hike_id));
-            }
-            else 
-            {
-                echo "Failed to upload file.";
-            }
-        }
-    }
-
-
-
-
-
-  echo '<script>alert("Group Added")</script>';
+    
 }
 
-if(isset($_GET["activate"]))  
+if(isset($_GET["action"]))  
 {
-  $faq_status = DB::query('SELECT status FROM deactivated WHERE isBlog=1 AND item_id=:item_id',array(':item_id'=>$_GET['activate']))[0]['status'];
-  if($faq_status == 0)
-  {
-    DB::query('UPDATE deactivated SET status = 1 WHERE isBlog=1 AND item_id=:item_id',array(':item_id'=>$_GET['activate']));
-    echo '<script>alert("Activated ")</script>';
-  }
-  else
-  {
-    echo '<script>alert("Already Activated")</script>';
-  }
+     if($_GET["action"] == "delete")  
+     {  
+		DB::query('DELETE FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$_GET["id"]));
+		DB::query('DELETE FROM hikes WHERE id=:id',array(':id'=>$_GET["id"]));
+		
+        echo '<script>alert("Group Removed")</script>';
+        echo '<script>window.location="view-groups.php"</script>';
+     }  
 }
-elseif(isset($_GET["deactivate"]))
-{
-  $faq_status = DB::query('SELECT status FROM deactivated WHERE isBlog=1 AND item_id=:item_id',array(':item_id'=>$_GET['deactivate']))[0]['status'];
-  if($faq_status == 1)
-  {
-    DB::query('UPDATE deactivated SET status = 0 WHERE isBlog=1 AND item_id=:item_id',array(':item_id'=>$_GET['deactivate']));
-    echo '<script>alert("Deactivated ")</script>';
-  }
-  else
-  {
-    echo '<script>alert("Already Activated")</script>';
-  }
-}  
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -263,7 +292,7 @@ elseif(isset($_GET["deactivate"]))
 									<div class="col-md-8" style="margin: 0 auto;">
 										<div class="card card-danger">
 											<div class="card-header border-transparent">
-												<h3 class="card-title">Blogs Settings</h3>
+												<h3 class="card-title">All Groups</h3>
 												<div class="card-tools">
 													<button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i> </button>
 													<button type="button" class="btn btn-tool" data-card-widget="remove"> <i class="fas fa-times"></i> </button>
@@ -282,9 +311,10 @@ elseif(isset($_GET["deactivate"]))
 														<thead>
 															<tr>
 																<th>ID</th>
-																<th>Subject</th>
-																<th>URL</th>
-																<th>Action</th>
+																<th>Name</th>
+																<th>Location</th>
+																<th>Rating</th>
+																<th>Actions</th>
 															</tr>
 														</thead>
 														<style>
@@ -299,17 +329,19 @@ elseif(isset($_GET["deactivate"]))
                                                             $faq_data = DB::query('SELECT * FROM hikes');
                                                             foreach($faq_data as $fd)
                                                             {
-                                                            $faq_status = DB::query('SELECT status FROM deactivated WHERE isBlog=1 AND item_id=:item_id',array(':item_id'=>$fd['id']));
                                                             ?>
 																<tr>
 																	<td>
 																		<?php echo $fd['id'] ?>
 																	</td>
-																	<td><abbr title="<?php echo $fd['subject']; ?>"><?php echo truncate($fd['subject'],35); ?></abbr></td>
-																	<td><abbr title="<?php echo $fd['url']; ?>"><?php echo truncate($fd['url'],35); ?></abbr></td>
+																	<td><abbr title="<?php echo $fd['name']; ?>"><?php echo truncate($fd['name'],35); ?></abbr></td>
+																	<td><abbr title="<?php echo $fd['location']; ?>"><?php echo truncate($fd['location'],35); ?></abbr></td>
+																	<td>4.84</td>
 																	<td>
-																		<button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='view-blogs.php?deactivate=<?php echo $fd['id']; ?>';return false;})();return false;">Deactivate</button> &nbsp;&nbsp;
-																		<button id="act" class="btn btn-outline-success btn-sm" onClick="(function(){window.location='view-blogs.php?activate=<?php echo $fd['id']; ?>';return false;})();return false;">Activate</button>
+																	<button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-groups.php?action=delete&id=<?php echo $fd["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
+																	&nbsp;&nbsp;
+																	<button class="btn btn-outline-primary btn-sm" onClick="(function(){window.location='edit-group.php?us=<?php echo $fd['id']; ?>';return false;})();return false;"><i class="fas fa-cog"></i></button>
+																	&nbsp;&nbsp;
 																	</td>
 																</tr>
 																<?php } ?>

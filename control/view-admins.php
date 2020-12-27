@@ -5,11 +5,6 @@ if (!Login::isLoggedIn())
   echo '<script>window.location="404.php"</script>';
 }
 
-if(!$level[2] && !$level[1])
-{
-  echo '<script>window.location="404.php"</script>';
-}
-
 
 if(isset($_GET["action"]))  
 {
@@ -119,29 +114,18 @@ elseif(isset($_GET["deactivate"]))
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Level</th>
                         <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php 
                         $user_info = DB::query('SELECT * FROM admins');
-                        $levls_data = DB::query('SELECT * FROM levels');
                         foreach ($user_info as $ui) {
                         ?>
                         <tr>
                         <td><?php echo $ui["id"];?></td>
                         <td><?php echo $ui["name"];?></td>
                         <td><?php echo $ui["email"];?></td>
-                        <td><b><?php
-                          for($i=1;$i<=8;$i++)
-                          {
-                            if($ui['level'.$i] == 1)
-                            {
-                              echo $levls_data[$i-1]['level'];?><br>
-                          <?php  }}?>
-                          
-                        </b></td>
                         <td>
                         <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-admins.php?action=delete&id=<?php echo $ui["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
                         &nbsp;&nbsp;
