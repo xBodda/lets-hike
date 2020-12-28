@@ -884,7 +884,7 @@ label {
   margin-bottom: 50px;
 }
 
-#review .top-banner , #checkout .top-banner , #contact .top-banner{
+#review .top-banner , #checkout .top-banner , #contact .top-banner , #faq .top-banner {
   height: 300px !important;
   margin-bottom: 50px;
 }
@@ -1445,7 +1445,6 @@ padding-right:10px;
     text-align: left;
     margin: 5px;
     box-sizing: border-box;
-
     padding: 10px 70px;
     color: white;
     box-shadow: 0 7px 7px 0 #3dbc3d99 !important;
@@ -1454,3 +1453,38 @@ padding-right:10px;
     border:2px solid transparent !important;
 }
 /*Terms End*/
+
+
+#faq .faq-container {
+  margin-top: 30px;
+  width: 90%;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#faq .faq-container i {
+  color: #3dbc3d;
+}
+
+#faq .faq_question {
+  margin: 0px;
+  padding: 20px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  font-size: 26px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+#faq .faq_answer_container {
+  height: 0px;
+  overflow: hidden;
+  padding: 0px;
+  font-weight: normal;
+  font-size: 20px;
+}

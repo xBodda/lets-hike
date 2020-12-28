@@ -27,7 +27,7 @@ view-survey.php == xTrimy
 <-- Extras -->
 terms-conditions.php == Bodda
 privacy-policy.php == Bodda
-faq == xTrimy
+faq == xTrimy (Frontend & Backend Done)
 about-us == xTrimy
 arabic-language.php == Bodda
 change-currency.php == xTrimy

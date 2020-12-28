@@ -22,7 +22,7 @@
           <ul>
             <li><a href='terms.php'>Terms & Conditions</a></li>
             <li><a href='privacy.php'>Privacy Policy</a></li>
-            <li><a href='tours.php'>Tours</a></li>
+            <li><a href='faq.php'>FAQ</a></li>
             <li><a href='returns.php'>Returns Policy</a></li>
             <li><a href='support.php'>Support</a></li>
           </ul>
