@@ -5,10 +5,6 @@
     echo '<script>window.location="404.php"</script>';
   }
 
-  if(!$level[5] && !$level[1])
-{
-  echo '<script>window.location="404.php"</script>';
-}
   $isGetTo = false;
   if ( isset( $_GET['to'] ) )
   {
@@ -32,7 +28,7 @@
         ':_date'=>$date));
 
     
-    echo '<script>alert("تم إرسال الرسالة")</script>';
+    echo '<script>alert("Message Sent")</script>';
     echo '<script>window.location="compose.php"</script>';
   }
 
@@ -44,7 +40,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | Compose Message</title>
+  <title>Hikingfy | Compose Message</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

@@ -1,36 +1,16 @@
 <?php
-// include('includes/head.php');
-// if (!Login::isLoggedIn()) 
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
+include('includes/head.php');
 
-// if(!$level[2] && !$level[1])
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
-
-function IsChecked($chkname,$value)
+if (!Login::isLoggedIn()) 
 {
-    if(!empty($_POST[$chkname]))
-    {
-        foreach($_POST[$chkname] as $chkval)
-        {
-            if($chkval == $value)
-            {
-                return true;
-            }
-        }
-    }
-    return false;
+  echo '<script>window.location="404.php"</script>';
 }
-
 
 if(isset($_GET["action"]))  
 {
      if($_GET["action"] == "delete")  
      {  
-        DB::query('DELETE FROM messages WHERE _to=:id',array(':id'=>$_GET["id"]));
+        // DB::query('DELETE FROM messages WHERE _to=:id',array(':id'=>$_GET["id"]));
         DB::query('DELETE FROM admins WHERE id=:id',array(':id'=>$_GET["id"]));
         echo '<script>alert("Admin Removed")</script>';
         echo '<script>window.location="view-admins.php"</script>';
@@ -41,7 +21,6 @@ if(isset($_GET["ad"]))
 {
     $admin_id = $_GET["ad"];
     $admin_info = DB::query('SELECT * FROM admins WHERE id=:id',array(':id'=>$admin_id));
-
 }
 
 if(isset($_POST["save"]))  
@@ -50,29 +29,9 @@ if(isset($_POST["save"]))
     $email = $_POST['email'];
     $admin_id = $_GET["ad"];
 
-    for($i=1;$i <= 8;$i++)
-    {
-      if(IsChecked('level','level'.$i))
-      {
-        $level[$i] = 1;
-      }
-      else
-      {
-        $level[$i] = 0;
-      }
-    }
-
-    DB::query('UPDATE admins SET name=:name,email=:email,level1=:level1,level2=:level2,level3=:level3,level4=:level4,level5=:level5,level6=:level6,level7=:level7,level8=:level8 WHERE id=:id',
+    DB::query('UPDATE admins SET name=:name,email=:email WHERE id=:id',
     array(':name'=>$name,
             ':email'=>$email,
-            ':level1'=>$level[1],
-            ':level2'=>$level[2],
-            ':level3'=>$level[3],
-            ':level4'=>$level[4],
-            ':level5'=>$level[5],
-            ':level6'=>$level[6],
-            ':level7'=>$level[7],
-            ':level8'=>$level[8],
             ':id'=>$admin_id));
 
             echo '<script>alert("Data Saved")</script>';
@@ -86,7 +45,7 @@ if(isset($_POST["save"]))
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | View Admins</title>
+  <title>Hikingfy | View Admins</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -159,71 +118,6 @@ if(isset($_POST["save"]))
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-        </div>
-        
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="level[]" value="level1" <?php if($adi['level1'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms">
-              All Privileges
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms2" name="level[]" value="level2" <?php if($adi['level2'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms2">
-              Mange Admins Accounts
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms3" name="level[]" value="level3" <?php if($adi['level3'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms3">
-              Mange Users Accounts
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms4" name="level[]" value="level4" <?php if($adi['level4'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms4">
-              Review New Users
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms5" name="level[]" value="level5" <?php if($adi['level5'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms5">
-              Handle Messages
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms6" name="level[]" value="level6" <?php if($adi['level6'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms6">
-              Handle Blog
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms7" name="level[]" value="level7" <?php if($adi['level7'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms7">
-              Handle Payments
-              </label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms8"  name="level[]" value="level8" <?php if($adi['level7'] == 1 ){ echo "checked";}?>>
-              <label for="agreeTerms8">
-              Handle Complaints
-              </label>
-            </div>
         </div>
         <div class="row">
           <!-- /.col -->

@@ -5,11 +5,6 @@
     echo '<script>window.location="404.php"</script>';
   }
 
-  if(!$level[5] && !$level[1])
-  {
-    echo '<script>window.location="404.php"</script>';
-  }
-
   if ( isset( $_GET['m'] ) )
   {
     $msgid = $_GET['m'];
