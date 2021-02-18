@@ -66,7 +66,7 @@
                     </div>
                     <div class="button-container fl-1">
                         <button type="button" class="bButtonb">
-                            <span class="span">Create Account ?</span>
+                            <a href="signup.php"> Create Account ? </a>
                         </button>
                     </div>
                 </div>
