@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 02:27 AM
+-- Generation Time: Feb 18, 2021 at 02:52 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `lets-hike`
 --
-CREATE DATABASE IF NOT EXISTS `lets-hike` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `lets-hike`;
 
 -- --------------------------------------------------------
 
@@ -42,7 +40,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
-(1, 'Abdelrahman Sayed', 'bodda@gmail.com', '$2y$10$JcFKRUHotQx.fr2yfgoOpOhEb58niENDSzrc4jHAkiabTkgZw2MoW', 1),
+(1, 'Abdelrahman Sayed', 'bodda083@gmail.com', '$2y$10$JcFKRUHotQx.fr2yfgoOpOhEb58niENDSzrc4jHAkiabTkgZw2MoW', 1),
 (2, 'Mohamed Ashraf', 'xtrimy@gmail.com', '$2y$10$sI0Zuzmk7ndRJn4nJPwvb.m3alAU2a1axcY7v/094V0sn7eQC6qtC', 3);
 
 -- --------------------------------------------------------
@@ -83,7 +81,7 @@ CREATE TABLE `admin_tokens` (
 --
 
 INSERT INTO `admin_tokens` (`id`, `token`, `user_id`, `date`) VALUES
-(1, '5999653bcf06a68a48d9282e3cc6637f94da8108', 1, '2020-12-26 02:15:33');
+(3, 'a90690d80f87d272445157fd885726372ce3df90', 2, '2021-02-14 03:18:25');
 
 -- --------------------------------------------------------
 
@@ -96,7 +94,8 @@ CREATE TABLE `contact` (
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `subject` varchar(128) NOT NULL,
-  `message` text NOT NULL
+  `message` text NOT NULL,
+  `_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -196,6 +195,28 @@ CREATE TABLE `login_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `_from` int(11) NOT NULL,
+  `_to` int(11) NOT NULL,
+  `subject` text NOT NULL,
+  `message` text NOT NULL,
+  `_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `_from`, `_to`, `subject`, `message`, `_date`) VALUES
+(1, 1, 2, 'New Message', 'Test Message 1', '2021-02-14 03:17:45');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviews`
 --
 
@@ -284,6 +305,12 @@ ALTER TABLE `login_tokens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
@@ -316,7 +343,7 @@ ALTER TABLE `admin_levels`
 -- AUTO_INCREMENT for table `admin_tokens`
 --
 ALTER TABLE `admin_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -353,6 +380,12 @@ ALTER TABLE `hike_images`
 --
 ALTER TABLE `login_tokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reviews`
