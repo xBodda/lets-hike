@@ -32,3 +32,64 @@ for (let i = 0; i < ratings_containers.length; i++) {
         element.appendChild(stars[j]);
     }
 }
+
+function showNote(button,content)
+{
+  var contents = ["overview", "route", "safety", "howtobook"];
+
+  for(var i = 0; i < contents.length;i++){
+    document.getElementById(contents[i]).style.display = "none";
+  }
+
+  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn"];
+
+  for(var i = 0; i < buttons.length;i++){
+    document.getElementById(buttons[i]).classList.add('secondary');
+  }
+  
+  document.getElementById(button).classList.remove('secondary');
+  document.getElementById(content).style.display = "block";
+}
+
+function startDate(value,name)
+{
+    document.getElementById(name).innerHTML = value;
+}
+
+function getDays(date1,date2)
+{
+    var date1 = new Date(date1); 
+    var date2 = new Date(date2); 
+
+    var Difference_In_Time = date2.getTime() - date1.getTime(); 
+
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+    return Difference_In_Days;
+}
+
+function fillPrice(Price)
+{
+    var price = Price;
+    var persons = document.getElementById('sPersons').innerHTML * 1;
+    var sDate = document.getElementById('sDate').innerHTML;
+    var eDate = document.getElementById('eDate').innerHTML;
+    if(document.getElementById('sPersons').innerHTML != "" && sDate == "" && eDate == "") 
+    {
+        document.getElementById('sPrice').innerHTML = price * persons + " EGP";
+    }
+    else if(sDate != "" && eDate != "" && persons != "")
+    {
+        var days = getDays(sDate,eDate) * 1;
+        document.getElementById('sPrice').innerHTML = days * price * persons + " EGP";
+    }
+    else
+    {
+        document.getElementById('sPrice').innerHTML = price + " EGP";
+    }
+}
+
+function deletePastDates(dateID)
+{
+    document.getElementById(dateID).min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()
+}

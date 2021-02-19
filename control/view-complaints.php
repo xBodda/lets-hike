@@ -89,8 +89,8 @@ if (!Login::isLoggedIn())
                         <td><?php echo $ui["id"];?></td>
                         <td><?php echo $ui["name"];?></td>
                         <td><?php echo $ui["email"];?></td>
-                        <td><?php echo $ui["subject"];?></td>
-                        <td><?php echo $ui["message"];?></td>
+                        <td><?php echo truncate($ui["subject"], 20);?></td>
+                        <td><?php echo truncate($ui["message"], 30);?></td>
                         <td><?php echo $ui["_date"];?></td>
                         <td><button class="btn  btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;<button class="btn btn-outline-success btn-sm"><i class="fas fa-comment"></i></button></td>
                         </tr>

@@ -48,4 +48,27 @@ function timeago($date) {
 
 $level[1] = true;
 
+
+function CalculateRating($hikeid)
+{
+  $rating = DB::query('SELECT stars FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+  $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
+  $ratingValue = 0;
+  $fratingValue = 0;
+  if(!$rating)
+  {
+    $ratingValue = 0;
+  }
+  else
+  {
+    foreach($rating as $rate)
+    {
+      $fratingValue += $rate['stars'];
+      $ratingValue = $fratingValue / $total_ratings;
+    }
+  }
+
+  return round($ratingValue);
+}
+
 ?>

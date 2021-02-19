@@ -85,6 +85,25 @@ a {
   font-weight: bold;
 }
 
+#header .userImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+#header .userImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#header .userData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .xbutton {
   background: #3dbc3d;
   padding: 10px 40px;
@@ -337,7 +356,7 @@ label {
 }
 
 .bButton {
-  width: 200px;
+  width: 90%;
   height: 50px;
   background: none;
   border: 3px solid rgba(1, 179, 1, 0.801);
@@ -352,6 +371,7 @@ label {
   font-size: 20px;
   font-weight: bold;
   outline: none;
+  margin: 0 auto;
 }
 
 .bButtonb {
@@ -370,61 +390,9 @@ label {
   font-size: 20px;
   font-weight: bold;
   outline: none;
+  margin: 0 auto;
 }
 
-.bButtonb:hover {
-  background: white;
-  color: rgba(1, 179, 1, 0.801);
-}
-
-.span, .svg {
-  position: absolute;
-  color: rgba(1, 179, 1, 0.801);
-  fill: transparent;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.bButton:focus {
-  outline: none;
-  border: 2px solid transparent;
-  width: 50px;
-  border-left: 2px solid rgba(1, 179, 1, 0.801);
-  border-bottom: 2px solid rgba(1, 179, 1, 0.801);
-  animation: spin 2s 500ms forwards;
-}
-
-.bButton:focus .span {
-  color: transparent;
-}
-
-.bButton:focus .svg {
-  animation: check 500ms 2300ms forwards;
-}
-
-@keyframes spin {
-  80% {
-    border: 2px solid transparent;
-    border-left: 2px solid rgba(1, 179, 1, 0.801);
-  }
-
-  100% {
-    transform: rotate(1080deg);
-    border: 2px solid rgba(1, 179, 1, 0.801);
-  }
-}
-
-@keyframes check {
-  to {
-    fill: rgba(1, 179, 1, 0.801);
-  }
-}
-
-@keyframes circle {
-  to {
-    border: 2px solid rgba(1, 179, 1, 0.801);
-  }
-}
 
 .top-banner {
   width: 100%;
@@ -1050,6 +1018,11 @@ label {
   background-color: #fff;
   border:1px solid #444;
 }
+
+.hike-body #route, .hike-body #safety, .hike-body #howtobook {
+  display: none;
+}
+
 .hike-body .right{
   padding:0 !important;
   padding-left:30px !important;

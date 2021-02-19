@@ -37,7 +37,7 @@ if ( isset( $_POST['submit'] ) )
 
 								for ($z = 0; $z < $images; $z++)
 								{
-									$filename = $_FILES['image'.$z]['name'];
+									$filename = rand().$_FILES['image'.$z]['name'];
 
 									$destination = 'uploads/' . $filename;
 
@@ -336,7 +336,7 @@ if(isset($_GET["action"]))
 																	</td>
 																	<td><abbr title="<?php echo $fd['name']; ?>"><?php echo truncate($fd['name'],35); ?></abbr></td>
 																	<td><abbr title="<?php echo $fd['location']; ?>"><?php echo truncate($fd['location'],35); ?></abbr></td>
-																	<td>4.84</td>
+																	<td><?php echo CalculateRating($fd['id']); ?></td>
 																	<td>
 																	<button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-groups.php?action=delete&id=<?php echo $fd["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
 																	&nbsp;&nbsp;
