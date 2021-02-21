@@ -113,7 +113,32 @@ a {
   border-radius: 30px !important;
   cursor: pointer;
   border:2px solid transparent !important;
+  outline: none;
+  font-weight: bold;
 }
+
+.xbutton-danger {
+  background: #dc3545;
+  padding: 10px 40px;
+  display: table;
+  color: white;
+  box-shadow: 0 3px 3px 0 #cf000eb6 !important;
+  border-radius: 30px !important;
+  cursor: pointer;
+  border:2px solid transparent !important;
+  outline: none;
+}
+
+.remove-cart {
+  font-size: 24px;
+  transition: .3s all;
+  cursor: pointer;
+}
+
+.remove-cart:hover {
+  color: #cf000f;
+}
+
 .xbutton.secondary {
   border:2px solid #3dbc3d99;
   color:#3dbc3d99;
@@ -351,8 +376,6 @@ label {
 .button-container {
   text-align: center;
   width: 100%;
-  margin: 30px;
-  margin-left: 11%;
 
 }
 
@@ -1059,6 +1082,7 @@ position:relative;
 position: absolute;
 top:calc(100% - 10px);
 right:100px;
+outline: none;
 }
 .hike-body .book-container .price{
 color:#3dbc3d;
@@ -1448,6 +1472,7 @@ padding-right:10px;
 #edit-profile .edit-profile p.backToProfile{
 color: #3dbc3d !important;
 }
+
 /*Terms End*/
 
 

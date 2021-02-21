@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -21,7 +22,7 @@
     <div class="top-banner"> 
       <div class="overlay"></div>
       <div class="content">
-        <h1>Your Profile</h1> 
+
       </div>
     </div>
     <!-- Top Banner END -->
@@ -65,66 +66,11 @@
                     <i class="fas fa-phone icon"></i>
                     <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your New Phone Number .." required/>
                 </label>
-                <div class="flex">
-                    <div class="button-container fl-1">
-                        <button type="submit" class="bButton">
-                            <span class="span">Save Changes</span>
-                            <svg class="svg"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                            >
-                                <path class="path"
-                                d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23
-                                8.828-8.187 15-11.438-5.861 5.775-10.711
-                                12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z"
-                                />
-                            </svg>
 
                         </button>
                     </div>
                     
                 </div>
-
-            </form>
-        </div> 
-        <div class="edit-profile-form fl-2" id="Privacy" style="display:none;">
-        <form action="edit-profile.php" method="POST">
-                <h1 class="mb-30">Privacy</h1>
-                <label for="Password"> &nbsp Password
-                    <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="password" id="password" placeholder=" Enter Your Old Password .." required/>
-                </label>
-                <label for="newPassword"> &nbsp Password
-                    <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="password" id="password" placeholder=" Enter Your New Password .." required/>
-                </label>
-                <label for="repassword"> &nbsp Confirm Password
-                    <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="repassword" id="repassword" placeholder=" Confirm Your New Password .." required/>
-                </label>
-                <div class="flex">
-                    <div class="button-container fl-1">
-                        <button type="submit" class="bButton">
-                            <span class="span">Save Changes</span>
-                            <svg class="svg"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                            >
-                                <path class="path"
-                                d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23
-                                8.828-8.187 15-11.438-5.861 5.775-10.711
-                                12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z"
-                                />
-                            </svg>
-
-                        </button>
-                    </div>
-                </div>  
-                  
         </div>
             </div>
            

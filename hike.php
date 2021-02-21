@@ -1,6 +1,6 @@
 <?php
   include('includes/head.php');
-
+  session_start();
   if( isset($_GET['id']) )
   {
     $hikeid = $_GET['id'];
@@ -12,6 +12,82 @@
   else
   {
     die("Not Found");
+  }
+
+  if( isset($_POST['add']) )
+  {
+
+    if (!Login::isLoggedIn())
+    {
+        echo '<script>alert("You have to login to book")</script>';
+        echo '<script>window.location="signin.php"</script>';
+    }
+    else
+    {
+
+        $date = date('Y-m-d H:i:s');
+        $total_price = $_POST['total_price'];
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
+        $persons = $_POST['persons'];
+
+        if(isset($_SESSION["cart"]))
+        {
+            $hikeID = array_column($_SESSION["cart"], "hike_id");
+            if(!in_array($_GET["id"], $hikeID))
+            {
+                $counter = count($_SESSION["cart"]);
+                $hike_array = array(
+                  'hike_id'=>$_GET["id"],
+                  'total_price'=>$total_price,
+                  'start_date'=>$start_date,
+                  'end_date'=>$end_date,
+                  'persons'=>$persons
+                );
+                $_SESSION["cart"][$counter] = $hike_array;
+
+                DB::query('INSERT INTO cart VALUES(\'\',:user_id,:hike_id,:date_added,:total_price,:start_date,:end_date,:persons)',
+                array(':user_id'=>$userid,
+                    ':hike_id'=>$hikeid,
+                    ':date_added'=>$date,
+                    ':total_price'=>$total_price,
+                    ':start_date'=>$start_date,
+                    ':end_date'=>$end_date,
+                    ':persons'=>$persons));
+
+                echo '<script>alert("Added To Added Cart")</script>';
+                echo '<script>window.location="cart.php"</script>';
+            }
+            else
+            {
+                echo '<script>alert("Item Already Added")</script>';  
+                echo '<script>window.location="cart.php"</script>';
+            }   
+        }
+        else
+        {
+            $hike_array = array(  
+              'hike_id'=>$_GET["id"],
+              'total_price'=>$total_price,
+              'start_date'=>$start_date,
+              'end_date'=>$end_date,
+              'persons'=>$persons,   
+            );  
+            $_SESSION["cart"][0] = $hike_array;
+
+            DB::query('INSERT INTO cart VALUES(\'\',:user_id,:hike_id,:date_added,:total_price,:start_date,:end_date,:persons)',
+            array(':user_id'=>$userid,
+                ':hike_id'=>$hikeid,
+                ':date_added'=>$date,
+                ':total_price'=>$total_price,
+                ':start_date'=>$start_date,
+                ':end_date'=>$end_date,
+                ':persons'=>$persons));
+
+            echo '<script>alert("Added To Added Cart")</script>';
+            echo '<script>window.location="cart.php"</script>';
+        }
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -69,7 +145,7 @@
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
             <?php echo $hike_info['overview']; ?>
@@ -83,7 +159,7 @@
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
             <?php echo $hike_info['route']; ?>
@@ -97,7 +173,7 @@
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
             <?php echo $hike_info['safety']; ?>
@@ -111,7 +187,7 @@
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
             <?php echo $hike_info['howtobook']; ?>
@@ -120,12 +196,13 @@
       </div>
     </div>
     <!-- Booking Box START -->
-    <form class="flex-container book-container j-sb">
+    <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
       <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-        <input type="date" min="2021-2-20" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);">
-        <input type="date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);">
-        <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);">
+        <input type="date" name="start_date" min="2021-2-20" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="end_date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="hidden" name="total_price" id="totalPrice" value="">
+        <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
           <option value="" selected disabled>Select Persons</option>
           <?php
             for($i = 1;$i <= 12;$i++)
@@ -155,7 +232,7 @@
           </tr>
         </table>
       </div>
-      <div class="xbutton">Book Now</div>
+      <button type="submit" name="add" class="xbutton">Add To Cart</button>
     </form>
     <!-- Booking Box END -->
 
