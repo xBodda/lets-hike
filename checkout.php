@@ -1,5 +1,25 @@
 <?php
   include('includes/head.php');
+  session_start();
+  if (!empty($_SESSION["cart"]))
+  {
+      $total = 0;
+      $subtotal = 0;
+      $tax = 0;
+      foreach ($_SESSION["cart"] as $keys => $values)
+      {
+        $hikeid = $values['hike_id'];
+        $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$hikeid))[0];
+        $ratingValue = CalculateRating($hikeid);
+        $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['image'];
+          
+          $subtotal += $values["total_price"];
+          
+      } 
+    $tax = $subtotal * 0.14;
+    $total = $tax + $subtotal;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -13,7 +33,7 @@
     <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
     <!-- Link To Icons File -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <title>Hikingify | Review Hike</title>
+    <title>Hikingify | Checkout</title>
   </head>
   <body id="checkout">
     <!-- Header START -->
@@ -76,9 +96,6 @@
                         <input class="input" type="text" name="cvv" id="cvv" maxlength="3" min="0" max="3" placeholder=" Enter Your CVV .." required/>
                     </label>
                 </div>
-
-
-                
             </div>
             <div class="mb-a xbutton mb-10">
                 Finish Payment
@@ -87,21 +104,18 @@
           <div class="payment-desc fl-1">
             <h1 class="ta-c">Payment Details</h1>
             <hr>
-              <div class="payment-details">
-                <div class="flex mb-10">
-                    <b class="fl-1">Price</b>
-                    <p class="fl-1 ta-r">120$</p>
+            <div class="payment-details">
+                <div class="flex mb-10"> <b class="fl-2">Subtotal</b>
+                  <p class="fl-1 ta-r"><?php echo number_format($subtotal,2); ?> £</p>
                 </div>
-                <div class="flex mb-10">
-                    <b class="fl-1">Tax</b>
-                    <p class="fl-1 ta-r">11$</p>
+                <div class="flex mb-10"> <b class="fl-1">Tax</b>
+                  <p class="fl-1 ta-r"><?php echo number_format($tax,2); ?> £</p>
                 </div>
                 <hr>
-                <div class="flex mb-30">
-                    <b class="fl-1">Total Price</b>
-                    <p class="fl-1 ta-r">131$</p>
+                <div class="flex mb-10"> <b class="fl-1">Total Price</b>
+                  <p class="fl-1 ta-r"><?php echo number_format($total,2); ?> £</p>
                 </div>
-              </div>
+            </div>
           </div>
       </div>
     </div>

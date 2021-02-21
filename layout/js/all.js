@@ -71,21 +71,32 @@ function getDays(date1,date2)
 function fillPrice(Price)
 {
     var price = Price;
-    var persons = document.getElementById('sPersons').innerHTML * 1;
+    var persons = document.getElementById('sPersons').innerHTML;
     var sDate = document.getElementById('sDate').innerHTML;
     var eDate = document.getElementById('eDate').innerHTML;
-    if(document.getElementById('sPersons').innerHTML != "" && sDate == "" && eDate == "") 
+    var sPrice = document.getElementById('sPrice');
+    var hiddenTotal = document.getElementById('totalPrice');
+    if(persons != "" && sDate == "" && eDate == "") 
     {
-        document.getElementById('sPrice').innerHTML = price * persons + " EGP";
+        sPrice.innerHTML = price * persons + " EGP";
+        hiddenTotal.value = sPrice;
     }
     else if(sDate != "" && eDate != "" && persons != "")
     {
         var days = getDays(sDate,eDate) * 1;
-        document.getElementById('sPrice').innerHTML = days * price * persons + " EGP";
+        sPrice.innerHTML = days * price * persons + " EGP";
+        hiddenTotal.value = days * price * persons;
+    }
+    else if(sDate != "" && eDate != "" && persons == "")
+    {
+        var days = getDays(sDate,eDate) * 1;
+        sPrice.innerHTML = days * price  + " EGP";
+        hiddenTotal.value = days * price;
     }
     else
     {
-        document.getElementById('sPrice').innerHTML = price + " EGP";
+        sPrice.innerHTML = price + " EGP";
+        hiddenTotal.value = price;
     }
 }
 
