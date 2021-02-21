@@ -1,3 +1,68 @@
+<?php
+    include('includes/head.php');
+    if (Login::isLoggedIn())
+    {
+        die ("Already Logged In");
+    }
+
+    if ( isset( $_POST['signup'] ) )
+    {
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $repassword = $_POST['repassword'];
+        $gender = $_POST['gender'];
+        $phonenumber = $_POST['phonenumber'];
+        $image = 'layout/png/user.png';
+
+        if (!DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email)))
+        {
+            if (strlen($fullname) >= 3 && strlen($fullname) <= 128)
+            {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL))
+                {
+                    if (strlen($password) >= 8 && strlen($password) <= 60)
+                    {
+                        if($password == $repassword)
+                        {
+                            DB::query('INSERT INTO users VALUES(\'\',:fullname,:email,:password,:gender,:phonenumber,:image)',
+                            array(':fullname'=>$fullname,
+                                ':email'=>$email,
+                                ':password'=>password_hash($password, PASSWORD_BCRYPT),
+                                ':gender'=>$gender,
+                                ':phonenumber'=>$phonenumber,
+                                ':image'=>$image));
+
+                            echo '<script>alert("Account Created! You Can Login Now")</script>';
+                            echo '<script>window.location="signin.php"</script>';
+                        }
+                        else
+                        {
+                            echo '<script>alert("Password Doesn\'t Match!")</script>';
+                        }
+                    }
+                    else
+                    {
+                        echo '<script>alert("Password Is Too Short!")</script>';
+                    }
+                }
+                else
+                {
+                    echo '<script>alert("Error In Email!")</script>';
+                }
+
+            }
+            else
+            {
+                echo '<script>alert(" Error In Fullname Length!")</script>';
+            }
+        }
+        else
+        {
+            echo '<script>alert("Already Registered!")</script>';
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -40,19 +105,19 @@
                 <h1 class="mb-30">Create Account</h1>
                 <label for="name"> &nbsp Fullname
                     <i class="fas fa-id-card icon"></i>
-                    <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Name .." required/>
+                    <input class="input" type="text" name="fullname" id="name" placeholder=" Enter Your Name .." required/>
                 </label>
                 <label for="email"> &nbsp Email
                     <i class="fas fa-envelope icon"></i>
-                    <input class="input" type="text" name="email" id="email" placeholder=" Enter Your Email .." required/>
+                    <input class="input" type="email" name="email" id="email" placeholder=" Enter Your Email .." required/>
                 </label>
                 <label for="Password"> &nbsp Password
                     <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="password" id="password" placeholder=" Enter Your Password .." required/>
+                    <input class="input" type="password" name="password" id="password" placeholder=" Enter Your Password .." required/>
                 </label>
                 <label for="repassword"> &nbsp Confirm Password
                     <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="repassword" id="repassword" placeholder=" Confirm Your Password .." required/>
+                    <input class="input" type="password" name="repassword" id="repassword" placeholder=" Confirm Your Password .." required/>
                 </label>
                 <label for="gender"> &nbsp Gender
                     <i class="fas fa-venus-mars icon"></i>
@@ -65,31 +130,20 @@
                 </label>
                 <label for="phone"> &nbsp Phone Number
                     <i class="fas fa-phone icon"></i>
-                    <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your Phone Number .." required/>
+                    <input class="input" type="text" name="phonenumber" id="phone" placeholder=" Enter Your Phone Number .." required/>
                 </label>
                 <div class="flex">
-                    <div class="button-container fl-1">
-                        <button type="submit" class="bButton">
-                            <span class="span">Create Account</span>
-                            <svg class="svg"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                            >
-                                <path class="path"
-                                d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23
-                                8.828-8.187 15-11.438-5.861 5.775-10.711
-                                12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z"
-                                />
-                            </svg>
-
+                    <div class="button-container fl-3">
+                        <button type="submit" class="bButton" name="signup">
+                            Create Account
                         </button>
                     </div>
                     <div class="button-container fl-1">
-                        <button type="button" class="bButtonb">
-                            <span class="span">Login ?</span>
-                        </button>
+                        <a href="signin.php">
+                            <button type="button" class="bButtonb">
+                                Login ? 
+                            </button>
+                        </a>
                     </div>
                 </div>
 

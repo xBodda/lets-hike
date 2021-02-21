@@ -4,10 +4,6 @@
   {
     echo '<script>window.location="404.php"</script>';
   }
-  if(!$level[5] && !$level[1])
-{
-  echo '<script>window.location="404.php"</script>';
-}
 
   $isGetTo = false;
   if ( isset( $_GET['to'] ) )
@@ -33,7 +29,7 @@
         ':_date'=>$date));
 
     
-    echo '<script>alert("تم إرسال الرسالة")</script>';
+    echo '<script>alert("Message Sent")</script>';
     echo '<script>window.location="compose.php"</script>';
   }
 
@@ -45,7 +41,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | Compose Message</title>
+  <title>Hikingfy | Compose Message</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -147,12 +143,12 @@
                       ?>
                       <option disabled selected value="">-- Select The Reciever --</option>
                       <?php
-                      $alladmins = DB::query('SELECT * FROM user_info');
+                      $alladmins = DB::query('SELECT * FROM users');
                       foreach($alladmins as $ad)
                       {
-                        $toemail = DB::query('SELECT phoneEmail FROM users WHERE id=:id',array(':id'=>$ad['user_id']))[0]['phoneEmail'];
+                        $toemail = DB::query('SELECT email FROM users WHERE id=:id',array(':id'=>$ad['user_id']))[0]['phoneEmail'];
                       ?>
-                      <option value="<?php echo $ad['user_id'] ?>"><?php echo $ad['fullname']; ?>&nbsp; ( <?php echo $toemail;?> )</option>
+                      <option value="<?php echo $ad['user_id'] ?>"><?php echo $ad['name']; ?>&nbsp; ( <?php echo $toemail;?> )</option>
                       <?php } }?>
                     </select>
                   </div>

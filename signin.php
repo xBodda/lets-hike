@@ -1,3 +1,41 @@
+<?php
+include('includes/head.php');
+
+if (isset($_POST['signin']))
+{
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $date = date('Y-m-d H:i:s');
+
+    if (DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email)))
+    {
+        if (password_verify($password, DB::query('SELECT password FROM users WHERE email=:email', array(':email'=>$email))[0]['password']))
+        {
+            echo '<script>alert("Logged In!")</script>';
+            echo '<script>window.location="index.php"</script>';
+            $cstrong = True;
+            $token = bin2hex(openssl_random_pseudo_bytes(64, $cstrong));
+            $user_id = DB::query('SELECT id FROM users WHERE email=:email', array(':email'=>$email))[0]['id'];
+
+            DB::query('INSERT INTO login_tokens VALUES (\'\', :token, :user_id, :date)', array(':token'=>sha1($token), ':user_id'=>$user_id,':date'=>$date));
+
+            setcookie("USR", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
+            setcookie("USR_", '1', time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);
+
+        } 
+        else 
+        {
+            echo '<script>alert("Wrong Password")</script>';
+            echo '<script>window.location="signin.php"</script>';
+        }
+    } 
+    else 
+    {
+        echo '<script>alert("Not Registered")</script>';
+        echo '<script>window.location="signin.php"</script>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -34,40 +72,29 @@
             <p>Join Now !</p>
         </div>
         <div class="signup-form fl-1">
-            <form action="signup.php" method="POST">
+            <form action="signin.php" method="POST">
                 <h1 class="mb-30">Login To Your Account</h1>
                 <label for="email"> &nbsp Email
                     <i class="fas fa-envelope icon"></i>
-                    <input class="input" type="text" name="email" id="email" placeholder=" Enter Your Email .." required/>
+                    <input class="input" type="email" name="email" id="email" placeholder=" Enter Your Email .." required/>
                 </label>
                 <label for="Password"> &nbsp Password
                     <i class="fas fa-lock icon"></i>
-                    <input class="input" type="text" name="password" id="password" placeholder=" Enter Your Password .." required/>
+                    <input class="input" type="password" name="password" id="password" placeholder=" Enter Your Password .." required/>
                 </label>
 
                 <div class="flex">
-                    <div class="button-container fl-1">
-                        <button type="submit" class="bButton">
-                            <span class="span">Login</span>
-                            <svg class="svg"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24">
-                                <path class="path"
-                                d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23
-                                8.828-8.187 15-11.438-5.861 5.775-10.711
-                                12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z"
-
-                                />
-                            </svg>
-
+                    <div class="button-container fl-3">
+                        <button type="submit" class="bButton" name="signin">
+                            Login
                         </button>
                     </div>
                     <div class="button-container fl-1">
-                        <button type="button" class="bButtonb">
-                            <span class="span">Create Account ?</span>
-                        </button>
+                        <a href="signup.php">
+                            <button type="button" class="bButtonb">
+                                Create Account ? 
+                            </button>
+                        </a>
                     </div>
                 </div>
 

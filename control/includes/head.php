@@ -5,19 +5,7 @@ if (Login::isLoggedIn())
 {
   $userid = Login::isLoggedIn();
   $fullname = DB::query('SELECT name FROM admins WHERE id=:id', array(':id'=>$userid))[0]['name'];
-  // $total_messages = DB::query('SELECT COUNT(id) AS cnt FROM messages WHERE _to=:_to',array(':_to'=>$userid))[0]['cnt'];
-  // for($i=1;$i<=8;$i++)
-  // {
-  //   $level[$i] = DB::query('SELECT level'.$i.' FROM admins WHERE id=:id',array(':id'=>$userid))[0]['level'.$i];
-  //   if($level[$i] == 1)
-  //   {
-  //     $level[$i] = true;
-  //   }
-  //   else
-  //   {
-  //     $level[$i] = false;
-  //   }
-  // }
+  $total_messages = DB::query('SELECT COUNT(id) AS cnt FROM messages WHERE _to=:_to',array(':_to'=>$userid))[0]['cnt'];
 }
 else
 {
@@ -59,5 +47,28 @@ function timeago($date) {
 }
 
 $level[1] = true;
+
+
+function CalculateRating($hikeid)
+{
+  $rating = DB::query('SELECT stars FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+  $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
+  $ratingValue = 0;
+  $fratingValue = 0;
+  if(!$rating)
+  {
+    $ratingValue = 0;
+  }
+  else
+  {
+    foreach($rating as $rate)
+    {
+      $fratingValue += $rate['stars'];
+      $ratingValue = $fratingValue / $total_ratings;
+    }
+  }
+
+  return round($ratingValue);
+}
 
 ?>

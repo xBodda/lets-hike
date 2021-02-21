@@ -1,3 +1,19 @@
+<?php
+  include('includes/head.php');
+
+  if( isset($_GET['id']) )
+  {
+    $hikeid = $_GET['id'];
+    $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$hikeid))[0];
+    $ratingValue = CalculateRating($hikeid);
+    $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
+    $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['image'];
+  }
+  else
+  {
+    die("Not Found");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,7 +27,7 @@
   <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
   <!-- Link To Icons File -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <title>Hikingify | Review Hike</title>
+  <title>Hikingify | Book Hike</title>
 </head>
 
 <body id="review">
@@ -33,62 +49,109 @@
     <div class="flex-container">
       <div class="left">
         <div class="selected-hike-image">
-          <div class="title">MT Charleston Peak, USA</div>
-          <img src="layout/png/1.png">
+          <div class="title"><?php echo $hike_info['name'].', '.$hike_info['location']; ?></div>
+          <img src="control/uploads/<?php echo $hikeImage; ?>">
         </div>
       </div>
       <div class="right">
         <div class="flex-container mb-20 j-sb">
-          <div class="xbutton">Overview</div>
-          <div class="xbutton secondary">Route</div>
-          <div class="xbutton secondary">Safety</div>
-          <div class="xbutton secondary">How to book</div>
+          <div class="xbutton" id="overviewBtn" onclick="showNote('overviewBtn','overview')">Overview</div>
+          <div class="xbutton secondary" id="routeBtn" onclick="showNote('routeBtn','route')">Route</div>
+          <div class="xbutton secondary" id="safetyBtn" onclick="showNote('safetyBtn','safety')">Safety</div>
+          <div class="xbutton secondary" id="howtobookBtn" onclick="showNote('howtobookBtn','howtobook')">How to book</div>
           <div class="xbutton secondary">FAQ</div>
         </div>
-        <div class="hike-details">
+        <div class="hike-details" id="overview">
           <div class="hike-heading">
-            <h1 id="h-text">MT Charleston Peak, USA </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
             <div class="sep"></div>
-            <div class="rating" data-rating="3">
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count">235 Ratings</div>
+            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <?php echo $hike_info['overview']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="route">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['route']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="safety">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['safety']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="howtobook">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-count"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['howtobook']; ?>
           </p>
         </div>
       </div>
     </div>
     <!-- Booking Box START -->
     <form class="flex-container book-container j-sb">
-      <div class="price">850</div>
+      <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-        <input type="date">
-        <input type="date">
-        <select>
-          <option>3 persons</option>
+        <input type="date" min="2021-2-20" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);">
+        <input type="date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);">
+        <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);">
+          <option value="" selected disabled>Select Persons</option>
+          <?php
+            for($i = 1;$i <= 12;$i++)
+            {
+              print "<option value='$i'>".$i." Persons</option>";
+            }
+          ?>
         </select>
       </div>
       <div class="details">
         <table>
           <tr>
             <td>Start date</td>
-            <td>06-12-2020</td>
+            <td id="sDate"></td>
           </tr>
           <tr>
             <td>End date</td>
-            <td>08-12-2020</td>
+            <td id="eDate"></td>
           </tr>
           <tr>
             <td>Persons</td>
-            <td>06-12-2020</td>
+            <td id="sPersons"></td>
           </tr>
           <tr>
             <td>Booking Cost</td>
-            <td>2250 EGP</td>
+            <td id="sPrice">0 EGP</td>
           </tr>
         </table>
       </div>
@@ -102,14 +165,15 @@
     </div>
     <div class="hike-gallery flex-container">
       <div id="selected-image" class="image f-1">
-        <img src="layout/png/1.png">
+        <img src="control/uploads/<?php echo $hikeImage; ?>">
       </div>
       <div class="gallery-images f-1">
         <?php
-        for ($i = 0; $i < 9; $i++) {
+        $allimages = DB::query('SELECT * FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+        foreach ($allimages as $img) {
         ?>
           <div class="item">
-            <img src="layout/png/<?php echo $i % 4 + 1; ?>.png">
+            <img src="control/uploads/<?php echo $img['image'] ?>">
           </div>
         <?php
         }

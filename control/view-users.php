@@ -1,14 +1,9 @@
 <?php
-// include('includes/head.php');
-// if (!Login::isLoggedIn()) 
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
-
-// if(!$level[3] && !$level[1])
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
+include('includes/head.php');
+if (!Login::isLoggedIn()) 
+{
+  echo '<script>window.location="404.php"</script>';
+}
 
 if(isset($_GET["action"]))  
 {
@@ -118,9 +113,9 @@ elseif(isset($_GET["deactivate"]))
                         <thead>
                         <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Phone / Email</th>
-                        <th>Country</th>
+                        <th>Fullname</th>
+                        <th>Email</th>
+                        <th>Phone</th>
                         <th>Gender</th>
                         <th>Action</th>
                         </tr>
@@ -129,14 +124,21 @@ elseif(isset($_GET["deactivate"]))
                         <?php 
                         $user_info = DB::query('SELECT * FROM users');
                         foreach ($user_info as $ui) {
-                          $country = DB::query('SELECT name FROM country WHERE id=:id',array(':id'=>$ui['country']))[0]['name'];
-                          $gender = DB::query('SELECT gender FROM gender WHERE id=:id',array(':id'=>$ui['gender']))[0]['gender'];
+                          $gender = $ui['gender'];
+                          if($gender == 1)
+                          {
+                            $gender = "Male";
+                          } else if($gender == 2) {
+                            $gender = "Female";
+                          } else if($gender == 3) {
+                            $gender = "Rather Not To Say";
+                          }
                         ?>
                         <tr>
                         <td><?php echo $ui["id"];?></td>
-                        <td><?php echo $ui["username"];?></td>
-                        <td><?php echo $ui["phoneEmail"];?></td>
-                        <td><?php echo $country;?></td>
+                        <td><?php echo $ui["fullname"];?></td>
+                        <td><?php echo $ui["email"];?></td>
+                        <td><?php echo $ui["phonenumber"];?></td>
                         <td><?php echo $gender;?></td>
                         <td>
                         <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-users.php?action=delete&id=<?php echo $ui["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>

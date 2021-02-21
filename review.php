@@ -1,3 +1,6 @@
+<?php
+  include('includes/head.php');
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -84,7 +87,7 @@
               <div class="ques fl-3">
                 <p>How do you rate the service ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="4">
+              <div class="rev fl-1 flex rating" data-rating="2">
               </div>
             </div>
             <textarea name="comment" class="review-comment" id="comment" cols="30" rows="7" placeholder="(Optional)"></textarea>

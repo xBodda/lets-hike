@@ -1,3 +1,35 @@
+<?php
+  include('includes/head.php');
+
+  if(isset($_POST['send']))
+  {
+      $name=$_POST['name'];
+      $email=$_POST['email'];
+      $subject=$_POST['subject'];
+      $message=$_POST['message'];
+      $date = date('Y-m-d H:i:s');
+
+      if (strlen($name) >= 3 && strlen($name) <= 128) 
+      {
+          if (filter_var($email, FILTER_VALIDATE_EMAIL)) 
+          {
+              DB::query('INSERT INTO contact VALUES(\'\',:name,:email,:subject,:message,:_date)',
+              array(':name'=>$name,':subject'=>$subject,':email'=>$email,':message'=>$message,':_date'=>$date));
+              echo '<script>alert("Message Sent !")</script>';  
+              echo '<script>window.location="index.php"</script>';
+          }
+          else 
+          {
+              echo '<script>alert("Error In Email!")</script>';
+          }
+      }
+      else 
+      {
+          echo '<script>alert("Error In Name Length!")</script>';
+      }
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -50,16 +82,16 @@
             </label>
             <label for="name"> &nbsp Email
 
-                <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Email .." required/>
+                <input class="input" type="text" name="email" id="name" placeholder=" Enter Your Email .." required/>
             </label>
             <label for="name"> &nbsp Subject
 
-                <input class="input" type="text" name="name" id="name" placeholder=" Enter Subject .." required/>
+                <input class="input" type="text" name="subject" id="name" placeholder=" Enter Subject .." required/>
             </label>
           <label for="name"> &nbsp Message <br>
             <textarea name="message" rows="8" cols="80" placeholder="Your Message"></textarea>
             </label>
-            <input type="submit" class="xbutton contact-box" name="submit" value="Send">
+            <input type="submit" class="xbutton contact-box" name="send" value="Send">
           </form>
         </div>
       </div>

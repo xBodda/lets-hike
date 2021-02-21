@@ -32,5 +32,3 @@ for (let i = 0; i < ratings_containers.length; i++) {
         element.appendChild(stars[j]);
     }
 
-}
-

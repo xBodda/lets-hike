@@ -4,11 +4,6 @@ if (!Login::isLoggedIn())
 {
   echo '<script>window.location="404.php"</script>';
 }
-
-if(!$level[8] && !$level[1])
-{
-  echo '<script>window.location="404.php"</script>';
-}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +11,7 @@ if(!$level[8] && !$level[1])
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | View Complaints</title>
+  <title>Hikingfy | View Complaints</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -77,11 +72,12 @@ if(!$level[8] && !$level[1])
                         <thead>
                         <tr>
                         <th>ID</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Subject</th>
                         <th>Message</th>
                         <th>Date</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -91,9 +87,10 @@ if(!$level[8] && !$level[1])
                         ?>
                         <tr>
                         <td><?php echo $ui["id"];?></td>
+                        <td><?php echo $ui["name"];?></td>
                         <td><?php echo $ui["email"];?></td>
-                        <td><?php echo $ui["subject"];?></td>
-                        <td><?php echo $ui["message"];?></td>
+                        <td><?php echo truncate($ui["subject"], 20);?></td>
+                        <td><?php echo truncate($ui["message"], 30);?></td>
                         <td><?php echo $ui["_date"];?></td>
                         <td><button class="btn  btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;<button class="btn btn-outline-success btn-sm"><i class="fas fa-comment"></i></button></td>
                         </tr>

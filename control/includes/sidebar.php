@@ -19,29 +19,6 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./chartjs.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Statistics</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./flot.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Mange Website
@@ -99,10 +76,7 @@
               </p>
             </a>
           </li>
-              <?php
-              if(true) // if($level[5] || $level[1] || true)
-              {
-                print '<li class="nav-item">
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon far fa-envelope"></i>
                   <p>
@@ -114,7 +88,7 @@
                   <li class="nav-item">
                     <a href="./mailbox.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Inbox<span class="badge badge-info right"><?php echo $total_messages; ?></span></p>
+                      <p>Inbox<span class="badge badge-info right"><?php echo '5'; ?></span></p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -136,9 +110,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>';
-              }
-              ?>
+              </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
