@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="layout/css/productsans.css">
   <!-- Main CSS File -->
   <link rel="stylesheet" href="layout/css/master.css">
+  <!-- Link To Icons File -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   <!-- Emla Carousel Library -->
   <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js">
   </script>

@@ -13,9 +13,9 @@ else
 }
 // $date = date('Y-m-d H:i:s');
 
-// $total_users = DB::query('SELECT COUNT(id) AS cnt FROM users')[0]['cnt'];
+$total_users = DB::query('SELECT COUNT(id) AS cnt FROM users')[0]['cnt'];
 
-// $total_complaints = DB::query('SELECT COUNT(id) AS cnt FROM contact')[0]['cnt'];
+$total_complaints = DB::query('SELECT COUNT(id) AS cnt FROM contact')[0]['cnt'];
 
 $total_admins = DB::query('SELECT COUNT(id) AS cnt FROM admins')[0]['cnt'];
 

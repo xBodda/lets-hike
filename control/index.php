@@ -67,7 +67,7 @@ include('includes/head.php');
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>5</h3> 
+                <h3><?php echo $total_users; ?></h3> 
 
                 <p>User Registrations</p>
               </div>
@@ -95,7 +95,7 @@ include('includes/head.php');
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>5</h3>
+                <h3><?php echo $total_complaints; ?></h3>
 
                 <p>Complaints</p>
               </div>

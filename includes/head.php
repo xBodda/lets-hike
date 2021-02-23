@@ -6,6 +6,11 @@ if (Login::isLoggedIn())
   $userid = Login::isLoggedIn();
   $image = DB::query('SELECT image FROM users WHERE id=:id',array(':id'=>$userid))[0]['image'];
   $fullname = DB::query('SELECT fullname FROM users WHERE id=:id',array(':id'=>$userid))[0]['fullname'];
+  $total_cart = DB::query('SELECT COUNT(id) AS cnt FROM cart WHERE user_id=:user_id',array(':user_id'=>$userid))[0]['cnt'];
+}
+else
+{
+  $total_cart = 0;
 }
 
 function truncate($text, $length) 

@@ -20,6 +20,40 @@
     $tax = $subtotal * 0.14;
     $total = $tax + $subtotal;
   }
+
+  if (isset($_POST['checkout']))
+  {
+      $date = date('Y-m-d H:i:s');
+
+      DB::query('INSERT INTO orders VALUES(\'\',:user_id,:ordered_date)',
+      array(':user_id'=>$userid,':ordered_date'=>$date));
+
+      if (!empty($_SESSION["cart"]))
+      {
+          $total = 0;
+          $subtotal = 0;
+          $tax = 0;
+          foreach ($_SESSION["cart"] as $keys => $values)
+          {
+            $hikeid = $values['hike_id'];
+            $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$hikeid))[0];
+            
+            $subtotal += $values["total_price"];
+            $tax = $subtotal * 0.14;
+            $total = $tax + $subtotal;
+            $order_id = DB::query('SELECT id FROM orders ORDER BY id DESC LIMIT 1')[0]['id'];
+
+            DB::query('INSERT INTO order_items VALUES(\'\',:hike_id,:price,:start_date,:end_date,:persons,:order_id)',
+            array(':hike_id'=>$hikeid,':price'=>$total,':start_date'=>$values['start_date'],':end_date'=>$values['end_date'],':persons'=>$values['persons'],':order_id'=>$order_id));
+            unset($_SESSION["cart"][$keys]);
+            $cartid = DB::query('SELECT id FROM cart WHERE user_id=:user_id AND hike_id=:hike_id',array(':user_id'=>$userid,':hike_id'=>$hikeid))[0]['id'];
+            DB::query('DELETE FROM cart WHERE id=:id AND user_id=:user_id AND hike_id=:hike_id',array(':id'=>$cartid,':hike_id'=>$hikeid,':user_id'=>$userid));
+          }
+      }
+
+      echo '<script>alert("Order Placed !")</script>';  
+      echo '<script>window.location="index.php"</script>';
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -97,9 +131,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mb-a xbutton mb-10">
-                Finish Payment
-              </div>
+            <form action="checkout.php" method="POST">
+              <button class="mb-a xbutton mb-10" type="submit" name="checkout">
+                  Finish Payment
+              </button>
+            </form>
+            
           </div>
           <div class="payment-desc fl-1">
             <h1 class="ta-c">Payment Details</h1>
