@@ -1,3 +1,6 @@
+<?php
+  include('includes/head.php');
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -35,56 +38,56 @@
               <div class="ques fl-3">
                 <p>How much are you satisfied with the website ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you see the support team ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the hike equipment ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the transportations ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the place ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate your team guides ?</p>
               </div>
-              <div class="rev fl-1 flex rating rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you feel the weather in there ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the service ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="4">
+              <div class="rev fl-1 flex rating" data-rating="2">
               </div>
             </div>
             <textarea name="comment" class="review-comment" id="comment" cols="30" rows="7" placeholder="(Optional)"></textarea>

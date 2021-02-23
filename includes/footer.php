@@ -22,7 +22,7 @@
           <ul>
             <li><a href='terms.php'>Terms & Conditions</a></li>
             <li><a href='privacy.php'>Privacy Policy</a></li>
-            <li><a href='tours.php'>Tours</a></li>
+            <li><a href='faq.php'>FAQ</a></li>
             <li><a href='returns.php'>Returns Policy</a></li>
             <li><a href='support.php'>Support</a></li>
           </ul>
@@ -32,7 +32,7 @@
             <li><a href='advertise.php'>Advertise</a></li>
             <li><a href='afilliates.php'>Afilliates</a></li>
             <li><a href='careers.php'>Careers</a></li>
-            <li><a href='contact-us.php'>Contact Us</a></li>
+            <li><a href='contact.php'>Contact Us</a></li>
           </ul>
         </div>
       </div>

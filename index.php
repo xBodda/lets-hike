@@ -1,3 +1,7 @@
+<?php
+  include('includes/head.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -7,6 +11,8 @@
   <link rel="stylesheet" href="layout/css/productsans.css">
   <!-- Main CSS File -->
   <link rel="stylesheet" href="layout/css/master.css">
+  <!-- Link To Icons File -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   <!-- Emla Carousel Library -->
   <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js">
   </script>
@@ -69,13 +75,16 @@
 
   <div class="hikes-slide" id="embla">
     <div class="slider" id="hikes-slider">
-      <?php for ($i = 0; $i < 10; $i++) {
+      <?php 
+      $allhikes = DB::query('SELECT * FROM hikes');
+      foreach ($allhikes as $hike) {
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
       ?>
         <div class="item">
           <div class="item slide">
-            <div class="title"><?php echo $i + 1; ?>MT Charleston Peak, USA</div>
+            <div class="title"><?php echo $hike['name']; ?></div>
             <div class="image">
-              <img src="layout/png/<?php echo $i % 4 + 1; ?>.png">
+              <img src="control/uploads/<?php echo $hikeImage; ?>">
             </div>
           </div>
         </div>
@@ -84,22 +93,25 @@
     </div>
   </div>
   <!-- Hike Slider Description -->
+  <?php
+    $premiumHike = DB::query('SELECT * FROM hikes')[0];
+    $premiumImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$premiumHike['id']))[0]['image'];
+  ?>
   <div class="hike-s-description">
     <div class="background-text" id="h-bg-text">
-      MT Charleston Peak, USA
+      <?php echo $premiumHike['name']; ?>
     </div>
     <div class="flex-container">
       <div class="left">
         <div class="selected-hike-image">
-          <div class="title">MT Charleston Peak, USA</div>
-          <img src="layout/png/1.png">
+          <div class="title"><?php echo $premiumHike['name']; ?></div>
+          <img src="control/uploads/<?php echo $premiumImage; ?>">
         </div>
       </div>
       <div class="right">
-        <h1 id="h-text">MT Charleston Peak, USA</h1>
+        <h1 id="h-text"><?php echo $premiumHike['name']; ?></h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <?php echo $premiumHike['overview']; ?>
         </p>
       </div>
     </div>
@@ -109,14 +121,20 @@
   <!-- Hikes preview START -->
   <div class="hikes-preview">
     <div class="flex-container wrap j-sa">
-      <?php for ($i = 0; $i < 7; $i++) {
+      <?php 
+      $allhikes = DB::query('SELECT * FROM hikes');
+      foreach ($allhikes as $hike) {
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
+        $ratingValue = CalculateRating($hike['id']);
       ?>
-        <div class="item">
-          <div class="image"> <img src="layout/jpg/<?php echo $i % 2 + 1; ?>.jpg"> </div>
-          <div class="title">Eagles Nest</div>
-          <div class="rating">
+        <a href="hike.php?id=<?php echo $hike['id']; ?>">
+          <div class="item">
+            <div class="image"> <img src="control/uploads/<?php echo $hikeImage; ?>"> </div>
+            <div class="title"><?php echo $hike['name']; ?></div>
+            <div class="rev fl-1 flex rating" data-rating="<?php echo round($ratingValue); ?>">
+              </div>
           </div>
-        </div>
+        </a>
       <?php
       } ?>
       <div class="item extra"></div>
@@ -150,10 +168,22 @@
         chief system engineer
       </div>
     </div>
+    <div class="item">
+      <div class="image"> <img src="layout/jpg/o-3.jpg"> </div>
+      <div class="name">
+        Ahmed Ashraf
+      </div>
+      <div class="title">
+        Chief Content Officer
+      </div>
+    </div>
   </div>
-  <div class="xbutton center mt-40x contact-us-button">
-    <b>Contact Us</b>
-  </div>
+  <a href="contact.php">
+    <div class="xbutton center mt-40x contact-us-button">
+      <b>Contact Us</b>
+    </div>
+  </a>
+  
   <!-- Team END -->
   <!-- Footer START -->
   <?php include('includes/footer.php'); ?>

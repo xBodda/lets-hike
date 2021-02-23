@@ -1,3 +1,95 @@
+<?php
+  include('includes/head.php');
+  session_start();
+  if( isset($_GET['id']) )
+  {
+    $hikeid = $_GET['id'];
+    $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$hikeid))[0];
+    $ratingValue = CalculateRating($hikeid);
+    $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
+    $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['image'];
+  }
+  else
+  {
+    die("Not Found");
+  }
+
+  if( isset($_POST['add']) )
+  {
+
+    if (!Login::isLoggedIn())
+    {
+        echo '<script>alert("You have to login to book")</script>';
+        echo '<script>window.location="signin.php"</script>';
+    }
+    else
+    {
+
+        $date = date('Y-m-d H:i:s');
+        $total_price = $_POST['total_price'];
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
+        $persons = $_POST['persons'];
+
+        if(isset($_SESSION["cart"]))
+        {
+            $hikeID = array_column($_SESSION["cart"], "hike_id");
+            if(!in_array($_GET["id"], $hikeID))
+            {
+                $counter = count($_SESSION["cart"]);
+                $hike_array = array(
+                  'hike_id'=>$_GET["id"],
+                  'total_price'=>$total_price,
+                  'start_date'=>$start_date,
+                  'end_date'=>$end_date,
+                  'persons'=>$persons
+                );
+                $_SESSION["cart"][$counter] = $hike_array;
+
+                DB::query('INSERT INTO cart VALUES(\'\',:user_id,:hike_id,:date_added,:total_price,:start_date,:end_date,:persons)',
+                array(':user_id'=>$userid,
+                    ':hike_id'=>$hikeid,
+                    ':date_added'=>$date,
+                    ':total_price'=>$total_price,
+                    ':start_date'=>$start_date,
+                    ':end_date'=>$end_date,
+                    ':persons'=>$persons));
+
+                echo '<script>alert("Added To Added Cart")</script>';
+                echo '<script>window.location="cart.php"</script>';
+            }
+            else
+            {
+                echo '<script>alert("Item Already Added")</script>';  
+                echo '<script>window.location="cart.php"</script>';
+            }   
+        }
+        else
+        {
+            $hike_array = array(  
+              'hike_id'=>$_GET["id"],
+              'total_price'=>$total_price,
+              'start_date'=>$start_date,
+              'end_date'=>$end_date,
+              'persons'=>$persons,   
+            );  
+            $_SESSION["cart"][0] = $hike_array;
+
+            DB::query('INSERT INTO cart VALUES(\'\',:user_id,:hike_id,:date_added,:total_price,:start_date,:end_date,:persons)',
+            array(':user_id'=>$userid,
+                ':hike_id'=>$hikeid,
+                ':date_added'=>$date,
+                ':total_price'=>$total_price,
+                ':start_date'=>$start_date,
+                ':end_date'=>$end_date,
+                ':persons'=>$persons));
+
+            echo '<script>alert("Added To Added Cart")</script>';
+            echo '<script>window.location="cart.php"</script>';
+        }
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,7 +103,7 @@
   <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
   <!-- Link To Icons File -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <title>Hikingify | Review Hike</title>
+  <title>Hikingify | Book Hike</title>
 </head>
 
 <body id="review">
@@ -33,66 +125,114 @@
     <div class="flex-container">
       <div class="left">
         <div class="selected-hike-image">
-          <div class="title">MT Charleston Peak, USA</div>
-          <img src="layout/png/1.png">
+          <div class="title"><?php echo $hike_info['name'].', '.$hike_info['location']; ?></div>
+          <img src="control/uploads/<?php echo $hikeImage; ?>">
         </div>
       </div>
       <div class="right">
         <div class="flex-container mb-20 j-sb">
-          <div class="xbutton">Overview</div>
-          <div class="xbutton secondary">Route</div>
-          <div class="xbutton secondary">Safety</div>
-          <div class="xbutton secondary">How to book</div>
+          <div class="xbutton" id="overviewBtn" onclick="showNote('overviewBtn','overview')">Overview</div>
+          <div class="xbutton secondary" id="routeBtn" onclick="showNote('routeBtn','route')">Route</div>
+          <div class="xbutton secondary" id="safetyBtn" onclick="showNote('safetyBtn','safety')">Safety</div>
+          <div class="xbutton secondary" id="howtobookBtn" onclick="showNote('howtobookBtn','howtobook')">How to book</div>
           <div class="xbutton secondary">FAQ</div>
         </div>
-        <div class="hike-details">
+        <div class="hike-details" id="overview">
           <div class="hike-heading">
-            <h1 id="h-text">MT Charleston Peak, USA </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
             <div class="sep"></div>
-            <div class="rating" data-rating="3">
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
             </div>
             <div class="sep"></div>
-            <div class="rating-count">235 Ratings</div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <?php echo $hike_info['overview']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="route">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['route']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="safety">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['safety']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="howtobook">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating="<?php echo $ratingValue; ?>">
+
+            </div>
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['howtobook']; ?>
           </p>
         </div>
       </div>
     </div>
     <!-- Booking Box START -->
-    <form class="flex-container book-container j-sb">
-      <div class="price">850</div>
+    <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
+      <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-        <input type="date">
-        <input type="date">
-        <select>
-          <option>3 persons</option>
+        <input type="date" name="start_date" min="2021-2-20" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="end_date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="hidden" name="total_price" id="totalPrice" value="">
+        <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+          <option value="" selected disabled>Select Persons</option>
+          <?php
+            for($i = 1;$i <= 12;$i++)
+            {
+              print "<option value='$i'>".$i." Persons</option>";
+            }
+          ?>
         </select>
       </div>
       <div class="details">
         <table>
           <tr>
             <td>Start date</td>
-            <td>06-12-2020</td>
+            <td id="sDate"></td>
           </tr>
           <tr>
             <td>End date</td>
-            <td>08-12-2020</td>
+            <td id="eDate"></td>
           </tr>
           <tr>
             <td>Persons</td>
-            <td>06-12-2020</td>
+            <td id="sPersons"></td>
           </tr>
           <tr>
             <td>Booking Cost</td>
-            <td>2250 EGP</td>
+            <td id="sPrice">0 EGP</td>
           </tr>
         </table>
       </div>
-      <div class="xbutton">Book Now</div>
+      <button type="submit" name="add" class="xbutton">Add To Cart</button>
     </form>
     <!-- Booking Box END -->
 
@@ -102,14 +242,15 @@
     </div>
     <div class="hike-gallery flex-container">
       <div id="selected-image" class="image f-1">
-        <img src="layout/png/1.png">
+        <img src="control/uploads/<?php echo $hikeImage; ?>">
       </div>
       <div class="gallery-images f-1">
         <?php
-        for ($i = 0; $i < 9; $i++) {
+        $allimages = DB::query('SELECT * FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+        foreach ($allimages as $img) {
         ?>
           <div class="item">
-            <img src="layout/png/<?php echo $i % 4 + 1; ?>.png">
+            <img src="control/uploads/<?php echo $img['image'] ?>">
           </div>
         <?php
         }
@@ -127,28 +268,7 @@
     </div>
     <!-- Map Overview END -->
     <!-- Places you might like START -->
-    <div class="heading-line mb-30">
-      Places you might like
-    </div>
-    <div class="hikes-preview">
-      <div class="flex-container wrap j-sa">
-        <?php for ($i = 0; $i < 7; $i++) {
-        ?>
-          <div class="item">
-            <div class="image"> <img src="layout/jpg/<?php echo $i % 2 + 1; ?>.jpg"> </div>
-            <div class="title">Eagles Nest</div>
-            <div class="rating">
-            </div>
-          </div>
-        <?php
-        } ?>
-        <div class="item extra"></div>
-        <div class="item extra"></div>
-        <div class="item extra"></div>
-        <div class="item extra"></div>
-        <div class="item extra"></div>
-      </div>
-    </div>
+    <?php include('includes/places-might-like.php'); ?>
     <!-- Places you might like END -->
   </div>
   <!-- Hikes Body END  -->
@@ -157,4 +277,3 @@
   <!-- Footer END -->
 </body>
 
-</html>

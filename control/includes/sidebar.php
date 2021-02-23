@@ -19,29 +19,6 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./chartjs.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Statistics</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./flot.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Mange Website
@@ -55,58 +32,32 @@
                   <p>Edit FAQ</p>
                 </a>
               </li>
-
-              <?php
-              if(true) // if($level[4] || $level[1])
-              {
-                print '<li class="nav-item">
-                <a href="./pending-approval.php" class="nav-link">
-                  <i class="nav-icon far fa-image"></i>
-                  <p>
-                  Pending Approval
-                  <span class="badge badge-info right" id="pendingCount">5</span>
-                  </p>
-                </a>
-              </li>';
-              }
-              ?>
-              <?php
-              if(true) // if($level[3] || $level[1])
-              {
-                print '<li class="nav-item">
+              <li class="nav-item">
                 <a href="./view-users.php" class="nav-link">
                   <i class="nav-icon far fa-user"></i>
                   <p>View Users</p>
                 </a>
-              </li>';
-              }
+              </li>
               
-              ?>
-              <?php 
-              if(true) // if($level[2] || $level[1])
-              {
-
-                print "<li class='nav-item'>
+              <li class='nav-item'>
                 <a href='./view-admins.php' class='nav-link'>
                   <i class='nav-icon fas fa-users-cog'></i>
                   <p>View Admins</p>
                 </a>
-              </li>";
-              }
-              ?>
-
-              <?php
-              if(true) // if($level[8] || $level[1])
-              {
-                print '<li class="nav-item">
+              </li>
+                <li class="nav-item">
                 <a href="./view-complaints.php" class="nav-link">
                 <i class="nav-icon fas fa-exclamation-triangle"></i>
                   <p>View Complaints</p>
                 </a>
-              </li>';
-              }
-              ?>
-                            <li class="nav-item">
+              </li>
+              <li class="nav-item">
+                <a href="./view-groups.php" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                  <p>View Groups</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="./view-blogs.php" class="nav-link">
                 <i class="fas fa-pencil-alt nav-icon"></i>
                   <p>Blog</p>
@@ -125,10 +76,7 @@
               </p>
             </a>
           </li>
-              <?php
-              if(true) // if($level[5] || $level[1] || true)
-              {
-                print '<li class="nav-item">
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon far fa-envelope"></i>
                   <p>
@@ -140,7 +88,7 @@
                   <li class="nav-item">
                     <a href="./mailbox.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Inbox<span class="badge badge-info right"><?php echo $total_messages; ?></span></p>
+                      <p>Inbox<span class="badge badge-info right"><?php echo '5'; ?></span></p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -162,9 +110,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>';
-              }
-              ?>
+              </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>

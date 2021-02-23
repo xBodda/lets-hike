@@ -6,17 +6,17 @@ Login.php == Bodda (Frontend Done)
 Signup.php == Bodda (Frontend Done)
 Search.php == xTrimy (WIP)
 profile.php == Muhammed Tarek 
-edit-profile.php == Muhammed Tarek
+edit-profile.php == Muhammed Tarek (WIP)
 reviews.php == Ahmed Salah (Frontend Done)
-contact-us.php == Ahmed Ashraf (Frontend Done) 
-cart.php == Muhammed Tarek
+contact-us.php == Ahmed Ashraf (Frontend Done)
+cart.php == Ahmed Ashraf (Frontend Done)
 checkout.php == Bodda (Frontend Done)
 hike.php == xTrimy (Frontend Done)
 .....................
 <-- Control Panel -->
-add-group.php == Bodda
-edit-group.php == Bodda
-delete-group.php == Bodda
+add-group.php == Bodda (Frontend & Backend Done)
+edit-group.php == Bodda (Frontend & Backend Done)
+delete-group.php == Bodda (Frontend & Backend Done)
 view-profile.php == Ahmed Ashraf
 messages.php == Bodda
 edit-group-members.php == Bodda
@@ -29,7 +29,7 @@ view-survey.php == xTrimy
 <-- Extras -->
 terms-conditions.php == Bodda
 privacy-policy.php == Bodda
-faq == xTrimy
+faq == xTrimy (Frontend & Backend Done)
 about-us == xTrimy
 arabic-language.php == Bodda
 change-currency.php == xTrimy

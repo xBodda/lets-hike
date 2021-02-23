@@ -18,17 +18,93 @@ for (let i = 0; i < ratings_containers.length; i++) {
     for (let j = 0; j < rating_count; j++) {
         var star = document.createElement('div');
         star.classList.add('star');
+        star.createAttribute("id");
+        star.setAttribute("id",j);
         stars[j] = star;
+        
     }
     // *for the rest of 5 stars (which is { 5 - rating_count } ) create an empty star
     for (let j = rating_count; j < 5; j++ ){
         var star = document.createElement('div');
         star.classList.add('star')
         star.classList.add('nostar');
+        star.setAttribute("id",j);
         stars[j] = star;
     }
     // TODO: If the rating is a fraction, draw half star
     for (let j = 0; j < 5; j++) {
         element.appendChild(stars[j]);
     }
+}
+
+function showNote(button,content)
+{
+  var contents = ["overview", "route", "safety", "howtobook"];
+
+  for(var i = 0; i < contents.length;i++){
+    document.getElementById(contents[i]).style.display = "none";
+  }
+
+  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn"];
+
+  for(var i = 0; i < buttons.length;i++){
+    document.getElementById(buttons[i]).classList.add('secondary');
+  }
+  
+  document.getElementById(button).classList.remove('secondary');
+  document.getElementById(content).style.display = "block";
+}
+
+function startDate(value,name)
+{
+    document.getElementById(name).innerHTML = value;
+}
+
+function getDays(date1,date2)
+{
+    var date1 = new Date(date1); 
+    var date2 = new Date(date2); 
+
+    var Difference_In_Time = date2.getTime() - date1.getTime(); 
+
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+    return Difference_In_Days;
+}
+
+function fillPrice(Price)
+{
+    var price = Price;
+    var persons = document.getElementById('sPersons').innerHTML;
+    var sDate = document.getElementById('sDate').innerHTML;
+    var eDate = document.getElementById('eDate').innerHTML;
+    var sPrice = document.getElementById('sPrice');
+    var hiddenTotal = document.getElementById('totalPrice');
+    if(persons != "" && sDate == "" && eDate == "") 
+    {
+        sPrice.innerHTML = price * persons + " EGP";
+        hiddenTotal.value = sPrice;
+    }
+    else if(sDate != "" && eDate != "" && persons != "")
+    {
+        var days = getDays(sDate,eDate) * 1;
+        sPrice.innerHTML = days * price * persons + " EGP";
+        hiddenTotal.value = days * price * persons;
+    }
+    else if(sDate != "" && eDate != "" && persons == "")
+    {
+        var days = getDays(sDate,eDate) * 1;
+        sPrice.innerHTML = days * price  + " EGP";
+        hiddenTotal.value = days * price;
+    }
+    else
+    {
+        sPrice.innerHTML = price + " EGP";
+        hiddenTotal.value = price;
+    }
+}
+
+function deletePastDates(dateID)
+{
+    document.getElementById(dateID).min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()
 }

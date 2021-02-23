@@ -5,25 +5,20 @@
     echo '<script>window.location="404.php"</script>';
   }
 
-  if(!$level[5] && !$level[1])
-  {
-    echo '<script>window.location="404.php"</script>';
-  }
-
-  if ( isset( $_GET['m'] ) )
-  {
-    $msgid = $_GET['m'];
-    $subject = DB::query('SELECT subject FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['subject'];
-    $message = DB::query('SELECT message FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['message'];
-    $msgdate = DB::query('SELECT _date FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_date'];
-    $senderid = DB::query('SELECT _from FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_from'];
-    $senderemail = DB::query('SELECT email FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['email'];
-    $sendername = DB::query('SELECT name FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['name'];
-  }
-  else
-  {
-    echo '<script>window.location="404.php"</script>';
-  }
+  // if ( isset( $_GET['m'] ) )
+  // {
+  //   $msgid = $_GET['m'];
+  //   $subject = DB::query('SELECT subject FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['subject'];
+  //   $message = DB::query('SELECT message FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['message'];
+  //   $msgdate = DB::query('SELECT _date FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_date'];
+  //   $senderid = DB::query('SELECT _from FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_from'];
+  //   $senderemail = DB::query('SELECT email FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['email'];
+  //   $sendername = DB::query('SELECT name FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['name'];
+  // }
+  // else
+  // {
+  //   echo '<script>window.location="404.php"</script>';
+  // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
