@@ -13,7 +13,7 @@
         $repassword = $_POST['repassword'];
         $gender = $_POST['gender'];
         $phonenumber = $_POST['phonenumber'];
-        $image = 'layout/png/user.png';
+        $image = 'user.png';
 
         if (!DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email)))
         {

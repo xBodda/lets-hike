@@ -1,5 +1,39 @@
 <?php
-  include('includes/head.php');
+  include_once('includes/head.php');
+
+
+  if(!isset($_GET['id']) || !Login::isLoggedIn()){
+    header('Location:./');
+    exit;
+  }
+  $order_id = $_GET['id'];
+
+  $hike_details = DB::query('SELECT h.id, h.name,o.persons,o.price,o.start_date,o.end_date,i.image
+                             FROM hikes h, order_items o,hike_images i
+                             WHERE h.id=o.hike_id AND i.hike_id=h.id AND o.id=:id',array(':id'=>$order_id));
+  if(!$hike_details){
+    header('Location:./');
+    exit;
+  }
+  $hike = $hike_details[0];
+
+  if(isset($_POST['submit'])){
+    $rating = $_POST['rating'];
+    $comment = $_POST['comment'];
+    $final_rating = array_sum($rating)/count($rating);
+    if($final_rating>5) $final_rating = 5;
+
+    DB::query('INSERT INTO reviews VALUES(\'\',:hike_id,:rating,:comment,:stars,:user_id)',
+    array(
+      ':hike_id'=>$hike['id'],
+      ':rating'=>"",
+      ':comment'=>$comment,
+      ':stars'=>$final_rating,
+      ':user_id'=>Login::isLoggedIn()
+    ));
+    header('Location:./');
+    exit;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -30,6 +64,7 @@
     <!-- Top Banner END -->
 
     <!-- Questions START  -->
+    <form method="POST" >
     <div class="def-container">
       <div class="questions-container flex">
           <div class="questions fl-2">
@@ -38,83 +73,86 @@
               <div class="ques fl-3">
                 <p>How much are you satisfied with the website ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you see the support team ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the hike equipment ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the transportations ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the place ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate your team guides ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you feel the weather in there ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="3">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the service ?</p>
               </div>
-              <div class="rev fl-1 flex rating" data-rating="2">
+              <div class="rev fl-1 flex rating user-rating" data-rating="0">
               </div>
             </div>
             <textarea name="comment" class="review-comment" id="comment" cols="30" rows="7" placeholder="(Optional)"></textarea>
-            <div class="mb-a xbutton mb-30">
+            <button name="submit" class="mb-a xbutton mb-30">
               Submit reviews
-            </div>
+            </button>
           </div>
           <div class="hike-image fl-1">
-            <img src="layout/jpg/galen-crout-fItRJ7AHak8-unsplash.jpg" alt="">
+            <img src="uploads/<?php echo $hike['image']; ?>" alt="">
             <div class="hike-rev-props">
               <div class="rev-prop mb-10 flex">
-                <i class="fas fa-map-marker-alt"></i><b> Eagles Nest </b>
+                <i class="fas fa-map-marker-alt"></i><b> <?php echo $hike['name']; ?></b>
               </div>
               <div class="rev-prop mb-10 flex">
-                <i class="fas fa-user"></i> 8 Persons
+                <i class="fas fa-user"></i> <?php echo $hike['persons']; ?> Person<?php echo ($hike['persons']>1)?'s':''; ?>
               </div>
               <div class="rev-prop mb-10 flex">
-                <i class="fas fa-dollar-sign"></i> 275 USD
+                <i class="fas fa-dollar-sign"></i> <?php echo $hike['price']; ?> USD
               </div>
               <div class="rev-prop mb-10 flex">
-                <i class="far fa-clock"></i> 11/12/2020 9:00 AM
+                <i class="far fa-clock"></i> <?php echo date('Y/m/d h:i A',strtotime($hike['start_date'])); ?>
+              </div>
+              <div class="rev-prop mb-10 flex">
+                <i class="far fa-clock"></i> <?php echo date('Y/m/d h:i A',strtotime($hike['end_date'])); ?>
               </div>
             </div>
           </div>
       </div>
     </div>
-    
+  </form>
     <!-- Questions END  -->
 
     <!-- Footer START -->

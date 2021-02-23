@@ -1042,8 +1042,27 @@ label {
 .rating .star.nostar {
   background-image: url('../svg/rating-star-empty.svg') !important;
 }
-
-
+.rating.user-rating{
+  position: relative;
+}
+.rating.user-rating input{
+  width:0;
+  opacity: 0;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index: -1;
+}
+.rating.user-rating .star:hover {
+  opacity: 0.8;
+}
+.rating.user-rating .star:hover ~ .star{
+  opacity: 0.2;
+}
+.rating.user-rating .star:hover ~ .nostar{
+  opacity: 1;
+}
 .hike-body .hike-details{
   width:100%;
   padding:20px 50px;
