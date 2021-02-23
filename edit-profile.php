@@ -88,13 +88,11 @@
     <div class="signup-container flex mb-30">
         <div class="edit-profile fl-1">
         <h1 class="mb-30 ta-c">Edit Profile</h1>
-        
-             <p class="mb-10" onclick="showGeneral()"><i class="fas fa-user-cog"></i> General Settings</p>
+            <p class="mb-10" onclick="showGeneral()"><i class="fas fa-user-cog"></i> General Settings</p>
             <br>
              <p class="mb-30" onclick="showPrivacy()"><i class="fas fa-lock" ></i> Privacy</p>
             <br>
             <p class="mb-10 backToProfile"><i class="fas fa-chevron-left"></i> Back To Profile</p>
-            
     </div>
         <div class="edit-profile-content">
            
@@ -140,13 +138,24 @@
                     <i class="fas fa-phone icon"></i>
                     <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your New Phone Number .." value="<?php echo $user_info['phonenumber']; ?>" required/>
                 </label>
+                <div class="flex" style="align-items:center">
+                    <div class="whole-file">
+                        <input type="file" id="file" class="fileBtn" oninput="viewname('fileName',this.value)"/>
+                        <label for="file" class="labelBtn" >Upload Your Profile Picture</label>
+                    </div>
+                    <div class="file-name" style="margin-left:20px">
+                        <p id="fileName">
+
+                        </p>
+                    </div>
+                </div>
+                
                 <div>
                     <div class="button-container">
                         <button type="submit" class="bButton" name="save">
                             Save Changes
                         </button>
                     </div>
-                    
                 </div>
             </form>
             
@@ -160,7 +169,7 @@
             </label>
             <label for="newPassword"> &nbsp New Password
                 <i class="fas fa-lock icon"></i>
-                <input class="input" type="password" name="password" id="password" placeholder=" Enter Your New Password .." required/>
+                <input class="input" type="password" name="password" id="newpassword" placeholder=" Enter Your New Password .." required/>
             </label>
             <label for="repassword"> &nbsp Confirm Password
                 <i class="fas fa-lock icon"></i>

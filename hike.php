@@ -199,7 +199,8 @@
     <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
       <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-        <input type="date" name="start_date" min="2021-2-20" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+
+        <input type="date" name="start_date" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);deletePastDates(this);" required>
         <input type="date" name="end_date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
         <input type="hidden" name="total_price" id="totalPrice" value="">
         <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>

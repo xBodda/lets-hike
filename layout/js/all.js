@@ -18,8 +18,6 @@ for (let i = 0; i < ratings_containers.length; i++) {
     for (let j = 0; j < rating_count; j++) {
         var star = document.createElement('div');
         star.classList.add('star');
-        star.createAttribute("id");
-        star.setAttribute("id",j);
         stars[j] = star;
         
     }
@@ -28,7 +26,6 @@ for (let i = 0; i < ratings_containers.length; i++) {
         var star = document.createElement('div');
         star.classList.add('star')
         star.classList.add('nostar');
-        star.setAttribute("id",j);
         stars[j] = star;
     }
     // TODO: If the rating is a fraction, draw half star
@@ -104,7 +101,26 @@ function fillPrice(Price)
     }
 }
 
-function deletePastDates(dateID)
+function deletePastDates(el)
 {
-    document.getElementById(dateID).min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()
+    var date = new Date().getDate()  + "-" +  parseInt(new Date().getMonth() ) + "-" +  new Date().getFullYear();
+    el.setAttribute('value',date);
+    console.log(date);
+}
+
+
+function viewname(x,value)
+{
+    var pName = document.getElementById(x);
+    // pName.innerHTML = value;
+    if(value.length == 0)
+    {
+        pName.innerHTML = "Not Uploaded *";
+        pName.style.color = "red";
+    }
+    else
+    {
+        pName.innerHTML = "Uploaded Successfully";
+        pName.style.color = "green";
+    }
 }
