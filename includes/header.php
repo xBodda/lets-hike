@@ -19,7 +19,7 @@
         {
           print '<div class="userData"> <div> <a href="profile.php">'.$fullname.'</a> </div>';
           print ' <div class="userImg">
-                    <img src="'.$image.'" alt="userimage">
+                    <img src="userImgs/'.$image.'" alt="userimage">
                   </div> </div>';
         }
         else

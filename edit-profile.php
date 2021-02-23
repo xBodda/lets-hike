@@ -12,12 +12,40 @@
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
+        $image = $_POST['imageProfile'];
 
-        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber WHERE id=:id',
+        $filename = rand().$_FILES['imageProfile']['name'];
+
+        $destination = 'userImgs/' . $filename;
+        $isUploaded = false;
+
+        $file = $_FILES['imageProfile']['tmp_name'];
+        $size = $_FILES['imageProfile']['size'];
+        
+        if ($_FILES['imageProfile']['size'] > 1000000)
+        { 
+            echo '<script>alert("File Too Large")</script>';
+        } 
+        else 
+        { 
+            if (move_uploaded_file($file, $destination)) 
+            {
+                $isUploaded = true;
+            }
+            else
+            {
+                $isUploaded = false;
+                $filename = "";
+                echo '<script>alert("Failed To Upload Image")</script>';
+            }
+        }
+
+        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber,image=:image WHERE id=:id',
         array(':name'=>$name,
                 ':email'=>$email,
                 ':gender'=>$gender,
                 ':phonenumber'=>$phone,
+                ':image'=>$filename,
                 ':id'=>$userid));
 
                 echo '<script>alert("Data Saved")</script>';
@@ -98,7 +126,7 @@
            
         </div>
          <div class="edit-profile-form fl-2" id="generalSettings"> 
-            <form action="edit-profile.php" method="POST">
+            <form action="edit-profile.php" method="POST" enctype="multipart/form-data">
                 <h1 class="mb-30">General Settings</h1>
                 <label for="name"> &nbsp Fullname
                     <i class="fas fa-id-card icon"></i>
@@ -140,7 +168,7 @@
                 </label>
                 <div class="flex" style="align-items:center">
                     <div class="whole-file">
-                        <input type="file" id="file" class="fileBtn" oninput="viewname('fileName',this.value)"/>
+                        <input type="file" id="file" name="imageProfile" class="fileBtn" oninput="viewname('fileName',this.value)"/>
                         <label for="file" class="labelBtn" >Upload Your Profile Picture</label>
                     </div>
                     <div class="file-name" style="margin-left:20px">
