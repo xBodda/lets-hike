@@ -45,7 +45,9 @@
 
             DB::query('INSERT INTO order_items VALUES(\'\',:hike_id,:price,:start_date,:end_date,:persons,:order_id)',
             array(':hike_id'=>$hikeid,':price'=>$total,':start_date'=>$values['start_date'],':end_date'=>$values['end_date'],':persons'=>$values['persons'],':order_id'=>$order_id));
-            DB::query('DELETE FROM cart WHERE id=:id AND user_id=:user_id AND hike_id=:hike_id',array(':id'=>$cartid,':hike_id'=>$_GET['id'],':user_id'=>$userid));
+            unset($_SESSION["cart"][$keys]);
+            $cartid = DB::query('SELECT id FROM cart WHERE user_id=:user_id AND hike_id=:hike_id',array(':user_id'=>$userid,':hike_id'=>$hikeid))[0]['id'];
+            DB::query('DELETE FROM cart WHERE id=:id AND user_id=:user_id AND hike_id=:hike_id',array(':id'=>$cartid,':hike_id'=>$hikeid,':user_id'=>$userid));
           }
       }
 

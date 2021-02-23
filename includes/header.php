@@ -8,6 +8,12 @@
       <div> <a href="#">Blog</a> </div>
       <div> <a href="#">Currency EGP £</a> </div>
       <div id="lang"> Lang </div>
+      <div>
+        <a href="cart.php">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-count">(<?php echo $total_cart; ?>)</span>
+        </a>
+      </div>
       <?php
         if( Login::isLoggedIn() )
         {

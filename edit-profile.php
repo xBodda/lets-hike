@@ -1,5 +1,59 @@
 <?php
-  include('includes/head.php');
+    include('includes/head.php');
+    if (!Login::isLoggedIn())
+    {
+        die("Not Logged In");
+    }
+    $user_info = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$userid))[0];
+
+    if(isset($_POST["save"]))  
+    {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $gender = $_POST['gender'];
+        $phone = $_POST['phone'];
+
+        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber WHERE id=:id',
+        array(':name'=>$name,
+                ':email'=>$email,
+                ':gender'=>$gender,
+                ':phonenumber'=>$phone,
+                ':id'=>$userid));
+
+                echo '<script>alert("Data Saved")</script>';
+                echo '<script>window.location="profile.php"</script>';
+    }
+
+    if (isset($_POST['change']))
+    {
+            $oldpassword = $_POST['oldpassword'];
+            $newpassword = $_POST['password'];
+            $newpasswordrepeat = $_POST['repassword'];
+
+            if (password_verify($oldpassword, DB::query('SELECT password FROM users WHERE id=:id', array(':id'=>$userid))[0]['password']))
+            {
+                if ($newpassword == $newpasswordrepeat)
+                {
+                    if (strlen($newpassword) >= 6 && strlen($newpassword) <= 60)
+                    {
+
+                        DB::query('UPDATE users SET password=:newpassword WHERE id=:id', array(':newpassword'=>password_hash($newpassword, PASSWORD_BCRYPT), ':id'=>$userid));
+                        echo '<script>alert("Password Changed")</script>';
+                        echo '<script>window.location="edit-profile.php"</script>';
+                    }
+                } 
+                else 
+                {
+                    echo '<script>alert("Password Don\'t Match")</script>';
+                }
+
+            } 
+            else 
+            {
+                echo '<script>alert("Wrong Current Password")</script>';
+            }
+
+    }
 
 ?>
 
@@ -15,7 +69,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <!-- Favicon  -->
     <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
-    <title>Hikingify | Signup</title>
+    <title>Hikingify | Edit Profile</title>
     
   </head>
   <body id="edit-profile">
@@ -50,29 +104,45 @@
                 <h1 class="mb-30">General Settings</h1>
                 <label for="name"> &nbsp Fullname
                     <i class="fas fa-id-card icon"></i>
-                    <input class="input" type="text" name="name" id="name" placeholder=" Enter Your New Name .." required/>
+                    <input class="input" type="text" name="name" id="name" placeholder=" Enter Your New Name .." value="<?php echo $user_info['fullname']; ?>"/ required>
                 </label>
                 <label for="email"> &nbsp Email
                     <i class="fas fa-envelope icon"></i>
-                    <input class="input" type="text" name="email" id="email" placeholder=" Enter Your New Email .." required/>
+                    <input class="input" type="text" name="email" id="email" placeholder=" Enter Your New Email .." value="<?php echo $user_info['email']; ?>"/ required>
                 </label>
                 
                 <label for="gender"> &nbsp Gender
                     <i class="fas fa-venus-mars icon"></i>
                     <select name="gender" id="gender" class="input" required>
-                        <option value="" selected disabled>Specify Your Gender</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Rather Not To Say</option>
+                        <?php
+                            if($user_info['gender'] == 1)
+                            {
+                                echo '<option value="1">Male</option>';
+                                echo '<option value="2">Female</option>';
+                                echo '<option value="3">Rather Not To Say</option>';
+                            } 
+                            else if($user_info['gender'] == 2)
+                            {
+                                echo '<option value="2">Female</option>';
+                                echo '<option value="1">Male</option>';
+                                echo '<option value="3">Rather Not To Say</option>';
+                            }
+                            else if($user_info['gender'] == 3)
+                            {
+                                echo '<option value="3">Rather Not To Say</option>';
+                                echo '<option value="1">Male</option>';
+                                echo '<option value="2">Female</option>';
+                            }
+                        ?>
                     </select>
                 </label>
                 <label for="phone"> &nbsp Phone Number
                     <i class="fas fa-phone icon"></i>
-                    <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your New Phone Number .." required/>
+                    <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your New Phone Number .." value="<?php echo $user_info['phonenumber']; ?>" required/>
                 </label>
                 <div>
                     <div class="button-container">
-                        <button type="submit" class="bButton" name="signup">
+                        <button type="submit" class="bButton" name="save">
                             Save Changes
                         </button>
                     </div>
@@ -86,7 +156,7 @@
             <h1 class="mb-30">Privacy</h1>
             <label for="Password"> &nbsp Current Password
                 <i class="fas fa-lock icon"></i>
-                <input class="input" type="password" name="password" id="password" placeholder=" Enter Your Old Password .." required/>
+                <input class="input" type="password" name="oldpassword" id="password" placeholder=" Enter Your Old Password .." required/>
             </label>
             <label for="newPassword"> &nbsp New Password
                 <i class="fas fa-lock icon"></i>
@@ -98,7 +168,7 @@
             </label>
             <div class="flex">
                 <div class="button-container fl-1">
-                    <button type="submit" class="bButton" name="signup">
+                    <button type="submit" class="bButton" name="change">
                         Change Password
                     </button>
                 </div>

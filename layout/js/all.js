@@ -18,13 +18,17 @@ for (let i = 0; i < ratings_containers.length; i++) {
     for (let j = 0; j < rating_count; j++) {
         var star = document.createElement('div');
         star.classList.add('star');
+        star.createAttribute("id");
+        star.setAttribute("id",j);
         stars[j] = star;
+        
     }
     // *for the rest of 5 stars (which is { 5 - rating_count } ) create an empty star
     for (let j = rating_count; j < 5; j++ ){
         var star = document.createElement('div');
         star.classList.add('star')
         star.classList.add('nostar');
+        star.setAttribute("id",j);
         stars[j] = star;
     }
     // TODO: If the rating is a fraction, draw half star

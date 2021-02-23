@@ -1001,6 +1001,7 @@ label {
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 3px;
+  cursor: pointer;
 }
 
 #review .review-comment {
@@ -1018,9 +1019,10 @@ label {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 20px;
 }
-.rating{
+.rating {
   display:flex;
 }
+
 .rating .star {
   width: 20px;
   height: 20px;
@@ -1029,6 +1031,7 @@ label {
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 5px;
+  cursor: pointer;
 }
 .rating .star.nostar {
   background-image: url('../svg/rating-star-empty.svg') !important;

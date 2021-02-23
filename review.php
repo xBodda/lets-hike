@@ -38,42 +38,42 @@
               <div class="ques fl-3">
                 <p>How much are you satisfied with the website ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you see the support team ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the hike equipment ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the transportations ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate the place ?</p>
               </div>
-              <div class="rev fl-1 flex rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
               <div class="ques fl-3">
                 <p>How do you rate your team guides ?</p>
               </div>
-              <div class="rev fl-1 flex rating rating">
+              <div class="rev fl-1 flex rating" data-rating="3">
               </div>
             </div>
             <div class="qr-review flex">
