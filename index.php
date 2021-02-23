@@ -1,5 +1,5 @@
 <?php
-  include('includes/head.php');
+  include_once('includes/head.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,23 +32,32 @@
     <div class="content">
       <h1>Don't Limit Your Adventure</h1>
       <h2>Face a wonderful mountain journey now!</h2>
-      <div class="search-box">
+      <form method="GET" class="search-box" action="search.php">
         <div class="item">
           <h1>Destination</h1>
-          <p>Egypt</p>
+          <select name="country">
+            <?php
+              $countries = DB::query('SELECT * FROM country');
+              foreach($countries as $country){
+                ?>
+                  <option <?php echo ($country['iso']=="EG")?"selected":""; ?> value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
+                <?php
+              }
+            ?>
+          </select>
         </div>
         <div class="item">
           <h1>Start Date</h1>
-          <p>11/12/2020</p>
+          <input type="date" required name="start-date">
         </div>
         <div class="item">
           <h1>End Date</h1>
-          <p>31/12/2020</p>
+          <input type="date" required name="end-date">
         </div>
         <div class="item">
-          <div class="xbutton center">Search</div>
+          <button type="submit" class="xbutton center">Search</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <!-- Top Banner END -->
