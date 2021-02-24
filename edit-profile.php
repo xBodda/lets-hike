@@ -12,12 +12,40 @@
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
+        $image = $_POST['imageProfile'];
 
-        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber WHERE id=:id',
+        $filename = rand().$_FILES['imageProfile']['name'];
+
+        $destination = 'userImgs/' . $filename;
+        $isUploaded = false;
+
+        $file = $_FILES['imageProfile']['tmp_name'];
+        $size = $_FILES['imageProfile']['size'];
+        
+        if ($_FILES['imageProfile']['size'] > 1000000)
+        { 
+            echo '<script>alert("File Too Large")</script>';
+        } 
+        else 
+        { 
+            if (move_uploaded_file($file, $destination)) 
+            {
+                $isUploaded = true;
+            }
+            else
+            {
+                $isUploaded = false;
+                $filename = "";
+                echo '<script>alert("Failed To Upload Image")</script>';
+            }
+        }
+
+        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber,image=:image WHERE id=:id',
         array(':name'=>$name,
                 ':email'=>$email,
                 ':gender'=>$gender,
                 ':phonenumber'=>$phone,
+                ':image'=>$filename,
                 ':id'=>$userid));
 
                 echo '<script>alert("Data Saved")</script>';
@@ -88,19 +116,17 @@
     <div class="signup-container flex mb-30">
         <div class="edit-profile fl-1">
         <h1 class="mb-30 ta-c">Edit Profile</h1>
-        
-             <p class="mb-10" onclick="showGeneral()"><i class="fas fa-user-cog"></i> General Settings</p>
+            <p class="mb-10" onclick="showGeneral()"><i class="fas fa-user-cog"></i> General Settings</p>
             <br>
              <p class="mb-30" onclick="showPrivacy()"><i class="fas fa-lock" ></i> Privacy</p>
             <br>
             <p class="mb-10 backToProfile"><i class="fas fa-chevron-left"></i> Back To Profile</p>
-            
     </div>
         <div class="edit-profile-content">
            
         </div>
          <div class="edit-profile-form fl-2" id="generalSettings"> 
-            <form action="edit-profile.php" method="POST">
+            <form action="edit-profile.php" method="POST" enctype="multipart/form-data">
                 <h1 class="mb-30">General Settings</h1>
                 <label for="name"> &nbsp Fullname
                     <i class="fas fa-id-card icon"></i>
@@ -140,13 +166,24 @@
                     <i class="fas fa-phone icon"></i>
                     <input class="input" type="text" name="phone" id="phone" placeholder=" Enter Your New Phone Number .." value="<?php echo $user_info['phonenumber']; ?>" required/>
                 </label>
+                <div class="flex" style="align-items:center">
+                    <div class="whole-file">
+                        <input type="file" id="file" name="imageProfile" class="fileBtn" oninput="viewname('fileName',this.value)"/>
+                        <label for="file" class="labelBtn" >Upload Your Profile Picture</label>
+                    </div>
+                    <div class="file-name" style="margin-left:20px">
+                        <p id="fileName">
+
+                        </p>
+                    </div>
+                </div>
+                
                 <div>
                     <div class="button-container">
                         <button type="submit" class="bButton" name="save">
                             Save Changes
                         </button>
                     </div>
-                    
                 </div>
             </form>
             
@@ -160,7 +197,7 @@
             </label>
             <label for="newPassword"> &nbsp New Password
                 <i class="fas fa-lock icon"></i>
-                <input class="input" type="password" name="password" id="password" placeholder=" Enter Your New Password .." required/>
+                <input class="input" type="password" name="password" id="newpassword" placeholder=" Enter Your New Password .." required/>
             </label>
             <label for="repassword"> &nbsp Confirm Password
                 <i class="fas fa-lock icon"></i>

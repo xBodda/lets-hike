@@ -1640,3 +1640,54 @@ color: #3dbc3d !important;
   font-weight: normal;
   font-size: 20px;
 }
+
+.fileBtn {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.fileBtn + .labelBtn {
+  background: #f15d22;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+.fileBtn + .labelBtn:hover {
+  background-color: #d3460d;
+}
+
+.fileBtn + .labelBtn {
+  background-color: #3dbc3d;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.fileBtn + .labelBtn::before {
+  color: #fff;
+  content: "\f382";
+  font-family: "Font Awesome 5 Free";
+  font-size: 100%;
+  height: 100%;
+  right: 100%;
+  line-height: 3.3;
+  position: absolute;
+  top: 0px;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+.fileBtn + .labelBtn:hover {
+  background-color: #497f42;
+}
+.fileBtn + .labelBtn:hover::before {
+  right: 90%;
+}
