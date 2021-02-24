@@ -34,7 +34,7 @@ if (isset($_POST['submit']))
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zowjain | Log in</title>
+  <title>Hikingify | Log in</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -48,7 +48,7 @@ if (isset($_POST['submit']))
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.php"><b>Zowjain</b></a>
+    <a href="index2.php"><b>Hikingify</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
