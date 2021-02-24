@@ -1717,3 +1717,7 @@ color: #3dbc3d !important;
 .fileBtn + .labelBtn:hover::before {
   right: 90%;
 }
+
+.error-input-val{
+  color:red;
+}
