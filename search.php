@@ -42,12 +42,12 @@
       $date_in = date("Y-m-d", strtotime($date_in));
       $date_out = date("Y-m-d", strtotime($date_out));
 
-      $hikes = DB::query('SELECT h.*, i.image FROM hikes h,hike_images i WHERE h.location=:location
+      $hikes = DB::query('SELECT h.*, i.image FROM hikes h INNER JOIN hike_images i on h.id=i.hike_id WHERE h.location=:location
         AND (SELECT COUNT(id) FROM order_items WHERE start_date <= :leave_time AND end_date >=
-        :arrival_time AND hike_id=h.id)=0 AND i.hike_id=h.id',array(":location"=>$location, ":arrival_time"=>$date_in, ":leave_time"=>$date_out));
+        :arrival_time AND hike_id=h.id)=0 AND i.hike_id=h.id GROUP BY i.hike_id',array(":location"=>$location, ":arrival_time"=>$date_in, ":leave_time"=>$date_out));
         
       // For Testing
-      // $hikes = DB::query('SELECT h.*, i.image FROM hikes h,hike_images i WHERE  i.hike_id=h.id');
+      //$hikes = DB::query('SELECT h.*, i.image FROM hikes h INNER JOIN hike_images i on h.id=i.hike_id GROUP BY i.hike_id');
      
      ?>
 <!DOCTYPE html>
@@ -90,7 +90,7 @@
     <div class="flex-container j-center wrap">
       <?php foreach ($hikes as $hike) {
       ?>
-        <a href="#"><div class="item">
+        <a href="hike.php?id=<?php echo $hike['id']?>"><div class="item">
           <div class="image">
             <img src="uploads/<?php echo $hike['image']; ?>">
           </div>
