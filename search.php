@@ -63,7 +63,7 @@
   <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
   <!-- Link To Icons File -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <title>Hikingify | Review Hike</title>
+  <title>Hikingify | Search</title>
 </head>
 
 <body id="review">

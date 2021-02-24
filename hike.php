@@ -106,7 +106,8 @@
   <title>Hikingify | Book Hike</title>
 </head>
 
-<body id="review">
+<body id="review"
+>
   <!-- Header START -->
   <?php include('includes/header.php'); ?>
   <!-- Header END -->
@@ -199,9 +200,8 @@
     <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
       <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-
-        <input type="date" name="start_date" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);deletePastDates(this);" required>
-        <input type="date" name="end_date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="start_date" id="ssssDate" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="end_date" id="eeeeDate" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
         <input type="hidden" name="total_price" id="totalPrice" value="">
         <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
           <option value="" selected disabled>Select Persons</option>
@@ -212,6 +212,7 @@
             }
           ?>
         </select>
+        
       </div>
       <div class="details">
         <table>
@@ -275,6 +276,10 @@
   <!-- Hikes Body END  -->
   <!-- Footer START -->
   <?php include('includes/footer.php'); ?>
+  <script>
+    deletePastDates('ssssDate');
+    deletePastDates('eeeeDate');
+  </script>
   <!-- Footer END -->
 </body>
 
