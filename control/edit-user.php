@@ -1,29 +1,24 @@
 <?php
-// include('includes/head.php');
-// if (!Login::isLoggedIn()) 
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
+include('includes/head.php');
+if (!Login::isLoggedIn()) 
+{
+  echo '<script>window.location="404.php"</script>';
+}
 
-// if(!$level[2] && !$level[1])
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
-
-// function IsChecked($chkname,$value)
-// {
-//     if(!empty($_POST[$chkname]))
-//     {
-//         foreach($_POST[$chkname] as $chkval)
-//         {
-//             if($chkval == $value)
-//             {
-//                 return true;
-//             }
-//         }
-//     }
-//     return false;
-// }
+function IsChecked($chkname,$value)
+{
+    if(!empty($_POST[$chkname]))
+    {
+        foreach($_POST[$chkname] as $chkval)
+        {
+            if($chkval == $value)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 
 if(isset($_GET["action"]))  
@@ -184,7 +179,7 @@ elseif(isset($_GET["deactivate"]))
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Let's Hike | View Admins</title>
+  <title>Hikingify | View Admins</title>
   <link href="./../layout/png/favicon.png" rel="shortcut icon" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -737,8 +732,6 @@ elseif(isset($_GET["deactivate"]))
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

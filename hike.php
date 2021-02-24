@@ -106,7 +106,8 @@
   <title>Hikingify | Book Hike</title>
 </head>
 
-<body id="review">
+<body id="review"
+>
   <!-- Header START -->
   <?php include('includes/header.php'); ?>
   <!-- Header END -->
@@ -135,7 +136,7 @@
           <div class="xbutton secondary" id="routeBtn" onclick="showNote('routeBtn','route')">Route</div>
           <div class="xbutton secondary" id="safetyBtn" onclick="showNote('safetyBtn','safety')">Safety</div>
           <div class="xbutton secondary" id="howtobookBtn" onclick="showNote('howtobookBtn','howtobook')">How to book</div>
-          <div class="xbutton secondary">FAQ</div>
+          <div class="xbutton secondary" id="reviewsBtn" onclick="showNote('reviewsBtn','reviews')">Reviews ( <?php echo $total_ratings; ?> )</div>
         </div>
         <div class="hike-details" id="overview">
           <div class="hike-heading">
@@ -193,15 +194,39 @@
             <?php echo $hike_info['howtobook']; ?>
           </p>
         </div>
+        <div class="hike-details" id="reviews">
+          <?php
+            $allReviews = DB::query('SELECT * FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+            foreach($allReviews as $oneReview)
+            {
+              $userName = DB::query('SELECT fullname FROM users WHERE id=:id',array(':id'=>$oneReview['user_id']))[0]['fullname'];
+              $timeInAgo = timeago($oneReview['_date']);
+            
+          
+          ?>
+          <div class="single-review">
+            <div class="hike-heading">
+              <h1 id="h-text"><b><?php echo $userName; ?></b></h1>
+              <div class="sep"></div>
+              <div class="rating" data-rating="<?php echo $oneReview['stars']; ?>">
+
+              </div>
+              <div class="sep"></div>
+              <div class="rating-counter"> <i><?php echo $timeInAgo; ?></i> </div>
+            </div>
+            <p><?php echo $oneReview['comment']; ?></p>
+          </div>
+          <hr>
+          <?php } ?>
+        </div>
       </div>
     </div>
     <!-- Booking Box START -->
     <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
       <div class="price"><?php echo $hike_info['price']; ?></div>
       <div class="flex-container j-c">
-
-        <input type="date" name="start_date" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);deletePastDates(this);" required>
-        <input type="date" name="end_date" min="2021-2-20" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="start_date" id="ssssDate" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="end_date" id="eeeeDate" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
         <input type="hidden" name="total_price" id="totalPrice" value="">
         <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
           <option value="" selected disabled>Select Persons</option>
@@ -212,6 +237,7 @@
             }
           ?>
         </select>
+        
       </div>
       <div class="details">
         <table>
@@ -275,6 +301,10 @@
   <!-- Hikes Body END  -->
   <!-- Footer START -->
   <?php include('includes/footer.php'); ?>
+  <script>
+    deletePastDates('ssssDate');
+    deletePastDates('eeeeDate');
+  </script>
   <!-- Footer END -->
 </body>
 

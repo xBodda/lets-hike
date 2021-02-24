@@ -60,13 +60,13 @@ for (let i = 0; i < ratings_containers.length; i++) {
 
 function showNote(button,content)
 {
-  var contents = ["overview", "route", "safety", "howtobook"];
+  var contents = ["overview", "route", "safety", "howtobook", "reviews"];
 
   for(var i = 0; i < contents.length;i++){
     document.getElementById(contents[i]).style.display = "none";
   }
 
-  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn"];
+  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn", "reviewsBtn"];
 
   for(var i = 0; i < buttons.length;i++){
     document.getElementById(buttons[i]).classList.add('secondary');
@@ -127,11 +127,20 @@ function fillPrice(Price)
 
 function deletePastDates(el)
 {
-    var date = new Date().getDate()  + "-" +  parseInt(new Date().getMonth() ) + "-" +  new Date().getFullYear();
-    el.setAttribute('value',date);
-    console.log(date);
-}
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
 
+    document.getElementById(el).setAttribute('min',maxDate);
+}
 
 function viewname(x,value)
 {

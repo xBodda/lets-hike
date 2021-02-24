@@ -1203,7 +1203,7 @@ label {
   border:1px solid #444;
 }
 
-.hike-body #route, .hike-body #safety, .hike-body #howtobook {
+.hike-body #route, .hike-body #safety, .hike-body #howtobook, .hike-body #reviews {
   display: none;
 }
 
@@ -1803,3 +1803,12 @@ color: #3dbc3d !important;
   padding:0;
 }
 /* Profile END */
+.single-review i{
+  color: #666;
+  font-size: 16px;
+}
+
+.hike-details#reviews {
+  max-height: 400px;
+  overflow-y: auto;
+}
