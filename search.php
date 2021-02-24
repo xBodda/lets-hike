@@ -46,8 +46,8 @@
         AND (SELECT COUNT(id) FROM order_items WHERE start_date <= :leave_time AND end_date >=
         :arrival_time AND hike_id=h.id)=0 AND i.hike_id=h.id',array(":location"=>$location, ":arrival_time"=>$date_in, ":leave_time"=>$date_out));
         
-      //For Testing
-      //$hikes = DB::query('SELECT h.*, i.image FROM hikes h,hike_images i WHERE  i.hike_id=h.id');
+      // For Testing
+      // $hikes = DB::query('SELECT h.*, i.image FROM hikes h,hike_images i WHERE  i.hike_id=h.id');
      
      ?>
 <!DOCTYPE html>

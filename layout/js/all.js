@@ -7,11 +7,12 @@
  * @param stars Array of 5 star elements that will be appended to the rating element
  */
 var ratings_containers = document.getElementsByClassName("rating");
-for (let i = 0; i < ratings_containers.length; i++) {
-    const element = ratings_containers[i];
+
+function createRatingStars(element){
+    element.innerHTML = "";
     var rating_count = element.getAttribute('data-rating');
-    // ? check if the .rating element has a 'data-rating' attribute or no
-    // ? if yes, get the value of it, else then = 5
+    // * check if the .rating element has a 'data-rating' attribute or no
+    // * if yes, get the value of it, else then = 5
     rating_count = rating_count?rating_count:5;
     var stars = new Array(5);
     // *for the data-rating's count create full stars
@@ -32,6 +33,29 @@ for (let i = 0; i < ratings_containers.length; i++) {
     for (let j = 0; j < 5; j++) {
         element.appendChild(stars[j]);
     }
+
+    if(element.classList.contains('user-rating')){
+        const element_hidden_input = document.createElement('input');
+        element_hidden_input.setAttribute('type','text');
+        element_hidden_input.classList.add('hidden');
+        element_hidden_input.setAttribute('name','rating[]');
+        element_hidden_input.setAttribute('required','true');
+        element_hidden_input.value = rating_count==0?"":rating_count;
+        element.appendChild(element_hidden_input);
+        const element_star = element.querySelectorAll('.star');
+        for(let j = 0; j < element_star.length;j++){
+            console.log(element_star[j]);
+            element_star[j].addEventListener('click',function(){
+                this.parentNode.setAttribute('data-rating',j+1);
+                createRatingStars(this.parentNode);
+            });
+        }
+    }
+}
+
+for (let i = 0; i < ratings_containers.length; i++) {
+    const element = ratings_containers[i];
+    createRatingStars(element);
 }
 
 function showNote(button,content)
