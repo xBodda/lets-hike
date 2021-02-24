@@ -1945,4 +1945,8 @@ color: #3dbc3d !important;
 .hike-details#reviews {
   max-height: 400px;
   overflow-y: auto;
+
+}
+.error-input-val{
+  color:red;
 }

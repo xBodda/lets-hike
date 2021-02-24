@@ -53,7 +53,7 @@
     <div class="top-banner">
       <div class="overlay"></div>
       <div class="content">
-        <h1>Contact us</h1>
+        <h1>Support</h1>
       </div>
     </div>
     <!-- Top Banner END -->
@@ -62,36 +62,22 @@
 
     <div class="def-container">
       <div class="contact-contb">
-        <div class="contact-boxb">
+        <div class="contact-box">
           <div class="button-container">
-             
-             
+          
+                  <a href="open-ticket.php">
+                    <div class="bButtonb forms-footer">
+                    <img style="height:50px"src="layout\svg\add-ticket.svg" alt="Girl in a jacket">
+                    <h3>Open New Ticket</h3> 
+                    </div>
+                  </a>
 
-          <div class="contact-form">
-                      <h1 class="highlight u-c">OPEN A NEW TICKET</h1>
-          <p>And our support team will reach you as soon as possible!</p><br>
-          <form method="post">
-            <label for="name"> &nbsp Fullname
-
-                <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Name .." required/>
-            </label>
-            
-            <label for="name"> &nbsp Type
-
-                <select class="input"id="type" name="cars">
-                  <option value="inq">Inquiry</option>
-                  <option value="comp">Complaint</option>
-                  <option value="sug">Suggestion</option>
-                  <option value="other">Other</option>
-                </select>
-            </label>
-          <label for="name"> &nbsp Message <br>
-            <textarea name="message" rows="8" cols="80" placeholder="Your Message"></textarea>
-            </label>
-            <input type="submit" class="xbutton contact-box" name="send" value="Send">
-          </form>
-        </div>
-                 
+                  <a href="my-tickets.php">
+                    <div class="bButtonb forms-footeri">
+                    <img style="height:50px"src="layout\svg\tickets.svg" alt="Girl in a jacket">
+                    <h3>Show My Tickets</h3> 
+                    </div>
+                  </a>
                 
             </div>          
                      

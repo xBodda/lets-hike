@@ -84,18 +84,18 @@
         <h1 class="mb-30 ta-c"></h1>
         
         <a onclick="showNewTicket()">
-                    <div class="bButtonb forms-footerd">
-                    <img style="height:50px"src="layout\svg\add-ticket.svg" alt="Girl in a jacket">
-                    <h3> Open New Ticket</h3> 
-                    </div>
-                  </a>
+          <div class="bButtonb forms-footerd">
+          <img style="height:50px"src="layout\svg\add-ticket.svg" alt="Girl in a jacket">
+          <h3> Open New Ticket</h3> 
+          </div>
+        </a>
 
-                  <a onclick="showMyTickets()">
-                    <div class="bButtonb forms-footerid">
-                    <img style="height:50px"src="layout\svg\tickets.svg" alt="Girl in a jacket">
-                    <h3> Show My Tickets</h3> 
-                    </div>
-                  </a>
+        <a onclick="showMyTickets()">
+          <div class="bButtonb forms-footerid">
+          <img style="height:50px"src="layout\svg\tickets.svg" alt="Girl in a jacket">
+          <h3> Show My Tickets</h3> 
+          </div>
+        </a>
             
     </div>
         <div class="edit-profile-content">
