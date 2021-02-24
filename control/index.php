@@ -67,13 +67,12 @@ include('includes/head.php');
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3>4</h3>
-
-                  <p>Pending Approval</p>
+                  <p>Orders</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fas fa-shopping-cart"></i>
                 </div>
-                <a href="pending-approval.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="view-orders.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -105,7 +104,22 @@ include('includes/head.php');
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3><?php echo $total_users; ?></h3>
 
+                  <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="view-users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
@@ -124,9 +138,6 @@ include('includes/head.php');
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
 
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
