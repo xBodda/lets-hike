@@ -16,7 +16,25 @@ if (isset($_GET["action"])) {
   }
 }
 
+// Get data for filters
+$min_price = $_GET['min-price'] ?? 0;
+$max_price = $_GET['max-price'] ?? 99999;
+$min_date = $_GET[ 'min-date'] ?? DB::query('SELECT ordered_date FROM orders ORDER BY ordered_date ASC LIMIT 1')[0]['ordered_date'];
+$min_date = date('Y-m-d',strtotime($min_date));
+$max_date = $_GET['max-date'] ?? DB::query('SELECT ordered_date FROM orders ORDER BY ordered_date DESC LIMIT 1')[0]['ordered_date'];
+$max_date = date( 'Y-m-d', strtotime($max_date));
+$min_persons = $_GET['min-persons'] ?? 1;
+$max_persons = $_GET['max-persons'] ?? 99;
 
+if($max_date < $min_date){
+  $max_date = $min_date;
+}
+if ($max_price < $min_price) {
+  $max_price = $min_price;
+}
+if ($max_persons < $min_persons) {
+  $max_persons = $min_persons;
+}
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +88,39 @@ if (isset($_GET["action"])) {
                 <div class="card">
                   <div class="card-header border-transparent">
                     <h3 class="card-title">All Orders</h3>
+                    <br>
+                    <br>
+                    <h3 class="card-title text-muted">Filters</h3>
+                    <br>
+                    <form>
+                      <label class="control-label col-sm-3 text-left" for="pwd">Min Price:</label>
+                      <div class="col-sm-3">
+                        <input type="number" required value="<?php echo $min_price?>" class="form-control" placeholder="Min Price" name="min-price">
+                      </div>
+                      <label class="control-label col-sm-3" for="pwd">Max Price:</label>
+                      <div class="col-sm-3">
+                        <input type="number" required value="<?php echo $max_price?>" class="form-control" placeholder="Max Price" name="max-price">
+                      </div>
+                      <label class="control-label col-sm-3" for="pwd">Date Start:</label>
+                      <div class="col-sm-3">
+                        <input type="date" required value="<?php echo $min_date?>" class="form-control" placeholder="Min date" name="min-date">
+                      </div>
+                      <label class="control-label col-sm-3" for="pwd">Date End:</label>
+                      <div class="col-sm-3">
+                        <input type="date" required value="<?php echo $max_date?>" class="form-control" placeholder="Max date" name="max-date">
+                      </div>
+                      <label class="control-label col-sm-3" for="pwd">Persons Min:</label>
+                      <div class="col-sm-3">
+                        <input type="number" required value="<?php echo $min_persons?>" class="form-control" placeholder="Min persons" name="min-persons">
+                      </div>
+                      <label class="control-label col-sm-3" for="pwd">Persons Max:</label>
+                      <div class="col-sm-3">
+                        <input type="number" required value="<?php echo $max_persons?>" class="form-control" placeholder="Max persons" name="max-persons">
+                      </div>
+                      <div class="col-sm-3">
+                        <button type="submit" required  class="btn btn-primary col-sm-12 mt-2">Filter</button>
+                      </div>
+                    </form>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
@@ -97,14 +148,32 @@ if (isset($_GET["action"])) {
                         </thead>
                         <tbody>
                           <?php
-                          $orders = DB::query('SELECT o.*,r.id as order_id,h.name,r.ordered_date,u.fullname FROM order_items o,hikes h, orders r,users u WHERE o.order_id=r.id AND h.id=o.hike_id AND u.id=r.user_id');
+                          $max_date = date('Y-m-d', strtotime('+1 day', strtotime($max_date)));
+                          $orders = DB::query(
+                            'SELECT o.*,r.id as order_id,h.name,r.ordered_date,u.fullname 
+                          FROM order_items o,hikes h, orders r,users u 
+                          WHERE o.order_id=r.id AND h.id=o.hike_id AND u.id=r.user_id AND
+                                o.persons >= :min_persons AND
+                                o.persons <=:max_persons AND
+                                o.price >= :min_price AND
+                                o.price <= :max_price AND
+                                r.ordered_date >= :min_date AND
+                                r.ordered_date < :max_date',
+                          array(
+                              ':min_persons'=>$min_persons,
+                              ':max_persons'=>$max_persons,
+                              ':min_date'=>$min_date,
+                              ':max_date'=>$max_date,
+                              ':min_price'=>$min_price,
+                              ':max_price'=>$max_price,
+                          ));
                           foreach ($orders as $order) {
                           ?>
                             <tr>
                               <td><?php echo $order["id"]; ?></td>
                               <td><?php echo $order["order_id"]; ?></td>
-                              <td title="<?php echo $order["name"]; ?>"><?php echo truncate($order["name"],12); ?></td>
-                              <td><?php echo $order["fullname"]; ?></td>
+                              <td title="<?php echo $order["name"]; ?>"><?php echo truncate($order["name"], 17); ?></td>
+                              <td title="<?php echo $order["fullname"]; ?>"><?php echo truncate($order["fullname"], 15); ?></td>
                               <td><?php echo $order["price"]; ?></td>
                               <td><?php echo date('Y-m-d', strtotime($order["start_date"])); ?></td>
                               <td><?php echo date('Y-m-d', strtotime($order["end_date"])); ?></td>
@@ -119,7 +188,6 @@ if (isset($_GET["action"])) {
                                 &nbsp;&nbsp;
                                 <button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='view-users.php?deactivate=<?php echo $ui['id']; ?>';return false;})();return false;">Deactivate</button>
                                 &nbsp;&nbsp;
-                                <button id="act" class="btn btn-outline-success btn-sm" onClick="(function(){window.location='view-users.php?activate=<?php echo $ui['id']; ?>';return false;})();return false;">Activate</button>
                               </td>
                             </tr>
                           <?php } ?>
