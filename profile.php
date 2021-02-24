@@ -1,49 +1,132 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hikingify - Profile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
-  <link rel="stylesheet" href="profile-style.css">
-</head>
-<body id="profile">
-  <div class="profile-card">
-    <div class="card-header">
-      <div class="pic">
-        <img src="teka.jpg" alt="profile picture">
+  <?php include('includes/head.php'); 
+  
+  $user_id;
+  if(!isset($_GET['id'])){
+
+    if (!Login::isLoggedIn()) {
+      header('Location:./');
+      exit;
+    }
+    $user_id = Login::isLoggedIn();
+  }else{
+    $user_id = $_GET['id'];
+    
+  }
+  
+  $user = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$user_id));
+  if(!$user){
+    die('User not found');
+  }
+  $user=$user[0];
+  ?>
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <!-- Product Sans Font -->
+    <link rel="stylesheet" href="layout/css/productsans.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="layout/css/master.css">
+    <!-- Favicon  -->
+    <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
+    <!-- Link To Icons File -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>Hikingify | Book Hike</title>
+  </head>
+
+  <body id="profile">
+    <!-- Header START -->
+    <?php include('includes/header.php'); ?>
+    <!-- Header END -->
+
+    <!-- Top Banner START -->
+    <div class="top-banner small">
+      <div class="overlay"></div>
+      <div class="content">
+        <h1>User Profile</h1>
       </div>
-      <div class="name">Muhammad Tarek</div>
-      <div class="desc">Filmmaker & Designer</div>
-      <div class="sm">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-youtube"></a>
-      </div>
-      <a href="#" class="contact-btn">Contact Me</a>
     </div>
-    <div class="card-footer">
-      <div class="numbers">
-        <div class="item">
-          <span>12</span>
-          Trips
+    <!-- Top Banner END -->
+
+    <div class="profile-body">
+      <div class="user-details-container">
+        <div class="user-image">
+          <img src="userImgs/<?php echo $user['image'] ?>" alt="">
         </div>
-        <div class="border"></div>
-        <div class="item">
-          <span>127</span>
-          Following
+        <div class="user-details">
+          <p><i class="fas fa-hiking"></i> Hiker since 2012</p>
+          <p><i class="fas fa-phone"></i> +2010123456789</p>
+          <p><i class="fas fa-at"></i> Username@gmail.com</p>
+          <p><i class="fas fa-birthday-cake"></i> 12 January, 1989</p>
         </div>
-        <div class="border"></div>
-        <div class="item">
-          <span>120</span>
-          Friends
+        <div class="user-buttons">
+          <div class="xbutton center ">Contact</div>
         </div>
       </div>
+      <div class="user-info">
+        <div class="heading">
+          <?php  echo $user['fullname']  ?>
+        </div>
+        <div class="about">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.
+        </div>
+        <div class="heading">
+          My Hikes Groups
+        </div>
+        <!-- Hikes Groups START -->
+        <div class="hikes-preview">
+          <div class="flex-container wrap j-sa">
+            <a href="hike.php?id=1">
+              <div class="item">
+                <div class="image"> <img src="control/uploads/1.png"> </div>
+                <div class="title">Salkantay Traditional</div>
+                <div class="rev fl-1 flex rating" data-rating="4">
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star nostar"></div>
+                </div>
+              </div>
+            </a>
+            <a href="hike.php?id=2">
+              <div class="item">
+                <div class="image"> <img src="control/uploads/2.png"> </div>
+                <div class="title">Everest Base Camp Trek</div>
+                <div class="rev fl-1 flex rating" data-rating="4">
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star nostar"></div>
+                </div>
+              </div>
+            </a>
+            <a href="hike.php?id=8">
+              <div class="item">
+                <div class="image"> <img src="control/uploads/1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png"> </div>
+                <div class="title">Ultimate Salkantay Trek</div>
+                <div class="rev fl-1 flex rating" data-rating="0">
+                  <div class="star nostar"></div>
+                  <div class="star nostar"></div>
+                  <div class="star nostar"></div>
+                  <div class="star nostar"></div>
+                  <div class="star nostar"></div>
+                </div>
+              </div>
+            </a>
+            <div class="item extra"></div>
+            <div class="item extra"></div>
+            <div class="item extra"></div>
+            <div class="item extra"></div>
+            <div class="item extra"></div>
+          </div>
+        </div>
+        <!-- Hikes Groups END -->
+      </div>
     </div>
-  </div>
-  <div class="reviews">
-    <p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </p>
-  </div>
-</body>
-</html>
+  </body>
+
+  </html
