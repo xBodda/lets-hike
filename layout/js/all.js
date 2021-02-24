@@ -157,3 +157,107 @@ function viewname(x,value)
         pName.style.color = "green";
     }
 }
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function validateInput(input){
+    var maxLength = parseInt(input.getAttribute('data-max')) || 0;
+    var minLength = parseInt(input.getAttribute('data-min')) || 0;
+    var type = input.getAttribute('data-type') || 0;
+    if (input.required){
+        if(input.value.length == 0 || input.value == ""){
+            input.classList.add('error');
+            var error = document.createElement('p');
+            error.classList.add('error-input-val');
+            input.parentNode.prepend(error);
+            error.innerHTML = "This feild is required";
+            return false;
+        }
+    }
+
+    if(maxLength){
+        if(maxLength < input.value.length){
+            input.classList.add('error');
+            var error = document.createElement('p');
+            error.classList.add('error-input-val');
+            input.parentNode.prepend(error);
+            error.innerHTML = "Max length is "+ maxLength;
+            return false;
+        }
+    }
+    if(minLength){
+        if (minLength > input.value.length) {
+            var elementForm = input.parentNode;
+            var errors = elementForm.querySelectorAll('.error-input-val');
+            for (let i = 0; i < errors.length; i++) {
+                errors[i].parentNode.removeChild(errors[i]);
+            }
+            input.classList.add('error');
+            var error = document.createElement('p');
+            error.classList.add('error-input-val');
+            input.parentNode.prepend(error);
+            error.innerHTML = "Minimum length is " + minLength;
+            return false;
+        }
+    }
+    if(type){
+        if(type == 'email'){
+            if(!validateEmail(input.value)){
+                input.classList.add('error');
+                var error = document.createElement('p');
+                error.classList.add('error-input-val');
+                input.parentNode.prepend(error);
+                error.innerHTML = "Please enter a valid email";
+                return false;
+            }
+        }else if(type == 'confirm-password'){
+            var elementForm = input.closest("form");
+            var password = elementForm.querySelector('#password').value;
+            if (input.value != password){
+                input.classList.add('error');
+                var error = document.createElement('p');
+                error.classList.add('error-input-val');
+                input.parentNode.prepend(error);
+                error.innerHTML = "Password isn't matching";
+                return false;
+            }
+        }
+    }
+    return true;
+
+}
+function validateBeforeSubmit(element){
+    element.addEventListener('click',function(e){
+        var elementForm = element.closest("form");
+        if (elementForm) {
+            e.preventDefault();
+            var errors = elementForm.querySelectorAll('.error-input-val');
+            for (let i = 0; i < errors.length; i++) {
+                errors[i].parentNode.removeChild(errors[i]);
+            }
+            var inputs = elementForm.querySelectorAll('input');
+            var textareas = elementForm.querySelectorAll('textarea');
+            var select = elementForm.querySelectorAll('select');
+            var error = false;
+            for(let i = 0; i <inputs.length;i++){
+                if(!validateInput(inputs[i])) error = true;
+            }
+            for (let i = 0; i < select.length; i++) {
+                if (!validateInput(select[i])) error = true;
+            }
+            for (let i = 0; i < textareas.length; i++) {
+                if (!validateInput(textareas[i])) error = true;
+            }
+            if(error)
+                return;
+            elementForm.submit();
+        }
+    })
+}
+
+var validateSubmit = document.querySelectorAll('.validate-submit');
+for(let i = 0; i<validateSubmit.length;i++){
+    validateBeforeSubmit(validateSubmit[i]);
+}
