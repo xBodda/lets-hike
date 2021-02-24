@@ -193,8 +193,13 @@ if (isset($_GET["action"])) {
 														<td>
 															<?php echo $fd['id'] ?>
 														</td>
-														<td><abbr title="<?php echo $fd['question']; ?>"><?php echo truncate($fd['question'], 35); ?></abbr></td>
-														<td><abbr title="<?php echo $fd['answer']; ?>"><?php echo truncate($fd['answer'], 35); ?></abbr></td>
+														<td>
+															<div title="<?php echo $fd['question']; ?>"><?php echo truncate($fd['question'], 35); ?></div>
+														</td>
+														<td>
+															<div title="<?php echo $fd['answer']; ?>"><?php echo truncate($fd['answer'], 35); ?>
+															</div>
+														</td>
 														<td>
 															<button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='edit-faq.php?action=delete&id=<?php echo $fd['id']; ?>';return false;})();return false;">Delete</button> &nbsp;&nbsp;
 														</td>
