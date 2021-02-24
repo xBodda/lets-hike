@@ -108,7 +108,7 @@
     <div class="top-banner"> 
       <div class="overlay"></div>
       <div class="content">
-        <h1>Edit Your Profile</h1> 
+
       </div>
     </div>
     <!-- Top Banner END -->
