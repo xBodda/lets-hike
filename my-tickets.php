@@ -143,6 +143,84 @@
         <form action="edit-profile.php" method="POST">
              <h1 class="mb-30">My Tickets</h1>
 
+             <table class="myTable">
+  <tr class="tableHead">
+                    <th style="width:8%;">No.</th>
+                    <th style="width:50%;">Ticket Subject</th>
+                    <th style="width:15%;">Last Response By</th>
+                    <th style="width:8%;">Type</th>
+                    <th style="width:10%;">Date</th>
+                    <th style="width:100%;">Status</th>
+                  </tr>
+                  <tr>
+                    <td>78512</td>
+                    <td>Which is easier the South Kaibab Trail or the Bright Angel Trail?</td>
+                    <td><b>You</b></td>
+                    <td>Inquiry</td>
+                    <td>02-24-2021</td>
+                    <td><b>In Review</b></td>
+                  </tr>
+                    <td>65448</td>
+                    <td>How hard is it to hike into the Grand Canyon?</td>
+                    <td>Abdelrahman Sayed</td>
+                    <td>Inquiry</td>
+                    <td>02-14-2021</td>
+                    <td>Solved</td>
+                  </tr>
+                    <td>65210</td>
+                    <td>Do I need a map?</td>
+                    <td>Ahmed Ashraf</td>
+                    <td>Inquiry</td>
+                    <td>02-12-2021</td>
+                    <td>Solved</td>
+                  </tr>
+                    <td>45179</td>
+                    <td>What should I tell family/friends/employer about my trip?</td>
+                    <td>Ahmed Ashraf</td>
+                    <td>Inquiry</td>
+                    <td>02-10-2021</td>
+                    <td>Solved</td>
+                  </tr>
+                  <td>32659</td>
+                    <td>If I get into trouble and need to be rescued, who pays expenses for my rescue?</td>
+                    <td>Ahmed Ashraf</td>
+                    <td>Inquiry</td>
+                    <td>02-10-2021</td>
+                    <td>Solved</td>
+                  </tr>
+                  <td>31288</td>
+                    <td>Where can I get information about mule rides into the canyon?</td>
+                    <td>Ahmed Ashraf</td>
+                    <td>Inquiry</td>
+                    <td>02-10-2021</td>
+                    <td>Solved</td>
+                  </tr>
+                </table>
+    
+           
+                <div id="wrapper">
+
+
+  
+  <div class="b-pagination-outer">
+ 
+  <ul id="border-pagination">
+    <li><a class="" href="#">«</a></li>
+    <li><a href="#" class="active">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li><a href="#">7</a></li>
+    <li><a href="#">»</a></li>
+  </ul> 
+</div>
+  
+              </div><!--wrapper-->        
+    </div></div>
+
+
             </div>
            
             
