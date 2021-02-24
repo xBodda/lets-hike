@@ -60,13 +60,13 @@ for (let i = 0; i < ratings_containers.length; i++) {
 
 function showNote(button,content)
 {
-  var contents = ["overview", "route", "safety", "howtobook"];
+  var contents = ["overview", "route", "safety", "howtobook", "reviews"];
 
   for(var i = 0; i < contents.length;i++){
     document.getElementById(contents[i]).style.display = "none";
   }
 
-  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn"];
+  var buttons = ["overviewBtn", "routeBtn", "safetyBtn", "howtobookBtn", "reviewsBtn"];
 
   for(var i = 0; i < buttons.length;i++){
     document.getElementById(buttons[i]).classList.add('secondary');

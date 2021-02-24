@@ -136,7 +136,7 @@
           <div class="xbutton secondary" id="routeBtn" onclick="showNote('routeBtn','route')">Route</div>
           <div class="xbutton secondary" id="safetyBtn" onclick="showNote('safetyBtn','safety')">Safety</div>
           <div class="xbutton secondary" id="howtobookBtn" onclick="showNote('howtobookBtn','howtobook')">How to book</div>
-          <div class="xbutton secondary">FAQ</div>
+          <div class="xbutton secondary" id="reviewsBtn" onclick="showNote('reviewsBtn','reviews')">Reviews ( <?php echo $total_ratings; ?> )</div>
         </div>
         <div class="hike-details" id="overview">
           <div class="hike-heading">
@@ -193,6 +193,31 @@
           <p>
             <?php echo $hike_info['howtobook']; ?>
           </p>
+        </div>
+        <div class="hike-details" id="reviews">
+          <?php
+            $allReviews = DB::query('SELECT * FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid));
+            foreach($allReviews as $oneReview)
+            {
+              $userName = DB::query('SELECT fullname FROM users WHERE id=:id',array(':id'=>$oneReview['user_id']))[0]['fullname'];
+              $timeInAgo = timeago($oneReview['_date']);
+            
+          
+          ?>
+          <div class="single-review">
+            <div class="hike-heading">
+              <h1 id="h-text"><b><?php echo $userName; ?></b></h1>
+              <div class="sep"></div>
+              <div class="rating" data-rating="<?php echo $oneReview['stars']; ?>">
+
+              </div>
+              <div class="sep"></div>
+              <div class="rating-counter"> <i><?php echo $timeInAgo; ?></i> </div>
+            </div>
+            <p><?php echo $oneReview['comment']; ?></p>
+          </div>
+          <hr>
+          <?php } ?>
         </div>
       </div>
     </div>
