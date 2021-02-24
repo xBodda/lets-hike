@@ -4,7 +4,7 @@
   if( isset($_GET['id']) )
   {
     $hikeid = $_GET['id'];
-    $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$hikeid))[0];
+    $hike_info = DB::query('SELECT h.*,c.name as country FROM hikes h, country c WHERE h.location=c.id AND h.id=:id',array(':id'=>$hikeid))[0];
     $ratingValue = CalculateRating($hikeid);
     $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
     $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['image'];
@@ -125,7 +125,7 @@
     <div class="flex-container">
       <div class="left">
         <div class="selected-hike-image">
-          <div class="title"><?php echo $hike_info['name'].', '.$hike_info['location']; ?></div>
+          <div class="title"><?php echo $hike_info['name'].', '.$hike_info['country']; ?></div>
           <img src="control/uploads/<?php echo $hikeImage; ?>">
         </div>
       </div>
@@ -139,7 +139,7 @@
         </div>
         <div class="hike-details" id="overview">
           <div class="hike-heading">
-            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['country']; ?> </h1>
             <div class="sep"></div>
             <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
@@ -153,7 +153,7 @@
         </div>
         <div class="hike-details" id="route">
           <div class="hike-heading">
-            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['country']; ?> </h1>
             <div class="sep"></div>
             <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
@@ -167,7 +167,7 @@
         </div>
         <div class="hike-details" id="safety">
           <div class="hike-heading">
-            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['country']; ?> </h1>
             <div class="sep"></div>
             <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
@@ -181,7 +181,7 @@
         </div>
         <div class="hike-details" id="howtobook">
           <div class="hike-heading">
-            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['location']; ?> </h1>
+            <h1 id="h-text"><?php echo $hike_info['name'].', '.$hike_info['country']; ?> </h1>
             <div class="sep"></div>
             <div class="rating" data-rating="<?php echo $ratingValue; ?>">
 
