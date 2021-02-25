@@ -133,28 +133,32 @@ function fillPrice(Price)
     var eDate = document.getElementById('eDate').innerHTML;
     var sPrice = document.getElementById('sPrice');
     var hiddenTotal = document.getElementById('totalPrice');
+    var priceVal=0;
+    console.log(currencyVal);
     if(persons != "" && sDate == "" && eDate == "") 
     {
-        sPrice.innerHTML = price * persons + " EGP";
+        priceVal = Math.round(price * persons * currencyVal);
         hiddenTotal.value = sPrice;
     }
     else if(sDate != "" && eDate != "" && persons != "")
     {
         var days = getDays(sDate,eDate) * 1;
-        sPrice.innerHTML = days * price * persons + " EGP";
+        priceVal= Math.round(days * price * persons * currencyVal);
         hiddenTotal.value = days * price * persons;
     }
     else if(sDate != "" && eDate != "" && persons == "")
     {
         var days = getDays(sDate,eDate) * 1;
-        sPrice.innerHTML = days * price  + " EGP";
+        priceVal = Math.round(days * price * currencyVal);
         hiddenTotal.value = days * price;
     }
     else
     {
-        sPrice.innerHTML = price + " EGP";
+        priceVal = Math.round(price * currencyVal);
         hiddenTotal.value = price;
     }
+    sPrice.innerHTML = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: currency }).format(priceVal);
+    
 }
 
 function deletePastDates(el)

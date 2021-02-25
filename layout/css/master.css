@@ -453,7 +453,6 @@ label {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
 }
 
 .top-banner .overlay {

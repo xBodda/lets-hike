@@ -22,7 +22,7 @@
         $ticket_id = DB::query('SELECT id FROM tickets ORDER BY id DESC LIMIT 1')[0]['id'];
 
         DB::query(
-          'INSERT INTO tickets_messages VALUES(\'\',:ticket_id,:message,:user_id,:_date)',
+          'INSERT INTO tickets_messages VALUES(\'\',:ticket_id,:message,:user_id,:_date,0)',
           array(
               ':ticket_id' => $ticket_id,
               ':message' => $message,
