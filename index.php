@@ -93,7 +93,7 @@
           <div class="item slide">
             <div class="title"><?php echo $hike['name']; ?></div>
             <div class="image">
-              <img src="control/uploads/<?php echo $hikeImage; ?>">
+              <img src="uploads/<?php echo $hikeImage; ?>">
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
       <div class="left">
         <div class="selected-hike-image">
           <div class="title"><?php echo $premiumHike['name']; ?></div>
-          <img src="control/uploads/<?php echo $premiumImage; ?>">
+          <img src="uploads/<?php echo $premiumImage; ?>">
         </div>
       </div>
       <div class="right">
@@ -138,7 +138,7 @@
       ?>
         <a href="hike.php?id=<?php echo $hike['id']; ?>">
           <div class="item">
-            <div class="image"> <img src="control/uploads/<?php echo $hikeImage; ?>"> </div>
+            <div class="image"> <img src="uploads/<?php echo $hikeImage; ?>"> </div>
             <div class="title"><?php echo $hike['name']; ?></div>
             <div class="rev fl-1 flex rating" data-rating="<?php echo round($ratingValue); ?>">
               </div>

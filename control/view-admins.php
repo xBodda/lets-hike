@@ -14,23 +14,7 @@ if (isset($_GET["action"])) {
   }
 }
 
-if (isset($_GET["activate"])) {
-  $faq_status = DB::query('SELECT status FROM deactivated WHERE isAdmin=1 AND item_id=:item_id', array(':item_id' => $_GET['activate']))[0]['status'];
-  if ($faq_status == 0) {
-    DB::query('UPDATE deactivated SET status = 1 WHERE isAdmin=1 AND item_id=:item_id', array(':item_id' => $_GET['activate']));
-    echo '<script>alert("Activated ")</script>';
-  } else {
-    echo '<script>alert("Already Activated")</script>';
-  }
-} elseif (isset($_GET["deactivate"])) {
-  $faq_status = DB::query('SELECT status FROM deactivated WHERE isAdmin=1 AND item_id=:item_id', array(':item_id' => $_GET['deactivate']))[0]['status'];
-  if ($faq_status == 1) {
-    DB::query('UPDATE deactivated SET status = 0 WHERE isAdmin=1 AND item_id=:item_id', array(':item_id' => $_GET['deactivate']));
-    echo '<script>alert("Deactivated ")</script>';
-  } else {
-    echo '<script>alert("Already Activated")</script>';
-  }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -106,12 +90,12 @@ if (isset($_GET["activate"])) {
                         </thead>
                         <tbody>
                           <?php
-                          $user_info = DB::query('SELECT * FROM admins');
+                          $user_info = DB::query('SELECT * FROM users WHERE type>1');
                           foreach ($user_info as $ui) {
                           ?>
                             <tr>
                               <td><?php echo $ui["id"]; ?></td>
-                              <td><?php echo $ui["name"]; ?></td>
+                              <td><?php echo $ui["fullname"]; ?></td>
                               <td><?php echo $ui["email"]; ?></td>
                               <td>
                                 <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-admins.php?action=delete&id=<?php echo $ui["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
