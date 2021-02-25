@@ -127,7 +127,7 @@
       <div class="left">
         <div class="selected-hike-image">
           <div class="title"><?php echo $hike_info['name'].', '.$hike_info['country']; ?></div>
-          <img src="control/uploads/<?php echo $hikeImage; ?>">
+          <img src="uploads/<?php echo $hikeImage; ?>">
         </div>
       </div>
       <div class="right">
@@ -269,7 +269,7 @@
     </div>
     <div class="hike-gallery flex-container">
       <div id="selected-image" class="image f-1">
-        <img src="control/uploads/<?php echo $hikeImage; ?>">
+        <img src="uploads/<?php echo $hikeImage; ?>">
       </div>
       <div class="gallery-images f-1">
         <?php
@@ -277,7 +277,7 @@
         foreach ($allimages as $img) {
         ?>
           <div class="item">
-            <img src="control/uploads/<?php echo $img['image'] ?>">
+            <img src="uploads/<?php echo $img['image'] ?>">
           </div>
         <?php
         }

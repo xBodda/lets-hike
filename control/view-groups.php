@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 								for ($z = 0; $z < $images; $z++) {
 									$filename = rand() . $_FILES['image' . $z]['name'];
 
-									$destination = 'uploads/' . $filename;
+									$destination = '../uploads/' . $filename;
 
 									$extension = pathinfo($filename, PATHINFO_EXTENSION);
 
