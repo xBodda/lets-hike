@@ -1,52 +1,35 @@
 <?php
     include('includes/head.php');
-    if(isset($_POST["save"]))  
+    if(isset($_POST["send"]))  
     {
         $name = $_POST['name'];
-        $email = $_POST['email'];
-        $gender = $_POST['gender'];
-        $phone = $_POST['phone'];
+        $subject = $_POST['subject'];
+        $type = $_POST['type'];
+        $date = date('Y-m-d H:i:s');
+        $message = $_POST['message'];
 
-        DB::query('UPDATE users SET fullname=:name,email=:email,gender=:gender,phonenumber=:phonenumber WHERE id=:id',
-        array(':name'=>$name,
-                ':email'=>$email,
-                ':gender'=>$gender,
-                ':phonenumber'=>$phone,
-                ':id'=>$userid));
+        DB::query(
+          'INSERT INTO tickets VALUES(\'\',:fullname,:subject,:type,:_date,0)',
+          array(
+              ':fullname' => $name,
+              ':subject' => $subject,
+              ':type' => $type,
+              ':_date' => $date,
+          )
+        );
 
-                echo '<script>alert("Data Saved")</script>';
-                echo '<script>window.location="profile.php"</script>';
-    }
+        DB::query(
+          'INSERT INTO tickets VALUES(\'\',:fullname,:subject,:type,:_date,0)',
+          array(
+              ':fullname' => $name,
+              ':subject' => $subject,
+              ':type' => $type,
+              ':_date' => $date,
+          )
+        );
 
-    if (isset($_POST['change']))
-    {
-            $oldpassword = $_POST['oldpassword'];
-            $newpassword = $_POST['password'];
-            $newpasswordrepeat = $_POST['repassword'];
-
-            if (password_verify($oldpassword, DB::query('SELECT password FROM users WHERE id=:id', array(':id'=>$userid))[0]['password']))
-            {
-                if ($newpassword == $newpasswordrepeat)
-                {
-                    if (strlen($newpassword) >= 6 && strlen($newpassword) <= 60)
-                    {
-
-                        DB::query('UPDATE users SET password=:newpassword WHERE id=:id', array(':newpassword'=>password_hash($newpassword, PASSWORD_BCRYPT), ':id'=>$userid));
-                        echo '<script>alert("Password Changed")</script>';
-                        echo '<script>window.location="edit-profile.php"</script>';
-                    }
-                } 
-                else 
-                {
-                    echo '<script>alert("Password Don\'t Match")</script>';
-                }
-
-            } 
-            else 
-            {
-                echo '<script>alert("Wrong Current Password")</script>';
-            }
-
+        echo '<script>alert("Message Sent")</script>';
+        echo '<script>window.location="index.php"</script>';
     }
 
 ?>
@@ -63,7 +46,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <!-- Favicon  -->
     <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
-    <title>Hikingify | Edit Profile</title>
+    <title>Hikingify | My Tickets</title>
     
   </head>
   <body id="edit-profile">
@@ -111,19 +94,21 @@
           <div class="contact-form">
                       <h1 class="highlight u-c">OPEN A NEW TICKET</h1>
           <p>And our support team will reach you as soon as possible!</p><br>
-          <form method="post">
+          <form method="post" action="my-tickets.php">
             <label for="name"> &nbsp Fullname
-
                 <input class="input" type="text" name="name" id="name" placeholder=" Enter Your Name .." required/>
+            </label>
+
+            <label for="name"> &nbsp Subject
+                <input class="input" type="text" name="subject" id="name" placeholder=" Enter The Subject .." required/>
             </label>
             
             <label for="name"> &nbsp Type
-
-                <select class="input"id="type" name="cars">
-                  <option value="inq">Inquiry</option>
-                  <option value="comp">Complaint</option>
-                  <option value="sug">Suggestion</option>
-                  <option value="other">Other</option>
+                <select class="input"id="type" name="type">
+                  <option value="Inquiry">Inquiry</option>
+                  <option value="Complaint">Complaint</option>
+                  <option value="Suggestion">Suggestion</option>
+                  <option value="Other">Other</option>
                 </select>
             </label>
           <label for="name"> &nbsp Message <br>
