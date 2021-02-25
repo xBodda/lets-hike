@@ -12,8 +12,9 @@ function createRatingStars(element){
     element.innerHTML = "";
     var rating_count = element.getAttribute('data-rating');
     // * check if the .rating element has a 'data-rating' attribute or no
-    // * if yes, get the value of it, else then = 5
-    rating_count = rating_count?rating_count:5;
+    // * if yes, get the value of it, else then = 0
+    rating_count = Math.round(rating_count);
+    rating_count = rating_count?rating_count:0;
     var stars = new Array(5);
     // *for the data-rating's count create full stars
     for (let j = 0; j < rating_count; j++) {
@@ -50,6 +51,37 @@ function createRatingStars(element){
                 createRatingStars(this.parentNode);
             });
         }
+    }else{
+        element.addEventListener('click',function(e){
+            e.preventDefault();
+            let ratings = [] 
+            if (element.getAttribute('data-rating_1') == null){
+                return;
+            }
+            ratings.push(element.getAttribute('data-rating_1'));
+            ratings.push(element.getAttribute('data-rating_2'));
+            ratings.push(element.getAttribute('data-rating_3'));
+            ratings.push(element.getAttribute('data-rating_4'));
+            ratings.push(element.getAttribute('data-rating_5'));
+            
+            let ratings_view_container = document.createElement('div');
+                ratings_view_container.classList.add('ratings_view_container');
+                ratings_view_container.classList.add('blur-hide');
+                ratings_view_container.classList.add('show');
+            ratings_view_container.addEventListener('click',function(){
+                this.parentNode.removeChild(this);
+                check = false;
+            })
+            if((e.target == element || e.target.classList.contains('star')) && element.querySelector('.ratings_view_container') == null ){
+                for(let j = 1; j<=ratings.length; j++){
+                    let rating_view = document.createElement('div');
+                        rating_view.classList.add('rating_view');
+                        rating_view.innerHTML = ratings[j - 1] ?? 0;
+                    ratings_view_container.appendChild(rating_view);
+                }
+                element.appendChild(ratings_view_container);
+            }
+        })
     }
 }
 
