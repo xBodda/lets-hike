@@ -61,7 +61,7 @@
           <p><i class="fas fa-birthday-cake"></i> 12 January, 1989</p>
         </div>
         <div class="user-buttons">
-          <div class="xbutton center ">Contact</div>
+          <a href="edit-profile.php"> <div class="xbutton center ">Edit Profile</div> </a>
         </div>
       </div>
       <div class="user-info">

@@ -68,11 +68,6 @@ if (!Login::isLoggedIn()) {
                       <span class="badge bg-primary float-right"><?php echo $total_messages; ?></span>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-envelope"></i> Sent
-                    </a>
-                  </li>
                 </ul>
               </div>
               <!-- /.card-body -->
@@ -87,60 +82,24 @@ if (!Login::isLoggedIn()) {
                 <h3 class="card-title">Inbox</h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search Mail">
-                    <div class="input-group-append">
-                      <div class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
                 <!-- /.card-tools -->
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <div class="mailbox-controls">
-                  <!-- Check all button -->
-                  <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-                  </button>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-reply"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-share"></i>
-                    </button>
-                  </div>
-                  <!-- /.btn-group -->
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-sync-alt"></i>
-                  </button>
-                  <div class="float-right">
-                    1-50/<?php echo $total_messages; ?>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-chevron-left"></i>
-                      </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-chevron-right"></i>
-                      </button>
-                    </div>
-                    <!-- /.btn-group -->
-                  </div>
-                  <!-- /.float-right -->
-                </div>
                 <div class="table-responsive mailbox-messages">
                   <table class="table table-hover table-striped">
                     <tbody>
                       <?php
-                      $messages = DB::query('SELECT * FROM messages WHERE _to=:_to', array(':_to' => $userid));
-                      foreach ($messages as $msg) {
-
-                        $from_name = DB::query('SELECT name FROM admins WHERE id=:_from', array(':_from' => $msg['_from']))[0]['name'];
+                      $messages = DB::query('SELECT * FROM tickets_messages');
+                      foreach ($messages as $msg) 
+                      {
+                        $from_name = DB::query('SELECT * FROM users WHERE id=:id', array(':id' => $msg['user_id']))[0];
+                        if($from_name['id'] != $userid)
+                        {
+                        $adminStr = "  ( Admin )";
+                        
                       ?>
                         <tr>
                           <td>
@@ -150,12 +109,12 @@ if (!Login::isLoggedIn()) {
                             </div>
                           </td>
                           <td class="mailbox-star"></td>
-                          <td class="mailbox-name"><a href="read-mail.php?m=<?php echo $msg['id'] ?>"><?php echo $from_name; ?></a></td>
-                          <td class="mailbox-subject"><?php echo $msg['subject']; ?></td>
+                          <td class="mailbox-name"><a href="read-mail.php?m=<?php echo $msg['id'] ?>"><?php echo $from_name['fullname']; if($from_name['type'] != 1 ) echo $adminStr?></a></td>
+                          <td class="mailbox-subject"><?php echo truncate($msg['message'],60); ?></td>
                           <td class="mailbox-attachment"></td>
                           <td class="mailbox-date"><?php echo timeago($msg['_date']); ?></td>
                         </tr>
-                      <?php } ?>
+                      <?php }  }?>
                     </tbody>
                   </table>
                   <!-- /.table -->

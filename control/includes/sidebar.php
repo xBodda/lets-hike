@@ -109,6 +109,18 @@
                       <p>Read</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="./view-tickets.php" class="nav-link">
+                      <i class="fas fa-ticket-alt nav-icon"></i>
+                      <p>View Tickets</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="./view-conversations.php" class="nav-link">
+                    <i class="fas fa-scroll nav-icon"></i>
+                      <p>View Conversations</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
           <li class="nav-item">
