@@ -1,6 +1,5 @@
 <?php
   include('includes/head.php');
-  session_start();
   if (!empty($_SESSION["cart"]))
   {
       $total = 0;

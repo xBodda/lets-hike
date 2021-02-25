@@ -54,13 +54,10 @@
           <img src="userImgs/<?php echo $user['image'] ?>" alt="">
         </div>
         <div class="user-details">
-          <p><i class="fas fa-hiking"></i> Hiker since 2012</p>
-          <p><i class="fas fa-phone"></i> +2010123456789</p>
-          <p><i class="fas fa-at"></i> Username@gmail.com</p>
-          <p><i class="fas fa-birthday-cake"></i> 12 January, 1989</p>
+          <p><i class="fas fa-phone"></i> <?php echo $user['phonenumber'] ?></p>
+          <p><i class="fas fa-at"></i> <?php echo $user['email'] ?></p>
         </div>
         <div class="user-buttons">
-          <div class="xbutton center mb-20">Contact</div>
           <?php if($user['id'] == $userid){ ?>
           <a href="edit-profile.php"><div class="xbutton secondary center mt-20">Edit Profile</div></a>
           <?php } ?>
@@ -129,6 +126,7 @@
         <!-- Hikes Groups END -->
       </div>
     </div>
+    <?php include('includes/footer.php'); ?>
   </body>
 
   </html

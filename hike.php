@@ -1,6 +1,5 @@
 <?php
 include('includes/head.php');
-session_start();
 if (isset($_GET['id'])) {
   $hikeid = $_GET['id'];
   $hike_info = DB::query('SELECT h.*,c.name as country,

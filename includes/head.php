@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('Africa/Cairo');
-
+session_start();
 include('./classes/Login.php');
 include_once("./classes/DB.php");
 if (Login::isLoggedIn())

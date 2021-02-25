@@ -38,9 +38,17 @@
           <select name="country">
             <?php
               $countries = DB::query('SELECT * FROM country');
+              if($_SESSION['keywordSearch'])
+                  {
+                    $searchedCountry = DB::query('SELECT name FROM country WHERE id=:id',array(':id'=>$_SESSION['keywordSearch']))[0]['name'];
+                    echo '<option value="'.$_SESSION['keywordSearch'].'" selected>'.$searchedCountry.'</option>';
+                  }
               foreach($countries as $country){
+
+                  
                 ?>
-                  <option <?php echo ($country['iso']=="EG")?"selected":""; ?> value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
+                
+                  <option <?php echo ($country['iso']=="EG")?:""; ?> value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
                 <?php
               }
             ?>
@@ -48,11 +56,11 @@
         </div>
         <div class="item">
           <h1>Start Date</h1>
-          <input type="date" required name="start-date">
+          <input type="date" id="ssssDate" required name="start-date">
         </div>
         <div class="item">
           <h1>End Date</h1>
-          <input type="date" required name="end-date">
+          <input type="date" id="eeeeDate" required name="end-date">
         </div>
         <div class="item">
           <button type="submit" class="xbutton center">Search</button>
@@ -214,6 +222,10 @@
       loop: true,
       align: 'start',
     });
+  </script>
+  <script>
+    deletePastDates('ssssDate');
+    deletePastDates('eeeeDate');
   </script>
 </body>
 
