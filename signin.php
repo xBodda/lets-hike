@@ -12,27 +12,29 @@ if (isset($_POST['signin']))
         if (password_verify($password, DB::query('SELECT password FROM users WHERE email=:email', array(':email'=>$email))[0]['password']))
         {
             echo '<script>alert("Logged In!")</script>';
-            echo '<script>window.location="index.php"</script>';
             $cstrong = True;
             $token = bin2hex(openssl_random_pseudo_bytes(64, $cstrong));
-            $user_id = DB::query('SELECT id FROM users WHERE email=:email', array(':email'=>$email))[0]['id'];
-
+            $user = DB::query('SELECT id,type FROM users WHERE email=:email', array(':email'=>$email));
+            $user_id = $user[0]['id'];
+            $user_type = $user[0]['type'];
             DB::query('INSERT INTO login_tokens VALUES (\'\', :token, :user_id, :date)', array(':token'=>sha1($token), ':user_id'=>$user_id,':date'=>$date));
 
             setcookie("USR", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
             setcookie("USR_", '1', time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);
-
+            if($user_type != 1)
+                header('Location:control');
+            exit;
+            header('Location:./');
+            exit;
         } 
         else 
         {
             echo '<script>alert("Wrong Password")</script>';
-            echo '<script>window.location="signin.php"</script>';
         }
     } 
     else 
     {
         echo '<script>alert("Not Registered")</script>';
-        echo '<script>window.location="signin.php"</script>';
     }
 }
 ?>

@@ -1,11 +1,17 @@
 <?php
-include('./classes/Login.php');
+include('../classes/Login.php');
 include_once("./classes/DB.php");
 if (Login::isLoggedIn())
 {
   $userid = Login::isLoggedIn();
-  $fullname = DB::query('SELECT name FROM admins WHERE id=:id', array(':id'=>$userid))[0]['name'];
+  $user = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=> $userid));
+  $fullname = $user[0]['fullname'];
   $total_messages = DB::query('SELECT COUNT(id) AS cnt FROM messages WHERE _to=:_to',array(':_to'=>$userid))[0]['cnt'];
+  $type = $user[0]['type'];
+  if($type == 1){
+    header('Location:../');
+    exit;
+  }
 }
 else
 {
@@ -13,11 +19,11 @@ else
 }
 // $date = date('Y-m-d H:i:s');
 
-$total_users = DB::query('SELECT COUNT(id) AS cnt FROM users')[0]['cnt'];
+$total_users = DB::query('SELECT COUNT(id) AS cnt FROM users WHERE type=1')[0]['cnt'];
 
 $total_complaints = DB::query('SELECT COUNT(id) AS cnt FROM contact')[0]['cnt'];
 
-$total_admins = DB::query('SELECT COUNT(id) AS cnt FROM admins')[0]['cnt'];
+$total_admins = DB::query('SELECT COUNT(id) AS cnt FROM users WHERE type>1')[0]['cnt'];
 
 function truncate($text, $length) 
 {

@@ -11,6 +11,7 @@
   $hike_details = DB::query('SELECT h.id, h.name,o.persons,o.price,o.start_date,o.end_date,i.image
                              FROM hikes h, order_items o,hike_images i
                              WHERE h.id=o.hike_id AND i.hike_id=h.id AND o.id=:id',array(':id'=>$order_id));
+                             
   if(!$hike_details){
     header('Location:./');
     exit;
