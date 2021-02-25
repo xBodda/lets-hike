@@ -1,5 +1,5 @@
 <?php
-include('includes/head.php');
+  include('includes/head.php');
 
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {

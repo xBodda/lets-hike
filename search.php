@@ -9,30 +9,20 @@ $bathrooms = 0;
 $bedrooms = 0;
 $beds = 0;
 $livingrooms = 0;
-if (isset($_GET['country']) && isset($_GET['start-date']) && isset($_GET['end-date'])) {
+if (isset($_GET['country']) && isset($_GET['start-date']) && isset($_GET['end-date'])) 
+{
   $location = $_GET['country'];
   $date_in = $_GET['start-date'];
   $date_out = $_GET['end-date'];
-  if (isset($_GET['price-min']) && isset($_GET['price-max'])) {
+
+  $_SESSION['keywordSearch'] = $location;
+
+  if (isset($_GET['price-min']) && isset($_GET['price-max'])) 
+  {
     $price_min = $_GET['price-min'];
     $price_max = $_GET['price-max'];
   }
-  if (isset($_GET['bathrooms'])) {
-    if (!empty($_GET['bathrooms']))
-      $bathrooms = $_GET['bathrooms'];
-  }
-  if (isset($_GET['bedrooms'])) {
-    if (!empty($_GET['bedrooms']))
-      $bedrooms = $_GET['bedrooms'];
-  }
-  if (isset($_GET['beds'])) {
-    if (!empty($_GET['beds']))
-      $beds = $_GET['beds'];
-  }
-  if (isset($_GET['livingrooms'])) {
-    if (!empty($_GET['livingrooms']))
-      $livingrooms = $_GET['livingrooms'];
-  }
+
 } else {
   $msg = "An error has occured, Please try again";
   $_GET['err_msg'] = $msg;
