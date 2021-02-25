@@ -7,7 +7,12 @@
     $hike_info = DB::query('SELECT h.*,c.name as country FROM hikes h, country c WHERE h.location=c.id AND h.id=:id',array(':id'=>$hikeid))[0];
     $ratingValue = CalculateRating($hikeid);
     $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['cnt'];
-    $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeid))[0]['image'];
+    $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
+    if ($hikeImage) {
+      $hikeImage = $hikeImage[0]['image'];
+    } else {
+      $hikeImage = "default.png";
+    }
   }
   else
   {
