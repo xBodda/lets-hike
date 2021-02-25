@@ -15,7 +15,6 @@ if (isset($_POST['submit'])) {
 	$images = $_POST['images'];
 
 	if (strlen($name) >= 3 && strlen($name) < 128) {
-		if (strlen($location) >= 3 && strlen($location) < 128) {
 			if (strlen($overview) >= 3 && strlen($overview) < 1000) {
 				if (strlen($route) >= 3 && strlen($route) < 1000) {
 					if (strlen($safety) >= 3 && strlen($safety) < 1000) {
@@ -67,9 +66,6 @@ if (isset($_POST['submit'])) {
 			} else {
 				echo '<script>alert("Overview Length Out Of Bond")</script>';
 			}
-		} else {
-			echo '<script>alert("Location Length Out Of Bond")</script>';
-		}
 	} else {
 		echo '<script>alert("Name Length Out Of Bond")</script>';
 	}
@@ -153,7 +149,16 @@ if (isset($_GET["action"])) {
 												<!-- text input -->
 												<div class="form-group">
 													<label>Location </label>
-													<input type="text" name="location" class="form-control" placeholder="Enter The Location ..">
+													<select name="location" class="form-control">
+														<?php
+															$location = DB::query('SELECT * FROM country');
+															foreach($location as $loc){
+														?>
+														<option value="<?php echo $loc['id']; ?>"><?php echo $loc['name']; ?></option>
+														<?php
+															}
+														?>
+													</select>
 												</div>
 											</div>
 										</div>
