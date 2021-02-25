@@ -297,3 +297,21 @@ var validateSubmit = document.querySelectorAll('.validate-submit');
 for(let i = 0; i<validateSubmit.length;i++){
     validateBeforeSubmit(validateSubmit[i]);
 }
+
+var recomm_slide_items = document.querySelectorAll('.hikes-slide .slider > .item');
+
+for(let i = 0; i<recomm_slide_items.length;i++){
+    var item = recomm_slide_items[i];
+    item.addEventListener('click',function(){
+        var overview = this.getAttribute('data-overview');
+        var image = this.querySelector('.image img');
+        var title = this.querySelector('.title');
+            image = image.getAttribute('src');
+            title = title.innerHTML;
+        document.querySelector('#h-bg-text').innerHTML = title;
+        document.querySelector('#h-text').innerHTML = title;
+        document.querySelector('#h-text+p').innerHTML = overview;
+        document.querySelector('.selected-hike-image img').src = image;
+        document.querySelector('.selected-hike-image .title').innerHTML = title;
+    })
+}

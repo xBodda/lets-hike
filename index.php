@@ -93,25 +93,19 @@
   <div class="hikes-slide" id="embla">
     <div class="slider" id="hikes-slider">
       <?php 
-      $allhikes = DB::query('SELECT * FROM hikes');
+      $allhikes = DB::query('SELECT h.*,i.image FROM hikes h LEFT JOIN hike_images i on h.id=i.hike_id GROUP BY i.hike_id');
       foreach ($allhikes as $hike) {
-        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']));
-        if($hikeImage){
-          $hikeImage = $hikeImage[0]['image'];
-        }else{
-          $hikeImage = "default.png";
-        }
+
       ?>
-        <div class="item">
+        <div class="item" data-overview="<?php echo $hike['overview']; ?>">
           <div class="item slide">
             <div class="title"><?php echo $hike['name']; ?></div>
             <div class="image">
-              <img src="uploads/<?php echo $hikeImage; ?>">
+              <img src="uploads/<?php echo $hike['image'] ?? 'default.png'; ?>">
             </div>
           </div>
         </div>
-      <?php
-      } ?>
+        <?php } ?>
     </div>
   </div>
   <!-- Hike Slider Description -->
