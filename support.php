@@ -65,14 +65,14 @@
         <div class="contact-box">
           <div class="button-container">
           
-                  <a href="open-ticket.php">
+                  <a href="my-tickets.php">
                     <div class="bButtonb forms-footer">
                     <img style="height:50px"src="layout\svg\add-ticket.svg" alt="Girl in a jacket">
                     <h3>Open New Ticket</h3> 
                     </div>
                   </a>
 
-                  <a href="my-tickets.php">
+                  <a href="my-tickets.php?t">
                     <div class="bButtonb forms-footeri">
                     <img style="height:50px"src="layout\svg\tickets.svg" alt="Girl in a jacket">
                     <h3>Show My Tickets</h3> 

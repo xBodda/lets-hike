@@ -19,7 +19,7 @@ if (!empty($_POST)) {
                 if (strlen($password) >= 8 && strlen($password) <= 60) {
                     if ($password == $repassword) {
                         DB::query(
-                            'INSERT INTO users VALUES(\'\',:fullname,:email,:password,:gender,:phonenumber,:image,0)',
+                            'INSERT INTO users VALUES(\'\',:fullname,:email,:password,:gender,:phonenumber,:image,1)',
                             array(
                                 ':fullname' => $fullname,
                                 ':email' => $email,

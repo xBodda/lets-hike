@@ -4,20 +4,19 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-// if ( isset( $_GET['m'] ) )
-// {
-//   $msgid = $_GET['m'];
-//   $subject = DB::query('SELECT subject FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['subject'];
-//   $message = DB::query('SELECT message FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['message'];
-//   $msgdate = DB::query('SELECT _date FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_date'];
-//   $senderid = DB::query('SELECT _from FROM messages WHERE id=:id',array(':id'=>$msgid))[0]['_from'];
-//   $senderemail = DB::query('SELECT email FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['email'];
-//   $sendername = DB::query('SELECT name FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['name'];
-// }
-// else
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
+if ( isset( $_GET['m'] ) )
+{
+  $msgid = $_GET['m'];
+  $msgData = DB::query('SELECT * FROM tickets_messages WHERE id=:id',array(':id'=>$msgid))[0];
+  $ticketData = DB::query('SELECT * FROM tickets WHERE id=:id',array(':id'=>$msgData['ticket_id']))[0];
+  $senderData = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$ticketData['user_id']))[0];
+  // $senderemail = DB::query('SELECT email FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['email'];
+  // $sendername = DB::query('SELECT name FROM admins WHERE id=:id',array(':id'=>$senderid))[0]['name'];
+}
+else
+{
+  echo '<script>window.location="404.php"</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +24,7 @@ if (!Login::isLoggedIn()) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hikingify | Read Mail</title>
+  <title>Hikingify | Read Message</title>
   <?php
   include('includes/links.php');
   ?>
@@ -108,9 +107,9 @@ if (!Login::isLoggedIn()) {
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <div class="mailbox-read-info">
-                    <h5><?php echo $subject ?></h5>
-                    <h6>From: <?php echo $senderemail ?>
-                      <span class="mailbox-read-time float-right"><?php echo timeago($msgdate); ?></span>
+                    <h5><?php echo $ticketData['subject'] ?></h5>
+                    <h6>From: <?php echo $senderData['fullname'] ?>
+                      <span class="mailbox-read-time float-right"><?php echo timeago($msgData['_date']); ?></span>
                     </h6>
                   </div>
                   <!-- /.mailbox-read-info -->
@@ -133,7 +132,7 @@ if (!Login::isLoggedIn()) {
                   </div>
                   <!-- /.mailbox-controls -->
                   <div class="mailbox-read-message">
-                    <?php echo $message; ?>
+                    <?php echo $msgData['message']; ?>
                   </div>
                   <!-- /.mailbox-read-message -->
                 </div>
@@ -141,7 +140,7 @@ if (!Login::isLoggedIn()) {
                 <!-- /.card-footer -->
                 <div class="card-footer">
                   <div class="float-right">
-                    <a href="compose.php"><button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button></a>
+                    <a href="compose.php?user=<?php echo $senderData['id'] ?>&msg=<?php echo $msgData['ticket_id']; ?>"><button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button></a>
                   </div>
                 </div>
                 <!-- /.card-footer -->
