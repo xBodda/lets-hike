@@ -59,7 +59,7 @@ if (isset($_GET["action"])) {
             $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid))[0]['image'];
         ?>
             <div class=" cart-container ">
-              <div class="cartimg"> <img src="control/uploads/<?php echo $hikeImage; ?>"> </div>
+              <div class="cartimg"> <img src="uploads/<?php echo $hikeImage; ?>"> </div>
               <table>
                 <tr>
                   <td>
