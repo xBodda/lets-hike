@@ -14,7 +14,7 @@
   <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
   <!-- Link To Icons File -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <title>Hikingify | Review Hike</title>
+  <title>Hikingify | Blog</title>
 </head>
 
 <body id="review">
@@ -23,11 +23,16 @@
   <!-- Header END -->
 
   <!-- Top Banner START -->
-
+  <div class="top-banner small">
+      <div class="overlay"></div>
+      <div class="content">
+        <h1>Blog</h1>
+      </div>
+    </div>
   <!-- Top Banner END -->
 
   <!-- Cart Body START -->
-  <div class="terms-body">
+  <div class="blogger-inner-body">
     <div class="flex-container">
 
           <!-- Card 1 END-->
@@ -40,9 +45,8 @@
 
     <!-- Cart Details START -->
     <div class="left">
-      <div class=" terms-container ">
-        <h1 style="text-align: center;font-size:50px;">Blog</h1>
-        <div class="blog-inner-image"> <img class="image-inner-blog-inner"  src="hike2.jpg"> </div>
+      <div class="blogger-inner-container ">
+        <div class="blog-inner-image "> <img class="image-inner-blog-inner"  src="hike2.jpg"> </div>
         <h3>15 Top-Rated Tourist Attractions in Tanzania</h3>
         <div id="blog-text-container">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolore expedita rerum iure assumenda architecto quos asperiores. Totam, rem quas consequuntur autem, velit, eum voluptate cum modi voluptates a eaque.
@@ -55,12 +59,12 @@
         <!--You May also like -->
         <div id="blog-teka-id">
         <h3>You May Also Like</h3>
-        </div>
+        </div> 
         
-    <div id="blogPageContainer" style="justify-content:center;">
+    <div id="blogPageContainer" style="justify-content:center; padding:0px 0px">
         <div id="blog-flex1">
         <div  class="Blog-Container">
-        <div class="blog-image"><img class="blog-image-inner" src="hikemountain.jpg"> </div>
+        <div class="blog-image"><img class="blog-image-inner" src="hikemountain.jpg"> <h2 style="">Blog Title</h2></div>
         <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>        
@@ -77,24 +81,8 @@
 
     </div>
 
-    <div class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
-           <div class="Blog-Containerp">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-          </div>
-            <div>
-            <button type="button" class="blogbutton" >READ MORE</button>
-      </div>
-      <div class="blog-details">
-          <ul class="fa-ul" style="margin-top: 8px; margin-left: 0px;">
-          <li><span class="fa-li" style="position: static;" ><i class="fas fa-user-tag"></i></span>Ahmed Ashraf</li>
-            <li>Last Updated:</li>
-             <li><span class="fa-li"style="position: static;"><i class="fas fa-calendar-alt"></i></span>02-24-2021</li>
-          </ul>
-          </div>
-    </div>
     <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"><h2 style="">Blog Title</h2> </div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div>
@@ -110,7 +98,7 @@
     </div>
 
     <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> <h2 style="">Blog Title</h2></div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
@@ -125,6 +113,7 @@
           </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 </div>

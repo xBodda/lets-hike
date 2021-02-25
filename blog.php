@@ -37,7 +37,7 @@
     <div id="blogPageContainer">
     <div id="blog-flex1">
         <div  class="Blog-Container">
-        <div class="blog-image"><img class="blog-image-inner" src="hikemountain.jpg"> </div>
+        <div class="blog-image"><img class="blog-image-inner" src="hikemountain.jpg"><h2 style="">Blog Title</h2> </div>
         <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>        
@@ -51,11 +51,13 @@
              <li><span class="fa-li"style="position: static;"><i class="fas fa-calendar-alt"></i></span>02-24-2021</li>
           </ul>
           </div>
-
     </div>
 
     <div class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image "> <img class="blog-image-inner " src="hikemountain.jpg">
+     <h2 style="">Blog Title</h2></div>
+    
+
            <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>
@@ -70,8 +72,10 @@
           </ul>
           </div>
     </div>
-    <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="Blog-Container">
+    <div class="blog-image "> <img class="blog-image-inner " src="hikemountain.jpg">
+     <h2 style="">Blog Title</h2></div>
+
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div>
@@ -86,8 +90,9 @@
           </div>
     </div>
 
-    <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="Blog-Container">
+    <div class="blog-image "> <img class="blog-image-inner " src="hikemountain.jpg">
+     <h2 style="">Blog Title</h2></div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
@@ -105,7 +110,7 @@
   <div id="blog-flex2">
 
     <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> <h2 style="">Blog Title</h2></div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
@@ -121,7 +126,7 @@
     </div>
 
     <div class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"><h2 style="">Blog Title</h2> </div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
@@ -137,7 +142,7 @@
     </div>
 
     <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> <h2 style="">Blog Title</h2></div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
@@ -153,7 +158,7 @@
     </div>
 
     <div  class="Blog-Container">
-    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> </div>
+    <div class="blog-image"> <img class="blog-image-inner" src="hikemountain.jpg"> <h2 style="">Blog Title</h2></div>
     <div class="Blog-Containerp">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>            <div >
