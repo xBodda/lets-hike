@@ -4,33 +4,30 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-$isGetTo = false;
-if (isset($_GET['to'])) {
-  $to = $_GET['to'];
-  $toname = DB::query('SELECT fullname FROM users WHERE id=:id AND type>1', array(':id' => $to))[0]['fullname'];
-  $isGetTo = true;
+if (isset($_GET['user'])) {
+  $user_id = $_GET['user'];
+  $ticket_id = $_GET['msg'];
+  $senderData = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$user_id))[0];
+  $ticketData = DB::query('SELECT * FROM tickets WHERE id=:id',array(':id'=>$ticket_id))[0];
 }
 
-if (isset($_POST['send'])) {
-  $subject = $_POST['subject'];
+if (isset($_POST['send'])) 
+{
   $message = $_POST['message'];
-  $to = $_POST['to'];
   $date = date('Y-m-d H:i:s');
 
   DB::query(
-    'INSERT INTO messages VALUES(\'\',:_from,:_to,:subject,:message,:_date)',
+    'INSERT INTO tickets_messages VALUES(\'\',:ticket_id,:message,:user_id,:_date,0)',
     array(
-      ':_from' => $userid,
-      ':_to' => $to,
-      ':subject' => $subject,
+      ':ticket_id' => $ticket_id,
       ':message' => $message,
+      ':user_id' => $userid,
       ':_date' => $date
     )
   );
 
-
   echo '<script>alert("Message Sent")</script>';
-  echo '<script>window.location="compose.php"</script>';
+  echo '<script>window.location="mailbox.php"</script>';
 }
 
 
@@ -122,31 +119,14 @@ if (isset($_POST['send'])) {
                   <h3 class="card-title">Compose New Message</h3>
                 </div>
                 <!-- /.card-header -->
-                <form action="compose.php" method="POST">
+                <form action="compose.php?user=<?php echo $user_id; ?>&msg=<?php echo $ticket_id; ?>" method="POST">
                   <div class="card-body">
                     <div class="form-group">
                       <!-- <input class="form-control" name="to" placeholder="To:"> -->
-                      <select name="to" id="to" class="form-control">
-                        <?php
-                        if ($isGetTo) {
-                        ?>
-                          <option value="<?php echo $to; ?>"><?php echo $toname; ?></option>
-                        <?php
-                        } else {
 
-                        ?>
-                          <option disabled selected value="">-- Select The Reciever --</option>
-                          <?php
-                          $alladmins = DB::query('SELECT * FROM users WHERE id!=:id', array(':id' => $userid));
-                          foreach ($alladmins as $ad) {
-                          ?>
-                            <option value="<?php echo $ad['id'] ?>"><?php echo $ad['fullname']; ?></option>
-                        <?php }
-                        } ?>
-                      </select>
                     </div>
                     <div class="form-group">
-                      <input class="form-control" name="subject" placeholder="Subject:">
+                      <input class="form-control" name="to" value="To: <?php echo $senderData['fullname'] ?>" disabled>
                     </div>
                     <div class="form-group">
                       <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px">

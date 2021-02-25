@@ -817,7 +817,6 @@ label {
   padding-left: calc(7% + 50px);
   margin-top: 20px;
   margin-bottom: 0px;
-
 }
 .contact-contb .contact-box{
   width: 100%;
@@ -826,7 +825,6 @@ label {
   box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   flex-wrap: wrap;
-
 }
 
 .contact-contb .contact-boxb{
@@ -2066,3 +2064,84 @@ color: #3dbc3d !important;
   display: block;
 }
 
+
+.messages-content{
+  width: 70%;
+  padding: 10px;
+  box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.message-box {
+  width: 100%;
+}
+
+.message-box h1 {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.message-sender {
+  align-items: center;
+}
+
+.message-sender .sender-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.message-sender .sender-info p{
+  font-weight: bold;
+}
+
+.message-sender .sender-info i{
+  color: #666;
+}
+
+.message-sender .sender-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.whole-messages {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.single-message {
+  margin-bottom: 20px;
+}
+
+.messages-textarea {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(1, 179, 1, 0.801);
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-family: "ProductSans";
+  font-size: 18px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  margin-bottom: 20px;
+}
+
+.message-send {
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.message-send .xbutton{
+  margin: 0 auto;
+}

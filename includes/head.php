@@ -30,9 +30,9 @@ function timeago($date) {
   $strTime = array("second", "minute", "hour", "day", "month", "year");
   $length = array("60","60","24","30","12","10");
 
-  $currentTime = mktime();
+  $currentTime = time();
   if($currentTime >= $timestamp) {
-   $diff     = mktime()- $timestamp;
+   $diff     = time()- $timestamp;
    for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
    $diff = $diff / $length[$i];
    }
