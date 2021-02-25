@@ -5,8 +5,8 @@
   <div class="navigation">
       <div> <a href="index.php">Home</a> </div>
       <div> <a href="#">Destination</a> </div>
-      <div> <a href="#">Blog</a> </div>
-      <div> <a href="#">Currency EGP £</a> </div>
+      <div> <a href="blog.php">Blog</a> </div>
+      <div> <a href="currency.php">Currency EGP £</a> </div>
       <div id="lang"> Lang </div>
       <div>
         <a href="cart.php">

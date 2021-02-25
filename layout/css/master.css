@@ -387,7 +387,7 @@ label {
   width: 90%;
   height: 50px;
   background: none;
-  border: 3px solid rgba(1, 179, 1, 0.801);
+  border: 3px solid rgba(1, 179, 1, 0.8);
   border-radius: 100px;
   cursor: pointer;
   display: flex;
@@ -1110,7 +1110,35 @@ label {
 .myTable tr.tableHead, .myTable tr:hover {
   /* Add a grey background color to the table tableHead and on hover */
   background-color: #f1f1f1;
+  
 }
+
+.cTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+.cTable th, .cTable td {
+  text-align: center; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+.cTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.curButton{
+  background-color: #34C234;
+  color: #fff;
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+  border: none;
+}
+
 
 .wrapper {
   margin: 0 auto;
@@ -1669,8 +1697,8 @@ color: #3DBC41;
 
 /*Terms Start*/
 .terms-body .terms-container {
-      width: 100%;
-    padding: 50px 5%;
+    width: 100%;
+    padding: 50px 10%;
     box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.1);
     border-radius: 20px;
     margin: 10px 0;
@@ -1954,8 +1982,8 @@ color: #3dbc3d !important;
 #blogPageContainer{
   display: flex;
   flex-wrap: wrap;
-  margin:25px;
-  padding:10px;
+  /* margin:25px; */
+  padding: 10px 140px;
   flex-direction:column;
 }
 
@@ -1972,7 +2000,11 @@ color: #3dbc3d !important;
   flex-direction:row;
 
 }
-
+.Blog-Containerp{
+  padding: 0px 20px 0px 20px;
+  text-align: justify;
+  color:rgb(109, 109, 109)
+}
 .Blog-Container{
   display: flex;
   flex-wrap: wrap;
@@ -1981,17 +2013,23 @@ color: #3dbc3d !important;
   margin:10px;
   padding:0 10px;
   height:450px;
-  box-shadow: 0 5px 5px 0 #0000002c !important;
-
+  /* box-shadow: 0 5px 5px 0 #0000002c !important; */
+  border: #707070;
+  border-style: solid;
+  border-width: 1px;
+  
 }
 
+
+
 .blogbutton{
-  font-size:25px;
+  width: 337px;
+  font-size:16px;
   background: #3dbc3d;
   padding: 10px 40px;
   display: table;
   color: white;
-  box-shadow: 0 5px 5px 0 #3dbc3d99 !important;
+  /* box-shadow: 0 5px 5px 0 #3dbc3d99 !important; */
   cursor: pointer;
   border:2px solid transparent !important;
   outline: none;
@@ -1999,25 +2037,78 @@ color: #3dbc3d !important;
 }
 
 .blogbutton:hover{
-  font-size:25px;
-  background: #497f42;
+  width: 337px;
+  font-size:16px;
+  background: #2a992a;
   padding: 10px 40px;
   display: table;
-  color: #ffffff;
-  box-shadow: 0 5px 5px 0 #497f42 !important;
+  color: white;
+  /* box-shadow: 0 5px 5px 0 #3dbc3d99 !important; */
   cursor: pointer;
   border:2px solid transparent !important;
   outline: none;
   font-weight: bold;
 }
-
 .blog-image img{
   width:100%;
   height:100%;
+ 
+  padding: 25px 25px 10px 25px;
   object-fit: cover;
   object-position: 50% 50%;
 }
 
 .blog-image-inner{
   display: block;
+}
+.blog-details {
+  border-top: 1px solid rgb(117, 117, 117);
+}
+
+.blog-details li{
+  color:#686868;
+  display: inline-block;
+  margin: 0 6px;
+  font-size: 14px;
+}
+
+
+h3{
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#blogInnerPageContainer{
+  display: flex;
+  flex-wrap: wrap;
+  margin:25px;
+  padding:20px;
+  flex-direction:column;
+}
+
+#blogInnerPageContainer #blog-flex1{
+  width:100%;
+  display: flex;
+  flex-direction:row;
+}
+
+
+.blog-inner-image img{
+  width:100%;
+  height:25%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  padding:50px;
+  justify-content: center;
+  margin:0;
+}
+
+#blog-text-container{
+  width: auto;
+  text-align: center;
+  object-position: 50% 50%;
+}
+#blog-teka-id{
+  margin:20px;
 }
