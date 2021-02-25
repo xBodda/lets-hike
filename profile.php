@@ -1,23 +1,22 @@
-  <?php include('includes/head.php'); 
-  
+  <?php include('includes/head.php');
+
   $user_id;
-  if(!isset($_GET['id'])){
+  if (!isset($_GET['id'])) {
 
     if (!Login::isLoggedIn()) {
       header('Location:./');
       exit;
     }
     $user_id = Login::isLoggedIn();
-  }else{
+  } else {
     $user_id = $_GET['id'];
-    
   }
-  
-  $user = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$user_id));
-  if(!$user){
+
+  $user = DB::query('SELECT * FROM users WHERE id=:id', array(':id' => $user_id));
+  if (!$user) {
     die('User not found');
   }
-  $user=$user[0];
+  $user = $user[0];
   ?>
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
@@ -61,12 +60,15 @@
           <p><i class="fas fa-birthday-cake"></i> 12 January, 1989</p>
         </div>
         <div class="user-buttons">
-          <div class="xbutton center ">Contact</div>
+          <div class="xbutton center mb-20">Contact</div>
+          <?php if($user['id'] == $userid){ ?>
+          <a href="edit-profile.php"><div class="xbutton secondary center mt-20">Edit Profile</div></a>
+          <?php } ?>
         </div>
       </div>
       <div class="user-info">
         <div class="heading">
-          <?php  echo $user['fullname']  ?>
+          <?php echo $user['fullname']  ?>
         </div>
         <div class="about">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.

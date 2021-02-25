@@ -43,9 +43,21 @@ $date_in = date("Y-m-d", strtotime($date_in));
 $date_out = date("Y-m-d", strtotime($date_out));
 
 
-//Select hikes where arrival time - end_time is available
-//Order by the best average rating
-$hikes = DB::query('SELECT h.*, i.image, 
+  //Select hikes where arrival time - end_time is available
+  //Order by the best average rating
+
+  // $hikes = DB::query('SELECT h.*, i.image, 
+  //                     AVG(r.stars) as total_rating,
+  //                     COUNT(CASE CONVERT(r.stars,int) WHEN 1 THEN 1 ELSE NULL END) as total_rating_1,
+  //                     COUNT(CASE CONVERT(r.stars,int) WHEN 2 THEN 1 ELSE NULL END) as total_rating_2,
+  //                     COUNT(CASE CONVERT(r.stars,int) WHEN 3 THEN 1 ELSE NULL END) as total_rating_3,
+  //                     COUNT(CASE CONVERT(r.stars,int) WHEN 4 THEN 1 ELSE NULL END) as total_rating_4,
+  //                     COUNT(CASE CONVERT(r.stars,int) WHEN 5 THEN 1 ELSE NULL END) as total_rating_5
+  //                     FROM hikes h LEFT JOIN hike_images i on h.id=i.hike_id LEFT JOIN reviews r on h.id=r.hike_id WHERE h.location=:location
+  //         AND (SELECT COUNT(id) FROM order_items WHERE start_date <= :leave_time AND end_date >=
+  //         :arrival_time AND hike_id=h.id)=0 GROUP BY i.hike_id ORDER BY total_rating DESC', array(":location" => $location, ":arrival_time" => $date_in, ":leave_time" => $date_out));
+
+  $hikes = DB::query('SELECT h.*, i.image, 
                     AVG(r.stars) as total_rating,
                     COUNT(CASE CONVERT(r.stars,int) WHEN 1 THEN 1 ELSE NULL END) as total_rating_1,
                     COUNT(CASE CONVERT(r.stars,int) WHEN 2 THEN 1 ELSE NULL END) as total_rating_2,
@@ -53,8 +65,9 @@ $hikes = DB::query('SELECT h.*, i.image,
                     COUNT(CASE CONVERT(r.stars,int) WHEN 4 THEN 1 ELSE NULL END) as total_rating_4,
                     COUNT(CASE CONVERT(r.stars,int) WHEN 5 THEN 1 ELSE NULL END) as total_rating_5
                     FROM hikes h LEFT JOIN hike_images i on h.id=i.hike_id LEFT JOIN reviews r on h.id=r.hike_id WHERE h.location=:location
-        AND (SELECT COUNT(id) FROM order_items WHERE start_date <= :leave_time AND end_date >=
-        :arrival_time AND hike_id=h.id)=0 GROUP BY i.hike_id ORDER BY total_rating DESC', array(":location" => $location, ":arrival_time" => $date_in, ":leave_time" => $date_out));
+                    GROUP BY i.hike_id ORDER BY total_rating DESC',
+                     array(":location" => $location
+                      ));
 
 // For Testing
 // $hikes = DB::query('SELECT h.*, i.image FROM hikes h LEFT JOIN hike_images i on h.id=i.hike_id GROUP BY i.hike_id');

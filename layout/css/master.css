@@ -711,9 +711,9 @@ label {
   left: 40px;
   color: white;
   font-size: 40px;
-  max-width: 50%;
   text-transform: uppercase;
   z-index: 11;
+  padding-right:40px;
 }
 
 .hike-s-description .left .selected-hike-image img {
@@ -1547,11 +1547,13 @@ hr {
 .hike-gallery .gallery-images {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-items:initial;
 }
 
 .hike-gallery .gallery-images .item {
-  width: 30%;
-  height: 185px;
+  height: 30%;
+  width: 185px;
   background-color: #000;
   margin: 0 20px 20px 0;
   border-radius: 30px;
