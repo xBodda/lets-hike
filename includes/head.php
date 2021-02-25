@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Africa/Cairo');
+
 include('./classes/Login.php');
 include_once("./classes/DB.php");
 if (Login::isLoggedIn())
@@ -28,9 +30,9 @@ function timeago($date) {
   $strTime = array("second", "minute", "hour", "day", "month", "year");
   $length = array("60","60","24","30","12","10");
 
-  $currentTime = time();
+  $currentTime = mktime();
   if($currentTime >= $timestamp) {
-   $diff     = time()- $timestamp;
+   $diff     = mktime()- $timestamp;
    for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
    $diff = $diff / $length[$i];
    }
