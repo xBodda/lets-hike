@@ -7,7 +7,7 @@ if (!Login::isLoggedIn()) {
 $isGetTo = false;
 if (isset($_GET['to'])) {
   $to = $_GET['to'];
-  $toname = DB::query('SELECT name FROM admins WHERE id=:id', array(':id' => $to))[0]['name'];
+  $toname = DB::query('SELECT fullname FROM users WHERE id=:id AND type>1', array(':id' => $to))[0]['fullname'];
   $isGetTo = true;
 }
 
@@ -137,10 +137,10 @@ if (isset($_POST['send'])) {
                         ?>
                           <option disabled selected value="">-- Select The Reciever --</option>
                           <?php
-                          $alladmins = DB::query('SELECT * FROM admins WHERE id!=:id', array(':id' => $userid));
+                          $alladmins = DB::query('SELECT * FROM users WHERE id!=:id', array(':id' => $userid));
                           foreach ($alladmins as $ad) {
                           ?>
-                            <option value="<?php echo $ad['id'] ?>"><?php echo $ad['name']; ?></option>
+                            <option value="<?php echo $ad['id'] ?>"><?php echo $ad['fullname']; ?></option>
                         <?php }
                         } ?>
                       </select>
