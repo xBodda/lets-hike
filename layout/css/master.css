@@ -48,7 +48,9 @@ a {
 .mb-10 {
   margin-bottom: 10px !important;
 }
-
+.blur-hide{
+  display:none;
+}
 /* Header START */
 #header {
   width: 100%;
@@ -1258,20 +1260,11 @@ label {
   font-weight: normal;
 }
 
-.search-body .item .rating {
-  width: 50%;
-  display: flex;
-}
 
 .search-body .item .rating .star {
   width: 15px;
   height: 15px;
-  background: url('layout/svg/Icon awesome-star.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 3px;
-  cursor: pointer;
+  margin-right:2px;;
 }
 
 #review .review-comment {
@@ -1291,6 +1284,7 @@ label {
 }
 .rating {
   display:flex;
+  position: relative;
 }
 
 .rating .star {
@@ -1306,9 +1300,7 @@ label {
 .rating .star.nostar {
   background-image: url('../svg/rating-star-empty.svg') !important;
 }
-.rating.user-rating{
-  position: relative;
-}
+
 .rating.user-rating input{
   width:0;
   opacity: 0;
@@ -1326,6 +1318,58 @@ label {
 }
 .rating.user-rating .star:hover ~ .nostar{
   opacity: 1;
+}
+
+.rating .ratings_view_container{
+  width:150px;
+  height:auto;
+  padding:20px;
+  border-radius: 10px;
+  position: absolute;
+  bottom:100%;
+  margin-bottom:10px;
+  font-size:13px;
+  left:0;
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.4);
+  background-color: #fff;
+}
+.rating .ratings_view_container .rating_view::before{
+  content:"(1) ";
+  font-family: Arial;
+  display: inline-block;
+  padding:15px 30px;
+  padding-left:0;
+  background-image:url('../svg/Icon awesome-star.svg');
+  background-size:20px;
+  background-position:18px 12px;
+  background-repeat: no-repeat;
+}
+.rating .ratings_view_container .rating_view::after{
+  content:"";
+  width:0;
+  height:0;
+  border-top:10px solid #fff;
+  border-left:10px solid transparent;
+  border-right:10px solid transparent;
+  border-bottom:10px solid transparent;
+  position: absolute;
+  top:100%;
+  left:20px;
+}
+.rating .ratings_view_container .rating_view:nth-of-type(2)::before{
+  content:"(2)";
+}
+.rating .ratings_view_container .rating_view:nth-of-type(3)::before{
+  content:"(3)";
+}
+.rating .ratings_view_container .rating_view:nth-of-type(4)::before{
+  content:"(4)";
+}
+.rating .ratings_view_container .rating_view:nth-of-type(5)::before{
+  content:"(5)";
+}
+.rating .ratings_view_container.show{
+  display:block;
 }
 .hike-body .hike-details{
   width:100%;

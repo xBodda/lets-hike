@@ -4,7 +4,6 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-$isGetTo = false;
 if (isset($_GET['user'])) {
   $user_id = $_GET['user'];
   $ticket_id = $_GET['msg'];
@@ -124,7 +123,7 @@ if (isset($_POST['send']))
                   <div class="card-body">
                     <div class="form-group">
                       <!-- <input class="form-control" name="to" placeholder="To:"> -->
-                      
+
                     </div>
                     <div class="form-group">
                       <input class="form-control" name="to" value="To: <?php echo $senderData['fullname'] ?>" disabled>

@@ -7,7 +7,7 @@ if (!Login::isLoggedIn()) {
 $isGetTo = false;
 if (isset($_GET['to'])) {
   $to = $_GET['to'];
-  $toname = DB::query('SELECT fullname FROM user_info WHERE user_id=:id', array(':id' => $to))[0]['fullname'];
+  $toname = DB::query('SELECT fullname FROM user_info WHERE user_id=:id AND type=1', array(':id' => $to))[0]['fullname'];
   $tooEmail = DB::query('SELECT phoneEmail FROM users WHERE id=:id', array(':id' => $to))[0]['phoneEmail'];
   $isGetTo = true;
 }
@@ -141,7 +141,7 @@ if (isset($_POST['send'])) {
                           foreach ($alladmins as $ad) {
                             $toemail = DB::query('SELECT email FROM users WHERE id=:id', array(':id' => $ad['user_id']))[0]['phoneEmail'];
                           ?>
-                            <option value="<?php echo $ad['user_id'] ?>"><?php echo $ad['name']; ?>&nbsp; ( <?php echo $toemail; ?> )</option>
+                            <option value="<?php echo $ad['user_id'] ?>"><?php echo $ad['fullname']; ?>&nbsp; ( <?php echo $toemail; ?> )</option>
                         <?php }
                         } ?>
                       </select>

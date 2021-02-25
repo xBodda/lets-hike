@@ -80,7 +80,7 @@
           <div class="flex-container wrap j-sa">
             <a href="hike.php?id=1">
               <div class="item">
-                <div class="image"> <img src="control/uploads/1.png"> </div>
+                <div class="image"> <img src="uploads/1.png"> </div>
                 <div class="title">Salkantay Traditional</div>
                 <div class="rev fl-1 flex rating" data-rating="4">
                   <div class="star"></div>
@@ -93,7 +93,7 @@
             </a>
             <a href="hike.php?id=2">
               <div class="item">
-                <div class="image"> <img src="control/uploads/2.png"> </div>
+                <div class="image"> <img src="uploads/2.png"> </div>
                 <div class="title">Everest Base Camp Trek</div>
                 <div class="rev fl-1 flex rating" data-rating="4">
                   <div class="star"></div>
@@ -106,7 +106,7 @@
             </a>
             <a href="hike.php?id=8">
               <div class="item">
-                <div class="image"> <img src="control/uploads/1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png"> </div>
+                <div class="image"> <img src="uploads/1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png"> </div>
                 <div class="title">Ultimate Salkantay Trek</div>
                 <div class="rev fl-1 flex rating" data-rating="0">
                   <div class="star nostar"></div>

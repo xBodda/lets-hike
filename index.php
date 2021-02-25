@@ -87,13 +87,18 @@
       <?php 
       $allhikes = DB::query('SELECT * FROM hikes');
       foreach ($allhikes as $hike) {
-        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']));
+        if($hikeImage){
+          $hikeImage = $hikeImage[0]['image'];
+        }else{
+          $hikeImage = "default.png";
+        }
       ?>
         <div class="item">
           <div class="item slide">
             <div class="title"><?php echo $hike['name']; ?></div>
             <div class="image">
-              <img src="control/uploads/<?php echo $hikeImage; ?>">
+              <img src="uploads/<?php echo $hikeImage; ?>">
             </div>
           </div>
         </div>
@@ -114,7 +119,7 @@
       <div class="left">
         <div class="selected-hike-image">
           <div class="title"><?php echo $premiumHike['name']; ?></div>
-          <img src="control/uploads/<?php echo $premiumImage; ?>">
+          <img src="uploads/<?php echo $premiumImage; ?>">
         </div>
       </div>
       <div class="right">
@@ -133,12 +138,17 @@
       <?php 
       $allhikes = DB::query('SELECT * FROM hikes');
       foreach ($allhikes as $hike) {
-        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hike['id']));
+        if ($hikeImage) {
+          $hikeImage = $hikeImage[0]['image'];
+        } else {
+          $hikeImage = "default.png";
+        }
         $ratingValue = CalculateRating($hike['id']);
       ?>
         <a href="hike.php?id=<?php echo $hike['id']; ?>">
           <div class="item">
-            <div class="image"> <img src="control/uploads/<?php echo $hikeImage; ?>"> </div>
+            <div class="image"> <img src="uploads/<?php echo $hikeImage; ?>"> </div>
             <div class="title"><?php echo $hike['name']; ?></div>
             <div class="rev fl-1 flex rating" data-rating="<?php echo round($ratingValue); ?>">
               </div>
