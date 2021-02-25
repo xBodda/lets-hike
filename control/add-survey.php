@@ -5,76 +5,27 @@ if (!Login::isLoggedIn()) {
 }
 
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $location = $_POST['location'];
-    $overview = $_POST['overview'];
-    $route = $_POST['route'];
-    $safety = $_POST['safety'];
-    $howtobook = $_POST['howtobook'];
-    $price = $_POST['price'];
-    $images = $_POST['images'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $questions = $_POST['questions'];
+    $options = $_POST['options'];
+    $option_questions = $_POST['options_question'];
+    $option_questions = array_count_values($option_questions);
+    $j = 0;
+    DB::query('INSERT INTO survey VALUES(\'\',:name,:description)',array(':name'=>$title,':description'=>$description));
+    $survey_id = DB::query('SELECT id FROM survey WHERE name=:name ORDER BY id DESC LIMIT 1',array(':name'=>$title))[0]['id'];
+    for($i=1; $i<=count($questions); $i++){
+        $options_count = $option_questions[$i];
+        DB::query('INSERT INTO survey_questions VALUES(\'\',:name,:survey_id)', array(':name' => $questions[$i-1], ':survey_id' => $survey_id));
+        $question_id = DB::query('SELECT id FROM survey_questions WHERE name=:name ORDER BY id DESC LIMIT 1', array(':name' => $questions[$i - 1]))[0]['id'];
 
-    if (strlen($name) >= 3 && strlen($name) < 128) {
-        if (strlen($location) >= 3 && strlen($location) < 128) {
-            if (strlen($overview) >= 3 && strlen($overview) < 1000) {
-                if (strlen($route) >= 3 && strlen($route) < 1000) {
-                    if (strlen($safety) >= 3 && strlen($safety) < 1000) {
-                        if (strlen($howtobook) >= 3 && strlen($howtobook) < 1000) {
-                            if (strlen($price) >= 1 && strlen($price) <= 5) {
-                                DB::query(
-                                    'INSERT INTO hikes VALUES(\'\',:name,:location,:overview,:route,:safety,:howtobook,:price)',
-                                    array(':name' => $name, ':location' => $location, ':overview' => $overview, ':route' => $route, ':safety' => $safety, ':howtobook' => $howtobook, ':price' => $price)
-                                );
-
-                                $hike_id = DB::query('SELECT id FROM hikes ORDER BY id DESC LIMIT 1')[0]['id'];
-
-                                for ($z = 0; $z < $images; $z++) {
-                                    $filename = rand() . $_FILES['image' . $z]['name'];
-
-                                    $destination = '../uploads/' . $filename;
-
-                                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-                                    $file = $_FILES['image' . $z]['tmp_name'];
-                                    $size = $_FILES['image' . $z]['size'];
-
-                                    if ($_FILES['image' . $z]['size'] > 1000000) {
-                                        echo '<script>alert("File Too Large")</script>';
-                                    } else {
-                                        if (move_uploaded_file($file, $destination)) {
-                                            DB::query(
-                                                'INSERT INTO hike_images VALUES(\'\',:hike_id,:image)',
-                                                array(':image' => $filename, ':hike_id' => $hike_id)
-                                            );
-                                        } else {
-                                            echo '<script>alert("Failed To Upload Image")</script>';
-                                        }
-                                    }
-                                }
-                                echo '<script>alert("Group Added")</script>';
-                            } else {
-                                echo '<script>alert("Price Length Out Of Bond")</script>';
-                            }
-                        } else {
-                            echo '<script>alert("How To Book Length Out Of Bond")</script>';
-                        }
-                    } else {
-                        echo '<script>alert("Safety Length Out Of Bond")</script>';
-                    }
-                } else {
-                    echo '<script>alert("Route Length Out Of Bond")</script>';
-                }
-            } else {
-                echo '<script>alert("Overview Length Out Of Bond")</script>';
-            }
-        } else {
-            echo '<script>alert("Location Length Out Of Bond")</script>';
+        for ($j = 0; $j < $options_count; $j++) {
+            DB::query('INSERT INTO survey_options VALUES(\'\',:name,:survey_id)', array(':name' => $options[$j], ':survey_id' => $question_id));
         }
-    } else {
-        echo '<script>alert("Name Length Out Of Bond")</script>';
     }
-}
+    echo '<script>alert("Survey Added")</script>';
 
+}
 if (isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
         DB::query('DELETE FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $_GET["id"]));
@@ -91,7 +42,7 @@ if (isset($_GET["action"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hikingify | View Groups</title>
+    <title>Hikingify | Add Survey</title>
     <?php
     include('includes/links.php');
     ?>
@@ -111,12 +62,12 @@ if (isset($_GET["action"])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Edit Groups</h1>
+                            <h1>Add Survey</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">View Groups</li>
+                                <li class="breadcrumb-item active">Add Survey</li>
                             </ol>
                         </div>
                     </div>
@@ -134,17 +85,17 @@ if (isset($_GET["action"])) {
                             <!-- general form elements disabled -->
                             <div class="card card-warning">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Group</h3>
+                                    <h3 class="card-title">Add Survey</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <form method="POST" action="view-groups.php" enctype="multipart/form-data">
+                                    <form method="POST" >
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <!-- text input -->
                                                 <div class="form-group">
                                                     <label>Survey Title </label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Enter The Name Of The Group ..">
+                                                    <input type="text" name="title" class="form-control" placeholder="Survey Title">
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +104,7 @@ if (isset($_GET["action"])) {
                                                 <!-- text input -->
                                                 <div class="form-group">
                                                     <label>Description</label>
-                                                    <textarea name="overview" class="form-control" cols="30" rows="5" placeholder="Write An Overview">The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.</textarea>
+                                                    <textarea name="description" class="form-control" cols="30" rows="5" placeholder="Write An Overview"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,6 +165,7 @@ if (isset($_GET["action"])) {
                                                         console.log(el.closest('.row'));
                                                         console.log(container);
                                                         var options_count = parseInt(container.getAttribute("data-count"));
+                                                        var question = parseInt(container.getAttribute("data-question"));
                                                         number = 1;
                                                         for (i = 0; i < number; i++) {
                                                             container.setAttribute('data-count', ++options_count);
@@ -221,8 +173,8 @@ if (isset($_GET["action"])) {
                                                             var option_clone = first_option.cloneNode(true);
 
                                                             option_clone.querySelector('label').innerHTML = "Option " + parseInt(options_count);
-                                                            option_clone.querySelector('input').value = "Option " + parseInt(options_count);
-                                                            option_clone.querySelector('input+input').value = parseInt(container.parentNode.getAttribute('data-questions'));
+                                                            option_clone.querySelector('input').placeholder = "Option " + parseInt(options_count);
+                                                            option_clone.querySelector('input+input').value = parseInt(question);
                                                             option_clone.querySelector('.remove').addEventListener('click', function() {
                                                                 removeOption(this);
                                                             });
@@ -241,12 +193,16 @@ if (isset($_GET["action"])) {
                                                             //remove options
                                                             var getOptions = question_clone.querySelectorAll('.option');
                                                             getOptions[0].parentNode.setAttribute('data-count', 1);
-                                                            for (let j = 1; j < getOptions.length; j++) {
+                                                            for (let j = 0; j < getOptions.length; j++) {
+                                                                if (j == 0) {
+                                                                    getOptions[j].querySelector('input+input').value = parseInt(questions_count);
+                                                                    continue;
+                                                                }
                                                                 getOptions[j].parentNode.removeChild(getOptions[j]);
                                                             }
-                                                            getOptions.parentNode.setAttribute('data-question', parseInt(questions_count));
+                                                            question_clone.querySelector('.options-container').setAttribute('data-question', questions_count);
                                                             question_clone.querySelector('label').innerHTML = "Question " + parseInt(questions_count);
-                                                            question_clone.querySelector('input').value = "Question " + parseInt(questions_count);
+                                                            question_clone.querySelector('input').placeholder = "Question " + parseInt(questions_count);
                                                             question_clone.querySelector('.remove').addEventListener('click', function() {
                                                                 removeField(this);
                                                             });

@@ -87,7 +87,12 @@
       <?php 
       $allhikes = DB::query('SELECT * FROM hikes');
       foreach ($allhikes as $hike) {
-        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']));
+        if($hikeImage){
+          $hikeImage = $hikeImage[0]['image'];
+        }else{
+          $hikeImage = "default.png";
+        }
       ?>
         <div class="item">
           <div class="item slide">
@@ -133,7 +138,12 @@
       <?php 
       $allhikes = DB::query('SELECT * FROM hikes');
       foreach ($allhikes as $hike) {
-        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hike['id']))[0]['image'];
+        $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hike['id']));
+        if ($hikeImage) {
+          $hikeImage = $hikeImage[0]['image'];
+        } else {
+          $hikeImage = "default.png";
+        }
         $ratingValue = CalculateRating($hike['id']);
       ?>
         <a href="hike.php?id=<?php echo $hike['id']; ?>">
