@@ -21,9 +21,10 @@ if (isset($_POST['signin']))
 
             setcookie("USR", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
             setcookie("USR_", '1', time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);
-            if($user_type != 1)
-                header('Location:control');
+            if($user_type != 1){
+            header('Location:control');
             exit;
+            }
             header('Location:./');
             exit;
         } 

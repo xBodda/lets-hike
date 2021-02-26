@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2021 at 01:53 PM
+-- Generation Time: Feb 25, 2021 at 06:21 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,8 +68,6 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `hike_id`, `date_added`, `total_price`, `start_date`, `end_date`, `persons`) VALUES
-(6, 1, 2, '2021-02-21 06:46:34', '53004', '2021-02-02', '2021-02-23', 2),
-(7, 1, 1, '2021-02-21 06:48:45', '7400', '2021-02-22', '2021-02-26', 2),
 (8, 3, 2, '2021-02-23 14:45:25', '40384', '2021-03-02', '2021-04-03', 1);
 
 -- --------------------------------------------------------
@@ -423,8 +421,7 @@ CREATE TABLE `hikes` (
 INSERT INTO `hikes` (`id`, `name`, `location`, `overview`, `route`, `safety`, `howtobook`, `price`) VALUES
 (1, 'Salkantay Traditional', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '925'),
 (2, 'Everest Base Camp Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '1262'),
-(8, 'Ultimate Salkantay Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '477'),
-(10, '111111', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '1111');
+(8, 'Ultimate Salkantay Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '477');
 
 -- --------------------------------------------------------
 
@@ -474,7 +471,9 @@ INSERT INTO `login_tokens` (`id`, `token`, `user_id`, `date`) VALUES
 (5, '596de300b68d2b92610fe6c7214f3a12e74a70ae', 3, '2021-02-23 14:03:39'),
 (6, 'c4965541233853994ed2c6d2bdd2b25a8af7d916', 4, '2021-02-24 14:29:51'),
 (7, '69ab99dd40f45e31b4a65b6bfa3bf465828c104a', 4, '2021-02-24 14:29:53'),
-(8, 'f1560acb3977c3aa7ea258f129230eac5a05cb8c', 4, '2021-02-25 11:39:53');
+(8, '04d982e6afc5ad006e22cce8680de0af291854fe', 6, '2021-02-25 10:19:44'),
+(9, '91174fedf08a729b64e0ca0d51bb7ef0e9d18c83', 1, '2021-02-25 10:29:57'),
+(10, 'bde80983f1e81ff872ece38f01834df8215070bb', 6, '2021-02-25 10:37:46');
 
 -- --------------------------------------------------------
 
@@ -613,6 +612,53 @@ CREATE TABLE `survey_questions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL,
+  `fullname` varchar(256) NOT NULL,
+  `subject` varchar(256) NOT NULL,
+  `type` varchar(64) NOT NULL,
+  `_date` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `fullname`, `subject`, `type`, `_date`, `user_id`, `status`) VALUES
+(2, 'Abdelrahman Sayed', 'Very Important', 'Suggestion', '2021-02-25 10:35:37', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets_messages`
+--
+
+CREATE TABLE `tickets_messages` (
+  `id` int(11) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `_date` datetime NOT NULL,
+  `read` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tickets_messages`
+--
+
+INSERT INTO `tickets_messages` (`id`, `ticket_id`, `message`, `user_id`, `_date`, `read`) VALUES
+(1, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.', 1, '2021-02-25 10:35:37', 0),
+(10, 2, 'Test Message For Ajax', 1, '2021-02-25 13:43:07', 0),
+(12, 2, 'Test message from admin                      ', 6, '2021-02-25 16:07:21', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -632,10 +678,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `email`, `password`, `gender`, `phonenumber`, `image`, `type`) VALUES
-(1, 'Abdelrahman Sayed', 'bodda@gmail.com', '$2y$10$nRmrGZkfk6DAtx5Hnjs1UOyaia4NqiwWDgOXEgFF2X.buzrLlqIm.', 1, '01158999135', 'user.png', 1),
+(1, 'Abdelrahman Sayed', 'bodda@gmail.com', '$2y$10$nRmrGZkfk6DAtx5Hnjs1UOyaia4NqiwWDgOXEgFF2X.buzrLlqIm.', 1, '01158999135', '814503530unnamed.jpg', 1),
 (2, 'Ahmed Ashraf', 'ashroof@gmail.com', '$2y$10$FA2aeY1CFahkSvcsLqihpeQEHChQRY/vp3e9dVJ6MCqZmuHIHtdPe', 1, '01158999145', 'user.png', 1),
 (3, 'Mohamed Ashraf', 'Mohamed1812470@miuegypt.edu.eg', '$2y$10$sHuj0QEnh06aq2RMhgWIBOpkC1TSEFTMEVWPvvQ.V5QcjbbCEnNR2', 1, '+201156052920', '1756500080400018700354_306553.jpg', 1),
-(4, 'Mohamed Ashraf2', 'Mohamed18124701@miuegypt.edu.eg', '$2y$10$FC6YOmSReylgww.62EDPMOlZoI2Ml.sTYft7v3Nx9Q5kM33m5hiu2', 1, '+201156052920', 'user.png', 2);
+(4, 'Mohamed Ashraf2', 'Mohamed18124701@miuegypt.edu.eg', '$2y$10$FC6YOmSReylgww.62EDPMOlZoI2Ml.sTYft7v3Nx9Q5kM33m5hiu2', 1, '+201156052920', 'user.png', 2),
+(6, 'Abdelrahman Sayed', 'abdelrahman3aysh@hotmail.com', '$2y$10$mu25KwxW5SrAJfpvDMiwGeNvOxJ2tSVWMDHTW9G01wElFHIeQQUra', 1, '01158999135', 'user.png', 2);
 
 -- --------------------------------------------------------
 
@@ -769,15 +816,28 @@ ALTER TABLE `survey`
 -- Indexes for table `survey_options`
 --
 ALTER TABLE `survey_options`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `survey_options_ibfk_1` (`question_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `survey_questions`
 --
 ALTER TABLE `survey_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `survey_questions_ibfk_1` (`survey_id`);
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `tickets_messages`
+--
+ALTER TABLE `tickets_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ticket_id` (`ticket_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -837,7 +897,7 @@ ALTER TABLE `gender`
 -- AUTO_INCREMENT for table `hikes`
 --
 ALTER TABLE `hikes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `hike_images`
@@ -849,7 +909,7 @@ ALTER TABLE `hike_images`
 -- AUTO_INCREMENT for table `login_tokens`
 --
 ALTER TABLE `login_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -885,31 +945,43 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `survey_options`
 --
 ALTER TABLE `survey_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `survey_questions`
 --
 ALTER TABLE `survey_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tickets_messages`
+--
+ALTER TABLE `tickets_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_types`
 --
 ALTER TABLE `user_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -974,16 +1046,17 @@ ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `survey_options`
+-- Constraints for table `tickets`
 --
-ALTER TABLE `survey_options`
-  ADD CONSTRAINT `survey_options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `survey_questions` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `survey_questions`
+-- Constraints for table `tickets_messages`
 --
-ALTER TABLE `survey_questions`
-  ADD CONSTRAINT `survey_questions_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+ALTER TABLE `tickets_messages`
+  ADD CONSTRAINT `tickets_messages_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`),
+  ADD CONSTRAINT `tickets_messages_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
