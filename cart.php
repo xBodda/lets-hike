@@ -1,5 +1,32 @@
 <?php
   include('includes/head.php');
+<<<<<<< HEAD
+  session_start();
+  if(empty($_SESSION["cart"])){
+    $subtotal=0;
+    $tax=0;
+    $total=0;
+    
+}
+
+  if(isset($_GET["action"]))  
+  {
+    
+    if($_GET["action"] == "delete")  
+    {
+      foreach($_SESSION["cart"] as $keys => $values)  
+      {
+        if($values["hike_id"] == $_GET["id"])  
+        {
+          unset($_SESSION["cart"][$keys]);
+          $cartid = DB::query('SELECT id FROM cart WHERE user_id=:user_id AND hike_id=:hike_id',array(':user_id'=>$userid,':hike_id'=>$_GET['id']))[0]['id'];
+          DB::query('DELETE FROM cart WHERE id=:id AND user_id=:user_id AND hike_id=:hike_id',array(':id'=>$cartid,':hike_id'=>$_GET['id'],':user_id'=>$userid));
+          echo '<script>alert("Item Removed")</script>';
+          echo '<script>window.location="cart.php"</script>';
+        }  
+      }  
+    }  
+=======
 
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {
@@ -12,6 +39,7 @@ if (isset($_GET["action"])) {
         echo '<script>window.location="cart.php"</script>';
       }
     }
+>>>>>>> f1605af2297971f5ca2c18cf6d0e333e561e757b
   }
 }
 
