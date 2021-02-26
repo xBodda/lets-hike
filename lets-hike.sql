@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2021 at 06:21 PM
+-- Generation Time: Feb 27, 2021 at 12:14 AM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,6 +68,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `hike_id`, `date_added`, `total_price`, `start_date`, `end_date`, `persons`) VALUES
+(6, 1, 2, '2021-02-21 06:46:34', '53004', '2021-02-02', '2021-02-23', 2),
+(7, 1, 1, '2021-02-21 06:48:45', '7400', '2021-02-22', '2021-02-26', 2),
 (8, 3, 2, '2021-02-23 14:45:25', '40384', '2021-03-02', '2021-04-03', 1);
 
 -- --------------------------------------------------------
@@ -356,6 +358,44 @@ INSERT INTO `country` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phon
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `currency`
+--
+
+CREATE TABLE `currency` (
+  `id` int(11) NOT NULL,
+  `name` varchar(5) NOT NULL,
+  `value` float NOT NULL,
+  `_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `currency`
+--
+
+INSERT INTO `currency` (`id`, `name`, `value`, `_date`) VALUES
+(1, 'INR', 4.61138, '2021-02-25 19:58:44'),
+(2, 'CAD', 0.079713, '2021-02-25 20:06:28'),
+(3, 'GBP', 0.045017, '2021-02-25 20:08:41'),
+(4, 'EUR', 0.052348, '2021-02-25 20:20:35'),
+(5, 'USD', 0.063757, '2021-02-25 20:31:14'),
+(6, 'CAD', 0.079713, '2021-02-25 21:07:22'),
+(7, 'GBP', 0.045017, '2021-02-25 21:18:04'),
+(8, 'EUR', 0.052348, '2021-02-25 22:34:43'),
+(9, 'INR', 4.61138, '2021-02-25 22:34:46'),
+(10, 'CAD', 0.079713, '2021-02-25 22:34:48'),
+(11, 'USD', 0.063757, '2021-02-25 22:34:50'),
+(12, 'GBP', 0.045017, '2021-02-25 22:34:54'),
+(13, 'CAD', 0.08035, '2021-02-26 14:04:49'),
+(14, 'CAD', 0.08035, '2021-02-26 15:36:22'),
+(15, 'CAD', 0.08035, '2021-02-26 16:38:31'),
+(16, 'CAD', 0.08035, '2021-02-26 18:04:44'),
+(17, 'CAD', 0.08035, '2021-02-26 22:24:41'),
+(18, 'CAD', 0.08035, '2021-02-26 23:24:50'),
+(19, 'CAD', 0.081154, '2021-02-27 00:24:54');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faq`
 --
 
@@ -421,7 +461,9 @@ CREATE TABLE `hikes` (
 INSERT INTO `hikes` (`id`, `name`, `location`, `overview`, `route`, `safety`, `howtobook`, `price`) VALUES
 (1, 'Salkantay Traditional', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '925'),
 (2, 'Everest Base Camp Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '1262'),
-(8, 'Ultimate Salkantay Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '477');
+(8, 'Ultimate Salkantay Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '477'),
+(10, '111111', 1, 'Test', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '1111'),
+(11, 'Hunter Trails Trek', 1, 'The Inca Trail to Machu Picchu is a once in a lifetime experience and an opportunity not to be missed. It is one of the world’s oldest pilgrimages and is consistently ranked among the ten best hikes on the planet. Over four unforgettable days you will hike through different ecological zones which house an abundance of diverse flora and fauna. These include various orchids, bromeliads, hummingbirds, foxes and deer. Some lucky hikers may even catch a glimpse of the magnificent spectacled bear of South America during the trekking.', 'Your trekking team will pick you up from your hotel between 4:30-6:30am (depending on your location) and drive you to KM. 82 – arriving at approximately 8.00am. After a delicious breakfast we will head straight to the checkpoint to begin your trekking to Machu Picchu. It’s a relatively easy two-hour walk to Patallacta; the first Inca site along the trail. From a unique, secluded location we will enjoy the breathtaking views of this ancient city. It’s then another two-hour walk to Hatunchaca – located in the heart of the Inca trail – where lunch will be waiting. We will walk for another two hours to the first campsite located in Ayapata, arriving at approximately 5:00pm. Your tent, a snack and a hot drink will be waiting for you. You will then have some time to rest and enjoy the view of the mountains before dinner.', 'Safety is of the utmost importance to us. That is why this is an area in which we simply do not compromise when it comes to keeping the cost of our trekkings low. Our guides have been selected on the basis of their technical competence, proven safety performance, impeccable judgment, friendly attitude and ability to provide useful and expert instructions. They are also very professional and well trained in first aid and personal protection equipment. First aid kits are available on all treks. In addition, the routes are ideally designed to give you enough time to acclimatize.', 'On Bookatrekking.com you can find and compare the adventures of your dreams. Is this trekking adventure your match? In that case you can proceed to booking. At Bookatrekking.com you make a deposit of 15% of the total amount. You pay the remaining amount on location prior to the trek directly to the trekking company. Bookatrekking.com uses only the safest payment methods. Once your booking has been received, your place is reserved, your place is safe and you can look forward to your chosen trekking.', '220');
 
 -- --------------------------------------------------------
 
@@ -444,7 +486,9 @@ INSERT INTO `hike_images` (`id`, `hike_id`, `image`) VALUES
 (4, 2, '2.png'),
 (9, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png'),
 (13, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png'),
-(14, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png');
+(14, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png'),
+(15, 10, '206479097b94e506311.jpg'),
+(16, 11, '110319058766973177The-Ultimate-Salkantay-Trek-Trekexperience-3.png');
 
 -- --------------------------------------------------------
 
@@ -471,9 +515,13 @@ INSERT INTO `login_tokens` (`id`, `token`, `user_id`, `date`) VALUES
 (5, '596de300b68d2b92610fe6c7214f3a12e74a70ae', 3, '2021-02-23 14:03:39'),
 (6, 'c4965541233853994ed2c6d2bdd2b25a8af7d916', 4, '2021-02-24 14:29:51'),
 (7, '69ab99dd40f45e31b4a65b6bfa3bf465828c104a', 4, '2021-02-24 14:29:53'),
-(8, '04d982e6afc5ad006e22cce8680de0af291854fe', 6, '2021-02-25 10:19:44'),
-(9, '91174fedf08a729b64e0ca0d51bb7ef0e9d18c83', 1, '2021-02-25 10:29:57'),
-(10, 'bde80983f1e81ff872ece38f01834df8215070bb', 6, '2021-02-25 10:37:46');
+(8, 'f1560acb3977c3aa7ea258f129230eac5a05cb8c', 4, '2021-02-25 11:39:53'),
+(9, '546d67578b3b27b8eadfa69b25792e4b92588250', 3, '2021-02-25 18:53:35'),
+(10, '3a04b6002ecbb7e08a0efea4d98fbc5a8bcedfd9', 3, '2021-02-26 16:25:57'),
+(11, 'ad1789bcf1ca32345c21c839fd309480b78a1b5d', 4, '2021-02-26 18:14:00'),
+(12, 'd064f4534ce86dcfa2b82a58d8a2c77bb85b0aab', 4, '2021-02-26 18:14:31'),
+(13, 'cd36dd5501689709ab2948425d90ac9e661f2a91', 3, '2021-02-26 18:14:42'),
+(14, 'e8dd43fe915a73ae59d533ad71febbf2cdba238f', 3, '2021-02-26 23:22:37');
 
 -- --------------------------------------------------------
 
@@ -547,6 +595,16 @@ CREATE TABLE `rating` (
   `stars` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`id`, `hike_id`, `user_id`, `review`, `stars`) VALUES
+(1, 10, 4, '', '5'),
+(2, 10, 4, '', '1'),
+(3, 2, 1, '', '5'),
+(4, 2, 1, '', '5');
+
 -- --------------------------------------------------------
 
 --
@@ -568,9 +626,9 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `hike_id`, `rating`, `comment`, `stars`, `_date`, `user_id`) VALUES
-(1, 1, '', 'Very Good Place', 4.5, '2021-02-10 17:46:19', 1),
-(2, 1, '', 'Good', 2, '2021-02-24 17:47:07', 1),
-(4, 1, '', 'I Liked It', 5, '2021-02-23 17:46:19', 1),
+(1, 1, '', 'Very Good Place', 1, '2021-02-10 17:46:19', 1),
+(2, 1, '', 'Good', 1, '2021-02-24 17:47:07', 1),
+(4, 1, '', 'I Liked It', 1, '2021-02-23 17:46:19', 1),
 (11, 2, '', '', 3.5, '2021-02-22 17:46:19', 3);
 
 -- --------------------------------------------------------
@@ -585,6 +643,59 @@ CREATE TABLE `survey` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`id`, `name`, `description`) VALUES
+(4, 'Test Survey', 'Test Survey2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_answers`
+--
+
+CREATE TABLE `survey_answers` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `option_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_answers`
+--
+
+INSERT INTO `survey_answers` (`id`, `survey_id`, `question_id`, `option_id`, `user_id`, `_date`) VALUES
+(8, 4, 8, 15, 4, '2021-02-27 01:02:40'),
+(9, 4, 9, 19, 4, '2021-02-27 01:02:40'),
+(10, 4, 10, 23, 4, '2021-02-27 01:02:40'),
+(11, 4, 11, 26, 4, '2021-02-27 01:02:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_dismiss`
+--
+
+CREATE TABLE `survey_dismiss` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_dismiss`
+--
+
+INSERT INTO `survey_dismiss` (`id`, `survey_id`, `user_id`) VALUES
+(6, 4, 4),
+(7, 4, 4),
+(8, 4, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -597,6 +708,26 @@ CREATE TABLE `survey_options` (
   `question_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `survey_options`
+--
+
+INSERT INTO `survey_options` (`id`, `name`, `question_id`) VALUES
+(14, 'op1', 8),
+(15, 'op2', 8),
+(16, 'op3', 8),
+(17, 'test1', 9),
+(18, 'test2', 9),
+(19, 'test3', 9),
+(20, 'test1', 10),
+(21, 'test2', 10),
+(22, 'test3', 10),
+(23, 'test21', 10),
+(24, 'test23', 10),
+(25, 'test1', 11),
+(26, 'test2', 11),
+(27, 'test3', 11);
+
 -- --------------------------------------------------------
 
 --
@@ -608,6 +739,16 @@ CREATE TABLE `survey_questions` (
   `name` varchar(50) NOT NULL,
   `survey_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_questions`
+--
+
+INSERT INTO `survey_questions` (`id`, `name`, `survey_id`) VALUES
+(8, 'Test', 4),
+(9, 'Test2', 4),
+(10, 'Test123', 4),
+(11, 'Test333', 4);
 
 -- --------------------------------------------------------
 
@@ -630,7 +771,7 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `fullname`, `subject`, `type`, `_date`, `user_id`, `status`) VALUES
-(2, 'Abdelrahman Sayed', 'Very Important', 'Suggestion', '2021-02-25 10:35:37', 1, 0);
+(6, 'xTrimy', '22222222222', 'Complaint', '2021-02-25 22:35:50', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -652,9 +793,44 @@ CREATE TABLE `tickets_messages` (
 --
 
 INSERT INTO `tickets_messages` (`id`, `ticket_id`, `message`, `user_id`, `_date`, `read`) VALUES
-(1, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.', 1, '2021-02-25 10:35:37', 0),
-(10, 2, 'Test Message For Ajax', 1, '2021-02-25 13:43:07', 0),
-(12, 2, 'Test message from admin                      ', 6, '2021-02-25 16:07:21', 0);
+(17, 6, 'eeeeeeeeeeee', 4, '2021-02-25 22:35:50', 0),
+(36, 6, 'fffffffffff', 4, '2021-02-26 16:04:10', 0),
+(37, 6, 'fffffffffff', 4, '2021-02-26 16:04:12', 0),
+(38, 6, 'gggggggggg', 4, '2021-02-26 16:04:14', 0),
+(39, 6, 'f', 4, '2021-02-26 16:23:12', 0),
+(40, 6, 'ffff', 4, '2021-02-26 16:25:27', 0),
+(41, 6, 'test', 3, '2021-02-26 16:26:24', 0),
+(42, 6, 'ffffffffff', 3, '2021-02-26 16:39:05', 0),
+(43, 6, 'ffffffff', 4, '2021-02-26 16:39:35', 0),
+(44, 6, 'hhhhhhh', 4, '2021-02-26 16:48:21', 0),
+(45, 6, 'gggggggggg', 4, '2021-02-26 16:48:24', 0),
+(46, 6, 'ggggggggggggg', 4, '2021-02-26 16:48:27', 0),
+(47, 6, 'ffffffffff', 4, '2021-02-26 17:26:26', 0),
+(48, 6, 'fffffffffffffffff', 4, '2021-02-26 17:26:31', 0),
+(49, 6, 'ffffffffffff', 3, '2021-02-26 17:26:36', 0),
+(50, 6, 'fffffffffff', 3, '2021-02-26 17:25:16', 0),
+(51, 6, 'gggggggggggggggggggggggggggggggggggggg', 3, '2021-02-26 17:25:20', 0),
+(52, 6, 'ggggggggggggggggggggggggggg', 3, '2021-02-26 17:25:24', 0),
+(53, 6, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', 3, '2021-02-26 17:25:28', 0),
+(54, 6, 'eqeqeqwe', 3, '2021-02-26 17:25:31', 0),
+(55, 6, 'qeqeqeqe', 3, '2021-02-26 17:25:40', 0),
+(56, 6, 'qeqeqeqe', 3, '2021-02-26 17:25:44', 0),
+(57, 6, 'wwwwwww', 3, '2021-02-26 17:25:48', 0),
+(58, 6, 'wwwwwww', 3, '2021-02-26 17:26:58', 0),
+(59, 6, 'ggggggggggg', 3, '2021-02-26 17:27:01', 0),
+(60, 6, 'ggggggggggg', 3, '2021-02-26 17:27:38', 0),
+(61, 6, 'ggggggggggg', 3, '2021-02-26 17:27:55', 0),
+(62, 6, 'ggggggggggg', 3, '2021-02-26 17:28:02', 0),
+(63, 6, 'ggggggggggg', 3, '2021-02-26 17:28:04', 0),
+(64, 6, 'ggggggggggg', 3, '2021-02-26 17:30:14', 0),
+(65, 6, 'ggggggggggg', 3, '2021-02-26 17:30:28', 0),
+(66, 6, 'ggggggggggg', 3, '2021-02-26 17:30:50', 0),
+(67, 6, 'eee', 3, '2021-02-26 17:37:31', 0),
+(68, 6, 'test', 4, '2021-02-26 18:37:36', 0),
+(69, 6, 'e', 3, '2021-02-26 17:38:13', 0),
+(70, 6, 'ee', 4, '2021-02-26 18:38:23', 0),
+(71, 6, 'fffffffff', 4, '2021-02-26 23:13:03', 0),
+(72, 6, 'fffffffff', 4, '2021-02-26 23:13:05', 0);
 
 -- --------------------------------------------------------
 
@@ -678,11 +854,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `email`, `password`, `gender`, `phonenumber`, `image`, `type`) VALUES
-(1, 'Abdelrahman Sayed', 'bodda@gmail.com', '$2y$10$nRmrGZkfk6DAtx5Hnjs1UOyaia4NqiwWDgOXEgFF2X.buzrLlqIm.', 1, '01158999135', '814503530unnamed.jpg', 1),
+(1, 'Abdelrahman Sayed', 'bodda@gmail.com', '$2y$10$nRmrGZkfk6DAtx5Hnjs1UOyaia4NqiwWDgOXEgFF2X.buzrLlqIm.', 1, '01158999135', 'user.png', 1),
 (2, 'Ahmed Ashraf', 'ashroof@gmail.com', '$2y$10$FA2aeY1CFahkSvcsLqihpeQEHChQRY/vp3e9dVJ6MCqZmuHIHtdPe', 1, '01158999145', 'user.png', 1),
-(3, 'Mohamed Ashraf', 'Mohamed1812470@miuegypt.edu.eg', '$2y$10$sHuj0QEnh06aq2RMhgWIBOpkC1TSEFTMEVWPvvQ.V5QcjbbCEnNR2', 1, '+201156052920', '1756500080400018700354_306553.jpg', 1),
-(4, 'Mohamed Ashraf2', 'Mohamed18124701@miuegypt.edu.eg', '$2y$10$FC6YOmSReylgww.62EDPMOlZoI2Ml.sTYft7v3Nx9Q5kM33m5hiu2', 1, '+201156052920', 'user.png', 2),
-(6, 'Abdelrahman Sayed', 'abdelrahman3aysh@hotmail.com', '$2y$10$mu25KwxW5SrAJfpvDMiwGeNvOxJ2tSVWMDHTW9G01wElFHIeQQUra', 1, '01158999135', 'user.png', 2);
+(3, 'Mohamed Ashraf', 'Mohamed1812470@miuegypt.edu.eg', '$2y$10$sHuj0QEnh06aq2RMhgWIBOpkC1TSEFTMEVWPvvQ.V5QcjbbCEnNR2', 1, '+201156052920', '1756500080400018700354_306553.jpg', 2),
+(4, 'Mohamed Ashraf2', 'Mohamed18124701@miuegypt.edu.eg', '$2y$10$FC6YOmSReylgww.62EDPMOlZoI2Ml.sTYft7v3Nx9Q5kM33m5hiu2', 1, '+201156052920', 'user.png', 1);
 
 -- --------------------------------------------------------
 
@@ -734,6 +909,12 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `country`
   ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `currency`
+--
+ALTER TABLE `currency`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `faq`
@@ -813,16 +994,36 @@ ALTER TABLE `survey`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_id` (`survey_id`),
+  ADD KEY `option_id` (`option_id`),
+  ADD KEY `question_id` (`question_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_id` (`survey_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `survey_options`
 --
 ALTER TABLE `survey_options`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_options_ibfk_1` (`question_id`);
 
 --
 -- Indexes for table `survey_questions`
 --
 ALTER TABLE `survey_questions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_questions_ibfk_1` (`survey_id`);
 
 --
 -- Indexes for table `tickets`
@@ -867,7 +1068,7 @@ ALTER TABLE `admin_tokens`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -880,6 +1081,12 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `country`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+
+--
+-- AUTO_INCREMENT for table `currency`
+--
+ALTER TABLE `currency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `faq`
@@ -897,19 +1104,19 @@ ALTER TABLE `gender`
 -- AUTO_INCREMENT for table `hikes`
 --
 ALTER TABLE `hikes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `hike_images`
 --
 ALTER TABLE `hike_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `login_tokens`
 --
 ALTER TABLE `login_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -933,7 +1140,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -945,43 +1152,55 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `survey_options`
 --
 ALTER TABLE `survey_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `survey_questions`
 --
 ALTER TABLE `survey_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tickets_messages`
 --
 ALTER TABLE `tickets_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_types`
 --
 ALTER TABLE `user_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -1046,6 +1265,34 @@ ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  ADD CONSTRAINT `survey_answers_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`),
+  ADD CONSTRAINT `survey_answers_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `survey_options` (`id`),
+  ADD CONSTRAINT `survey_answers_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `survey_questions` (`id`),
+  ADD CONSTRAINT `survey_answers_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  ADD CONSTRAINT `survey_dismiss_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`),
+  ADD CONSTRAINT `survey_dismiss_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `survey_options`
+--
+ALTER TABLE `survey_options`
+  ADD CONSTRAINT `survey_options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `survey_questions` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `survey_questions`
+--
+ALTER TABLE `survey_questions`
+  ADD CONSTRAINT `survey_questions_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
 -- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
@@ -1055,8 +1302,8 @@ ALTER TABLE `tickets`
 -- Constraints for table `tickets_messages`
 --
 ALTER TABLE `tickets_messages`
-  ADD CONSTRAINT `tickets_messages_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`),
-  ADD CONSTRAINT `tickets_messages_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `tickets_messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `tickets_messages_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`);
 
 --
 -- Constraints for table `users`
