@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2021 at 06:21 PM
+-- Generation Time: Feb 25, 2021 at 10:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `lets-hike`
 --
+CREATE DATABASE IF NOT EXISTS `lets-hike` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `lets-hike`;
 
 -- --------------------------------------------------------
 
@@ -352,6 +354,30 @@ INSERT INTO `country` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phon
 (237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967),
 (238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260),
 (239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `currency`
+--
+
+CREATE TABLE `currency` (
+  `id` int(11) NOT NULL,
+  `name` varchar(5) NOT NULL,
+  `value` float NOT NULL,
+  `_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `currency`
+--
+
+INSERT INTO `currency` (`id`, `name`, `value`, `_date`) VALUES
+(1, 'INR', 4.61138, '2021-02-25 19:58:44'),
+(2, 'CAD', 0.079713, '2021-02-25 20:06:28'),
+(3, 'GBP', 0.045017, '2021-02-25 20:08:41'),
+(4, 'EUR', 0.052348, '2021-02-25 20:20:35'),
+(5, 'USD', 0.063757, '2021-02-25 20:31:14');
 
 -- --------------------------------------------------------
 
@@ -736,6 +762,12 @@ ALTER TABLE `country`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `currency`
+--
+ALTER TABLE `currency`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `faq`
 --
 ALTER TABLE `faq`
@@ -880,6 +912,12 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `country`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+
+--
+-- AUTO_INCREMENT for table `currency`
+--
+ALTER TABLE `currency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `faq`

@@ -31,7 +31,7 @@
     <link href="layout/svg/logo-mark.svg" rel="shortcut icon" type="image/png">
     <!-- Link To Icons File -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <title>Hikingify | Book Hike</title>
+    <title>Hikingify | My Profile</title>
   </head>
 
   <body id="profile">
