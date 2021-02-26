@@ -12,10 +12,9 @@ if (Login::isLoggedIn())
     header('Location:../');
     exit;
   }
-}
-else
-{
-    $fullname = "Admin";
+}else{
+    header('Location:../signin.php');
+    exit;
 }
 // $date = date('Y-m-d H:i:s');
 

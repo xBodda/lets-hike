@@ -150,151 +150,159 @@ if (isset($_POST['add'])) {
             <div class="sep"></div>
             <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
 
-          <div class="sep"></div>
-          <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
-        </div>
-        <p>
-          <?php echo $hike_info['overview']; ?>
-        </p>
-      </div>
-      <div class="hike-details" id="route">
-        <div class="hike-heading">
-          <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
-          <div class="sep"></div>
-          <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
-
-        <div class="sep"></div>
-        <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
-      </div>
-      <p>
-        <?php echo $hike_info['route']; ?>
-      </p>
-    </div>
-    <div class="hike-details" id="safety">
-      <div class="hike-heading">
-        <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
-        <div class="sep"></div>
-        <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
-        <div class="sep"></div>
-        <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
-      </div>
-      <p>
-        <?php echo $hike_info['safety']; ?>
-      </p>
-    </div>
-    <div class="hike-details" id="howtobook">
-      <div class="hike-heading">
-        <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
-        <div class="sep"></div>
-        <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
-        <div class="sep"></div>
-        <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
-      </div>
-      <p>
-        <?php echo $hike_info['howtobook']; ?>
-      </p>
-    </div>
-    <div class="hike-details" id="reviews">
-      <?php
-      $allReviews = DB::query('SELECT * FROM reviews WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
-      foreach ($allReviews as $oneReview) {
-        $userName = DB::query('SELECT fullname FROM users WHERE id=:id', array(':id' => $oneReview['user_id']))[0]['fullname'];
-        $timeInAgo = timeago($oneReview['_date']);
-
-
-      ?>
-        <div class="single-review">
-          <div class="hike-heading">
-            <h1 id="h-text"><b><?php echo $userName; ?></b></h1>
             <div class="sep"></div>
-            <div class="rating" data-rating="<?php echo $oneReview['stars']; ?>">
-
-            </div>
-            <div class="sep"></div>
-            <div class="rating-counter"> <i><?php echo $timeInAgo; ?></i> </div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
           </div>
-          <p><?php echo $oneReview['comment']; ?></p>
+          <p>
+            <?php echo $hike_info['overview']; ?>
+          </p>
         </div>
-        <hr>
-      <?php } ?>
+        <div class="hike-details" id="route">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
+
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['route']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="safety">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['safety']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="howtobook">
+          <div class="hike-heading">
+            <h1 id="h-text"><?php echo $hike_info['name'] . ', ' . $hike_info['country']; ?> </h1>
+            <div class="sep"></div>
+            <div class="rating" data-rating_1="<?php echo $hike_info['total_rating_1'] ?? 0; ?>" data-rating_2="<?php echo $hike_info['total_rating_2'] ?? 0; ?>" data-rating_3="<?php echo $hike_info['total_rating_3'] ?? 0; ?>" data-rating_4="<?php echo $hike_info['total_rating_4'] ?? 0; ?>" data-rating_5="<?php echo $hike_info['total_rating_5'] ?? 0; ?>" data-rating="<?php echo $hike_info['total_rating'] ?? 0; ?>"></div>
+            <div class="sep"></div>
+            <div class="rating-counter"><?php echo $total_ratings; ?> Ratings</div>
+          </div>
+          <p>
+            <?php echo $hike_info['howtobook']; ?>
+          </p>
+        </div>
+        <div class="hike-details" id="reviews">
+          <?php
+          $allReviews = DB::query('SELECT * FROM reviews WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
+          if(!$allReviews){
+            echo "<div class='flex-container j-center'>No reviews</div>";
+          }
+          foreach ($allReviews as $oneReview) {
+            $userName = DB::query('SELECT fullname FROM users WHERE id=:id', array(':id' => $oneReview['user_id']))[0]['fullname'];
+            $timeInAgo = timeago($oneReview['_date']);
+
+
+          ?>
+            <div class="single-review">
+              <div class="hike-heading">
+                <h1 id="h-text"><b><?php echo $userName; ?></b></h1>
+                <div class="sep"></div>
+                <div class="rating" data-rating="<?php echo $oneReview['stars']; ?>">
+
+                </div>
+                <div class="sep"></div>
+                <div class="rating-counter"> <i><?php echo $timeInAgo; ?></i> </div>
+              </div>
+              <p><?php echo $oneReview['comment']; ?></p>
+            </div>
+            <hr>
+          <?php } ?>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-  <!-- Booking Box START -->
-  <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
-    <div class="price"><?php echo $hike_info['price']; ?></div>
-    <div class="flex-container j-c">
-      <input type="date" name="start_date" id="ssssDate" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
-      <input type="date" name="end_date" id="eeeeDate" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
-      <input type="hidden" name="total_price" id="totalPrice" value="">
-      <select name="persons" oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
-        <option value="" selected disabled>Select Persons</option>
+    <!-- Booking Box START -->
+    <form class="flex-container book-container j-sb" method="POST" action="hike.php?id=<?php echo $hikeid; ?>">
+      <style>
+        .hike-body .book-container .price::before{
+          content:"<?php echo $_SESSION['currency']; ?>";
+        }
+      </style>
+      <div class="price"><?php echo round($hike_info['price'] * $getCurrencyValue); ?></div>
+      <div class="flex-container j-c">
+        <input type="date" name="start_date" id="ssssDate" oninput="startDate(this.value,'sDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="date" name="end_date" id="eeeeDate" oninput="startDate(this.value,'eDate');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+        <input type="hidden"  name="total_price" id="totalPrice" value="">
+        <select name="persons"  oninput="startDate(this.value,'sPersons');fillPrice(<?php echo $hike_info['price'] ?>);" required>
+          <option value="" selected disabled>Select Persons</option>
+          <?php
+          for ($i = 1; $i <= 12; $i++) {
+            print "<option value='$i'>" . $i . " Persons</option>";
+          }
+          ?>
+        </select>
+
+      </div>
+      <div class="details">
+        <table>
+          <tr>
+            <td>Start date</td>
+            <td id="sDate"></td>
+          </tr>
+          <tr>
+            <td>End date</td>
+            <td id="eDate"></td>
+          </tr>
+          <tr>
+            <td>Persons</td>
+            <td id="sPersons"></td>
+          </tr>
+          <tr>
+            <td>Booking Cost</td>
+            <td id="sPrice">0 <?php echo $_SESSION['currency'] ?></td>
+          </tr>
+        </table>
+      </div>
+      <button type="submit" name="add" class="xbutton">Add To Cart</button>
+    </form>
+    <!-- Booking Box END -->
+
+    <!-- Gallery START -->
+    <div class="heading-line mb-30">
+      Gallery
+    </div>
+    <div class="hike-gallery flex-container">
+      <div id="selected-image" class="image f-1">
+        <img src="uploads/<?php echo $hikeImage; ?>">
+      </div>
+      <div class="gallery-images f-1">
         <?php
-        for ($i = 1; $i <= 12; $i++) {
-          print "<option value='$i'>" . $i . " Persons</option>";
+        $allimages = DB::query('SELECT * FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
+        foreach ($allimages as $img) {
+        ?>
+          <div class="item">
+            <img src="uploads/<?php echo $img['image'] ?>">
+          </div>
+        <?php
         }
         ?>
-      </select>
-
+      </div>
+      <!-- // TODO: Gallery Image Selection -->
     </div>
-    <div class="details">
-      <table>
-        <tr>
-          <td>Start date</td>
-          <td id="sDate"></td>
-        </tr>
-        <tr>
-          <td>End date</td>
-          <td id="eDate"></td>
-        </tr>
-        <tr>
-          <td>Persons</td>
-          <td id="sPersons"></td>
-        </tr>
-        <tr>
-          <td>Booking Cost</td>
-          <td id="sPrice">0 EGP</td>
-        </tr>
-      </table>
+    <!-- Gallery END -->
+    <!-- Map Overview START -->
+    <div class="heading-line mb-30">
+      Map Overview
     </div>
-    <button type="submit" name="add" class="xbutton">Add To Cart</button>
-  </form>
-  <!-- Booking Box END -->
-
-  <!-- Gallery START -->
-  <div class="heading-line mb-30">
-    Gallery
-  </div>
-  <div class="hike-gallery flex-container">
-    <div id="selected-image" class="image f-1">
-      <img src="uploads/<?php echo $hikeImage; ?>">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.3445460951766!2d31.48966771553003!3d30.17015031957734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581bab30f3291d%3A0x1b138aefe2d8bedb!2sMisr%20International%20University!5e0!3m2!1sen!2seg!4v1608703385546!5m2!1sen!2seg" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
-    <div class="gallery-images f-1">
-      <?php
-      $allimages = DB::query('SELECT * FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
-      foreach ($allimages as $img) {
-      ?>
-        <div class="item">
-          <img src="uploads/<?php echo $img['image'] ?>">
-        </div>
-      <?php
-      }
-      ?>
-    </div>
-    <!-- // TODO: Gallery Image Selection -->
-  </div>
-  <!-- Gallery END -->
-  <!-- Map Overview START -->
-  <div class="heading-line mb-30">
-    Map Overview
-  </div>
-  <div class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.3445460951766!2d31.48966771553003!3d30.17015031957734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581bab30f3291d%3A0x1b138aefe2d8bedb!2sMisr%20International%20University!5e0!3m2!1sen!2seg!4v1608703385546!5m2!1sen!2seg" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-  </div>
-  <!-- Map Overview END -->
-  <!-- Places you might like START -->
-  <?php include('includes/places-might-like.php'); ?>
-  <!-- Places you might like END -->
+    <!-- Map Overview END -->
+    <!-- Places you might like START -->
+    <?php include('includes/places-might-like.php'); ?>
+    <!-- Places you might like END -->
   </div>
   <!-- Hikes Body END  -->
   <!-- Footer START -->

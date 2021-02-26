@@ -1,6 +1,9 @@
 <?php
   include('includes/head.php');
-
+if ($user_type > 1) {
+  header('Location:./control/view-tickets.php');
+  exit;
+}
   if(isset($_POST['send']))
   {
       $name=$_POST['name'];

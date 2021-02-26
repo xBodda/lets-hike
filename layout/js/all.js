@@ -133,28 +133,32 @@ function fillPrice(Price)
     var eDate = document.getElementById('eDate').innerHTML;
     var sPrice = document.getElementById('sPrice');
     var hiddenTotal = document.getElementById('totalPrice');
+    var priceVal=0;
+    console.log(currencyVal);
     if(persons != "" && sDate == "" && eDate == "") 
     {
-        sPrice.innerHTML = price * persons + " EGP";
+        priceVal = Math.round(price * persons * currencyVal);
         hiddenTotal.value = sPrice;
     }
     else if(sDate != "" && eDate != "" && persons != "")
     {
         var days = getDays(sDate,eDate) * 1;
-        sPrice.innerHTML = days * price * persons + " EGP";
+        priceVal= Math.round(days * price * persons * currencyVal);
         hiddenTotal.value = days * price * persons;
     }
     else if(sDate != "" && eDate != "" && persons == "")
     {
         var days = getDays(sDate,eDate) * 1;
-        sPrice.innerHTML = days * price  + " EGP";
+        priceVal = Math.round(days * price * currencyVal);
         hiddenTotal.value = days * price;
     }
     else
     {
-        sPrice.innerHTML = price + " EGP";
+        priceVal = Math.round(price * currencyVal);
         hiddenTotal.value = price;
     }
+    sPrice.innerHTML = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: currency }).format(priceVal);
+    
 }
 
 function deletePastDates(el)
@@ -293,3 +297,53 @@ var validateSubmit = document.querySelectorAll('.validate-submit');
 for(let i = 0; i<validateSubmit.length;i++){
     validateBeforeSubmit(validateSubmit[i]);
 }
+
+var recomm_slide_items = document.querySelectorAll('.hikes-slide .slider > .item');
+
+for(let i = 0; i<recomm_slide_items.length;i++){
+    var item = recomm_slide_items[i];
+    item.addEventListener('click',function(){
+        var overview = this.getAttribute('data-overview');
+        var image = this.querySelector('.image img');
+        var title = this.querySelector('.title');
+            image = image.getAttribute('src');
+            title = title.innerHTML;
+        document.querySelector('#h-bg-text').innerHTML = title;
+        document.querySelector('#h-text').innerHTML = title;
+        document.querySelector('#h-text+p').innerHTML = overview;
+        document.querySelector('.selected-hike-image img').src = image;
+        document.querySelector('.selected-hike-image .title').innerHTML = title;
+    })
+}
+
+// XMLHTTPRequest functions START
+function send_request(type, url, data, response_function = function(){}) {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4) {
+
+            var response = JSON.parse(this.responseText);
+            if (this.status == 200) {
+                // console.log('success', response['message']);
+                if (response_function) {
+                        response_function(response);
+                }
+            } else {
+                if (response['error']) {
+                    console.log(response);
+                    console.log('error', response['error']);
+                } else {
+                    console.log('error', xhttp.statusText);
+                }
+            }
+        }
+    };
+    var params = data;
+    xhttp.open(type, url, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhttp.send(params);
+}
+// XMLHTTPRequest functions END
