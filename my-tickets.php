@@ -1,5 +1,9 @@
 <?php
     include('includes/head.php');
+	if($user_type > 1){
+		header('Location:./control/view-tickets.php');
+		exit;
+	}
     if(isset($_POST["send"]))  
     {
         $name = $_POST['name'];
@@ -120,13 +124,11 @@
 						</tr>
 
             <?php
-              $allTickets = DB::query('SELECT * FROM tickets WHERE user_id=:user_id',array(':user_id'=>$userid));
+			$allTickets = DB::query('SELECT * FROM tickets WHERE user_id=:user_id', array(':user_id' => $userid));
               foreach($allTickets as $oneTicket)
               {
                 $allUserInfo = DB::query('SELECT * FROM users WHERE id=:id',array(':id'=>$oneTicket['user_id']))[0];
-                if($allUserInfo['type'] == 1)
-                {
-                  $allTicketsMessages = DB::query('SELECT * FROM tickets_messages WHERE ticket_id=:ticket_id ORDER BY id ASC',array(':ticket_id'=>$oneTicket['id']))[0];
+                  $allTicketsMessages = DB::query('SELECT * FROM tickets_messages WHERE ticket_id=:ticket_id ORDER BY id DESC LIMIT 1',array(':ticket_id'=>$oneTicket['id']))[0];
                   if($allTicketsMessages['user_id'] == $userid)
                   {
                     $senderName = "You";
@@ -144,15 +146,14 @@
             ?>
 
 						<tr>
-							<td><?php echo $oneTicket['id'] ?></td>
-							<td><?php echo $oneTicket['subject'] ?></td>
-							<td><b><?php echo $senderName; ?></b></td>
-							<td><?php echo $oneTicket['type'] ?></td>
-							<td><?php echo $oneTicket['_date'] ?></td>
-							<td><b><?php echo $ticketStatus; ?></b></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><?php echo $oneTicket['id'] ?></a></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><?php echo $oneTicket['subject'] ?></a></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><b><?php echo $senderName; ?></b></a></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><?php echo $oneTicket['type'] ?></a></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><?php echo $oneTicket['_date'] ?></a></td>
+							<td><a href="ticket.php?ticket=<?php echo $oneTicket['id'];?>"><b><?php echo $ticketStatus; ?></b></a></td>
 						</tr>
 						<?php
-                }
               }
             ?>
 					</table>

@@ -6,8 +6,15 @@ include_once("./classes/DB.php");
 if (Login::isLoggedIn())
 {
   $userid = Login::isLoggedIn();
-  $image = DB::query('SELECT image FROM users WHERE id=:id',array(':id'=>$userid))[0]['image'];
-  $fullname = DB::query('SELECT fullname FROM users WHERE id=:id',array(':id'=>$userid))[0]['fullname'];
+  $user_info = DB::query('SELECT type,image,fullname FROM users WHERE id=:id',array(':id'=>$userid));
+  if(!$user_info){
+    //Logout
+    die('User not found');
+  }
+
+  $image = $user_info[0]['image'];
+  $fullname = $user_info[0]['fullname'];
+  $user_type = $user_info[0]['type'];
   $total_cart = DB::query('SELECT COUNT(id) AS cnt FROM cart WHERE user_id=:user_id',array(':user_id'=>$userid))[0]['cnt'];
 }
 else
