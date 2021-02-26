@@ -59,14 +59,25 @@
             <p class="question-itself-survey" style="font-size:30px;">
                 What is your best place to hike?
             </p>
-            <input type="checkbox" id="Answer" name="Answer" value="Answer">
-            <label for="Answer" style="font-size:20px;">Answer 1</label>
-            <input type="checkbox" id="Answer" name="Answer" value="Answer">
-            <label for="Answer" style="font-size:20px;">Answer 2</label>
-            <input type="checkbox" id="Answer" name="Answer" value="Answer">
-            <label for="Answer" style="font-size:20px;">Answer 3</label>
-            <input type="checkbox" id="Answer" name="Answer" value="Answer">
-            <label for="Answer" style="font-size:20px;">Answer 4</label>
+            <div class="answers-of-the-survey-questions">
+            <div class="answers">
+            <input type="radio" class="Answer-radio" name="Answer" value="Answer">
+            <label for="Answer"  style="font-size:20px;">Answer 1</label>
+            </div>
+            <div class="answers">
+            <input type="radio" class="Answer-radio" name="Answer" value="Answer">
+            <label for="Answer"  style="font-size:20px;">Answer 2</label>
+            </div>
+            <div class="answers">
+            <input type="radio" class="Answer-radio" name="Answer" value="Answer">
+            <label for="Answer"  style="font-size:20px;">Answer 3</label>
+            </div>
+            <div class="answers">
+            <input type="radio" class="Answer-radio" name="Answer" value="Answer" >
+            <label for="Answer"  style="font-size:20px;">Answer 4</label>
+            </div>
+
+            </div>
         </div>
         
 </div>

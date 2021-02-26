@@ -2421,10 +2421,36 @@ display: flex;
   margin: 20px;
 }
 
-#answer{
-  margin-top:10px;
+.answers-of-the-survey-questions{
   color:black;
   float: left;
   margin-top: 20px;
+}
+.answers{
+  background-color:darkgrey;
+  width:50%;
+  padding:10px;
+  margin:10px;
+  flex-direction: row;
+}
+
+input[type=radio]:not(old):checked{
+  opacity : 1;
+  width            : 0.5em;
+  height           : 0.5em;
+  margin           : 0.125em;
+  border           : 1.625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
+}
+
+input[type=radio]:not(old):checked{
+  opacity : 1;
+  width            : 1.5em;
+  height           : 1.5em;
+  margin           : 0.125em;
+  border           : 1.625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
 }
 /*Survey End*/
