@@ -6,8 +6,15 @@ include_once("./classes/DB.php");
 if (Login::isLoggedIn())
 {
   $userid = Login::isLoggedIn();
-  $image = DB::query('SELECT image FROM users WHERE id=:id',array(':id'=>$userid))[0]['image'];
-  $fullname = DB::query('SELECT fullname FROM users WHERE id=:id',array(':id'=>$userid))[0]['fullname'];
+  $user_info = DB::query('SELECT type,image,fullname FROM users WHERE id=:id',array(':id'=>$userid));
+  if(!$user_info){
+    //Logout
+    die('User not found');
+  }
+
+  $image = $user_info[0]['image'];
+  $fullname = $user_info[0]['fullname'];
+  $user_type = $user_info[0]['type'];
   $total_cart = DB::query('SELECT COUNT(id) AS cnt FROM cart WHERE user_id=:user_id',array(':user_id'=>$userid))[0]['cnt'];
 }
 else
@@ -34,6 +41,7 @@ function CallAPI($datas = [])
     return json_decode($res);
   }
 }
+$getCurrencyValue=1;
 if($_SESSION['currency'] != "EGP"){
   $getCurrencyValue = DB::query('SELECT value FROM currency WHERE name=:name AND _date >= DATE_SUB(NOW(),INTERVAL 1 HOUR)',array(':name'=>$_SESSION['currency']));
   if($getCurrencyValue){
@@ -47,8 +55,6 @@ if($_SESSION['currency'] != "EGP"){
     $getCurrencyValue = $getCurrencyValue->info->rate;
     DB::query('INSERT INTO currency VALUES(\'\',:name,:value,:date)',array(':name'=>$_SESSION['currency'],':value'=>$getCurrencyValue,':date'=>date('Y-m-d H:i:s')));
   }
-}else{
-  $getCurrencyValue = 1;
 }
 function truncate($text, $length) 
 {

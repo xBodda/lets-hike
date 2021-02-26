@@ -1,5 +1,5 @@
 <?php
-  include('includes/head.php');
+  include_once('includes/head.php');
 
 ?>
 <!DOCTYPE html>

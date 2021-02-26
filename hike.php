@@ -197,6 +197,9 @@ if (isset($_POST['add'])) {
         <div class="hike-details" id="reviews">
           <?php
           $allReviews = DB::query('SELECT * FROM reviews WHERE hike_id=:hike_id', array(':hike_id' => $hikeid));
+          if(!$allReviews){
+            echo "<div class='flex-container j-center'>No reviews</div>";
+          }
           foreach ($allReviews as $oneReview) {
             $userName = DB::query('SELECT fullname FROM users WHERE id=:id', array(':id' => $oneReview['user_id']))[0]['fullname'];
             $timeInAgo = timeago($oneReview['_date']);
