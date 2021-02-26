@@ -41,6 +41,7 @@ function CallAPI($datas = [])
     return json_decode($res);
   }
 }
+$getCurrencyValue=1;
 if($_SESSION['currency'] != "EGP"){
   $getCurrencyValue = DB::query('SELECT value FROM currency WHERE name=:name AND _date >= DATE_SUB(NOW(),INTERVAL 1 HOUR)',array(':name'=>$_SESSION['currency']));
   if($getCurrencyValue){
@@ -54,8 +55,6 @@ if($_SESSION['currency'] != "EGP"){
     $getCurrencyValue = $getCurrencyValue->info->rate;
     DB::query('INSERT INTO currency VALUES(\'\',:name,:value,:date)',array(':name'=>$_SESSION['currency'],':value'=>$getCurrencyValue,':date'=>date('Y-m-d H:i:s')));
   }
-}else{
-  $getCurrencyValue = 1;
 }
 function truncate($text, $length) 
 {

@@ -5,16 +5,14 @@ if (!Login::isLoggedIn()) {
 }
 
 
-if (isset($_GET["action"])) 
-{
-	if ($_GET["action"] == "delete") 
-    {
-        DB::query('DELETE FROM tickets_messages WHERE ticket_id=:id', array(':id' => $_GET["id"]));
-		DB::query('DELETE FROM tickets WHERE id=:id', array(':id' => $_GET["id"]));
+if (isset($_GET["action"])) {
+  if ($_GET["action"] == "delete") {
+    DB::query('DELETE FROM tickets_messages WHERE ticket_id=:id', array(':id' => $_GET["id"]));
+    DB::query('DELETE FROM tickets WHERE id=:id', array(':id' => $_GET["id"]));
 
-		echo '<script>alert("Ticket Removed")</script>';
-		echo '<script>window.location="view-tickets.php"</script>';
-	}
+    echo '<script>alert("Ticket Removed")</script>';
+    echo '<script>window.location="view-tickets.php"</script>';
+  }
 }
 ?>
 
@@ -94,41 +92,35 @@ if (isset($_GET["action"]))
                           <?php
                           $user_info = DB::query('SELECT * FROM tickets');
                           foreach ($user_info as $ui) {
-                            if($ui['status'] == 0) {
-                                $ticketStatus = "In Review";
-                              } else if ($ui['status'] == 1) {
-                                $ticketStatus = "Solved";
-                              }
+                            if ($ui['status'] == 0) {
+                              $ticketStatus = "In Review";
+                            } else if ($ui['status'] == 1) {
+                              $ticketStatus = "Solved";
+                            }
                           ?>
                             <tr>
                               <td><?php echo $ui["id"]; ?></td>
                               <td><?php echo $ui["fullname"]; ?></td>
-                              <td><?php echo truncate($ui["subject"], 30); ?></td>
+                              <td><a href="view-conversations.php?ticket=<?php echo $ui['id']; ?>"><?php echo truncate($ui["subject"], 30); ?></a></td>
                               <td><?php echo $ui["type"]; ?></td>
                               <td><?php echo $ui["_date"]; ?></td>
                               <?php
-                                if ($ui["status"] == 0) {
-                                    print "<td><span class='badge badge-info'>Processing</span></td>";
-                                } elseif ($ui["status"] == 1) {
-                                    print "<td><span class='badge badge-success'>Solved</span></td>";
-                                }
-                                ?>
+                              if ($ui["status"] == 0) {
+                                print "<td><span class='badge badge-info'>Processing</span></td>";
+                              } elseif ($ui["status"] == 1) {
+                                print "<td><span class='badge badge-success'>Solved</span></td>";
+                              }
+                              ?>
                               <td>
-                                  <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-tickets.php?action=delete&id=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;
-                                  <button class="btn btn-outline-success btn-sm"><i class="fas fa-comment"></i></button>
-                                </td>
+                                <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-tickets.php?action=delete&id=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;
+                                <!-- <button class="btn btn-outline-success btn-sm"><i class="fas fa-comment"></i></button> -->
+                              </td>
                             </tr>
                           <?php } ?>
                         </tbody>
                       </table>
                     </div>
-                    <!-- /.table-responsive -->
                   </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer clearfix">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Delete All</a>
-                  </div>
-                  <!-- /.card-footer -->
                 </div>
               </div>
             </div>
@@ -141,7 +133,6 @@ if (isset($_GET["action"]))
     </div>
     <!-- /.content-wrapper -->
     <?php include('includes/footer.php'); ?>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
@@ -149,7 +140,6 @@ if (isset($_GET["action"]))
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->

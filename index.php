@@ -95,7 +95,6 @@
       <?php 
       $allhikes = DB::query('SELECT h.*,i.image FROM hikes h LEFT JOIN hike_images i on h.id=i.hike_id GROUP BY i.hike_id');
       foreach ($allhikes as $hike) {
-
       ?>
         <div class="item" data-overview="<?php echo $hike['overview']; ?>">
           <div class="item slide">
