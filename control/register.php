@@ -1,34 +1,41 @@
 <?php
 include('includes/head.php');
 
-// if (!Login::isLoggedIn()) 
-// {
-//   echo '<script>window.location="404.php"</script>';
-// }
+if (!Login::isLoggedIn()) 
+{
+  echo '<script>window.location="404.php"</script>';
+}
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) 
+{
   $name = $_POST['name'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   $repassword = $_POST['repassword'];
+  $gender = $_POST['gender'];
+  $phonenumber = $_POST['phone'];
+  $image = "user.png";
   $level = $_POST['level'];
 
 
-  if (!DB::query('SELECT email FROM admins WHERE email=:email', array(':email' => $email))) {
+  if (!DB::query('SELECT email FROM users WHERE email=:email', array(':email' => $email))) 
+  {
     if (strlen($name) >= 3 && strlen($name) <= 64) {
       if (strlen($password) >= 8 && strlen($password) <= 60) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
           if ($password == $repassword) {
             DB::query(
-              'INSERT INTO admins VALUES(\'\',:name,:email,:password,:level)',
+              'INSERT INTO users VALUES(\'\',:fullname,:email,:password,:gender,:phonenumber,:image,:type)',
               array(
-                ':name' => $name,
+                ':fullname' => $name,
                 ':email' => $email,
                 ':password' => password_hash($password, PASSWORD_BCRYPT),
-                ':level' => $level
+                ':gender' => $gender,
+                ':phonenumber'=>$phonenumber,
+                ':image'=>$image,
+                ':type'=>$level
               )
             );
-
             echo '<script>alert("Admin Created")</script>';
             echo '<script>window.location="index.php"</script>';
           } else {
@@ -103,10 +110,37 @@ if (isset($_POST['submit'])) {
               </div>
             </div>
           </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" name="phone" placeholder="Phonenumber" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-phone"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="col-3">
+            <div class="icheck-primary">
+              <input type="radio" id="agreeTerms" name="gender" value="1">
+              <label for="agreeTerms">
+                Male
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icheck-primary">
+              <input type="radio" id="agreeTerms" name="gender" value="2">
+              <label for="agreeTerms">
+                Female
+              </label>
+            </div>
+          </div>
+          
+          </div>
 
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="radio" id="agreeTerms" name="level" value="1" checked>
+              <input type="radio" id="agreeTerms" name="level" value="4" checked>
               <label for="agreeTerms">
                 Administrator
               </label>

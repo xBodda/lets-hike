@@ -5,18 +5,9 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-if (isset($_GET["action"])) {
-  if ($_GET["action"] == "delete") {
-    // DB::query('DELETE FROM messages WHERE _to=:id',array(':id'=>$_GET["id"]));
-    DB::query('DELETE FROM admins WHERE id=:id', array(':id' => $_GET["id"]));
-    echo '<script>alert("Admin Removed")</script>';
-    echo '<script>window.location="view-admins.php"</script>';
-  }
-}
-
 if (isset($_GET["ad"])) {
   $admin_id = $_GET["ad"];
-  $admin_info = DB::query('SELECT * FROM admins WHERE id=:id', array(':id' => $admin_id));
+  $admin_info = DB::query('SELECT * FROM users WHERE id=:id', array(':id' => $admin_id));
 }
 
 if (isset($_POST["save"])) {
@@ -25,7 +16,7 @@ if (isset($_POST["save"])) {
   $admin_id = $_GET["ad"];
 
   DB::query(
-    'UPDATE admins SET name=:name,email=:email WHERE id=:id',
+    'UPDATE users SET name=:name,email=:email WHERE id=:id',
     array(
       ':name' => $name,
       ':email' => $email,
@@ -99,7 +90,7 @@ if (isset($_POST["save"])) {
                       ?>
                         <form action="edit-admin.php?ad=<?php echo $adi['id']; ?>" method="post">
                           <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="name" placeholder="Full name" value="<?php echo $adi['name']; ?>">
+                            <input type="text" class="form-control" name="name" placeholder="Full name" value="<?php echo $adi['fullname']; ?>">
                             <div class="input-group-append">
                               <div class="input-group-text">
                                 <span class="fas fa-user"></span>

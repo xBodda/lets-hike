@@ -67,15 +67,6 @@
           </li>
           <li class="nav-header">MORE</li>
 
-          <li class='nav-item'>
-            <a href='./calendar.php' class='nav-link'>
-              <i class='nav-icon far fa-calendar-alt'></i>
-              <p>
-                Calendar
-                <span class='badge badge-info right'>2</span>
-              </p>
-            </a>
-          </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon far fa-envelope"></i>
@@ -88,25 +79,7 @@
                   <li class="nav-item">
                     <a href="./mailbox.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Inbox<span class="badge badge-info right"><?php echo '5'; ?></span></p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./compose.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Compose Admins</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./compose-users.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Compose Users</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="./read-mail.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Read</p>
+                      <p>Inbox<span class="badge badge-info right"><?php echo $total_messages; ?></span></p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -121,6 +94,18 @@
                       <p>View Conversations</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="./view-reports.php" class="nav-link">
+                    <i class="nav-icon fas fa-exclamation-triangle"></i>
+                    <p>View Reports</p>
+                    </a>
+                   </li>
+                   <li class="nav-item">
+                    <a href="./view-penalties.php" class="nav-link">
+                    <i class="nav-icon fas fa-fire"></i>
+                    <p>View Penalties</p>
+                    </a>
+                   </li>
                 </ul>
               </li>
           <li class="nav-item">
@@ -153,12 +138,6 @@
                 <a href="./register.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Register</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./forgot-password.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Forgot Password</p>
                 </a>
               </li>
               <li class="nav-item">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2021 at 10:35 PM
+-- Generation Time: Feb 27, 2021 at 01:30 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `lets-hike`
 --
-CREATE DATABASE IF NOT EXISTS `lets-hike` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `lets-hike`;
 
 -- --------------------------------------------------------
 
@@ -377,7 +375,12 @@ INSERT INTO `currency` (`id`, `name`, `value`, `_date`) VALUES
 (2, 'CAD', 0.079713, '2021-02-25 20:06:28'),
 (3, 'GBP', 0.045017, '2021-02-25 20:08:41'),
 (4, 'EUR', 0.052348, '2021-02-25 20:20:35'),
-(5, 'USD', 0.063757, '2021-02-25 20:31:14');
+(5, 'USD', 0.063757, '2021-02-25 20:31:14'),
+(6, 'EUR', 0.052384, '2021-02-26 13:39:56'),
+(7, 'EUR', 0.052384, '2021-02-26 23:45:18'),
+(8, 'USD', 0.063687, '2021-02-26 23:45:48'),
+(9, 'USD', 0.063675, '2021-02-27 00:46:27'),
+(10, 'USD', 0.063675, '2021-02-27 01:59:50');
 
 -- --------------------------------------------------------
 
@@ -499,7 +502,10 @@ INSERT INTO `login_tokens` (`id`, `token`, `user_id`, `date`) VALUES
 (7, '69ab99dd40f45e31b4a65b6bfa3bf465828c104a', 4, '2021-02-24 14:29:53'),
 (8, '04d982e6afc5ad006e22cce8680de0af291854fe', 6, '2021-02-25 10:19:44'),
 (9, '91174fedf08a729b64e0ca0d51bb7ef0e9d18c83', 1, '2021-02-25 10:29:57'),
-(10, 'bde80983f1e81ff872ece38f01834df8215070bb', 6, '2021-02-25 10:37:46');
+(10, 'bde80983f1e81ff872ece38f01834df8215070bb', 6, '2021-02-25 10:37:46'),
+(12, '898b74a9ec38326983ff2890cedca8f0bb2c29bc', 6, '2021-02-27 00:16:57'),
+(13, '59881e83847caadcd945aa5fb12d0866a6926da6', 8, '2021-02-27 00:40:45'),
+(14, '2214b9f10ac8207a96e0b4f995e49511327df944', 6, '2021-02-27 00:44:48');
 
 -- --------------------------------------------------------
 
@@ -515,6 +521,21 @@ CREATE TABLE `messages` (
   `message` text NOT NULL,
   `_date` datetime NOT NULL,
   `contact_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message_reports`
+--
+
+CREATE TABLE `message_reports` (
+  `id` int(11) NOT NULL,
+  `message_id` int(11) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `_date` datetime NOT NULL,
+  `auditor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -558,6 +579,19 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`id`, `hike_id`, `price`, `start_date`, `end_date`, `persons`, `order_id`) VALUES
 (1, 2, '500', '2021-02-23 22:06:49', '2021-02-24 22:06:49', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penalties`
+--
+
+CREATE TABLE `penalties` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `_date` datetime NOT NULL,
+  `message_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -670,17 +704,21 @@ CREATE TABLE `tickets_messages` (
   `message` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `_date` datetime NOT NULL,
-  `read` tinyint(4) NOT NULL
+  `_read` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tickets_messages`
 --
 
-INSERT INTO `tickets_messages` (`id`, `ticket_id`, `message`, `user_id`, `_date`, `read`) VALUES
-(1, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.', 1, '2021-02-25 10:35:37', 0),
-(10, 2, 'Test Message For Ajax', 1, '2021-02-25 13:43:07', 0),
-(12, 2, 'Test message from admin                      ', 6, '2021-02-25 16:07:21', 0);
+INSERT INTO `tickets_messages` (`id`, `ticket_id`, `message`, `user_id`, `_date`, `_read`) VALUES
+(1, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus doloribus mollitia! Perferendis, debitis rerum illum nostrum praesentium reprehenderit. Quo eligendi tempora recusandae sunt qui amet delectus illo officiis ipsam.', 1, '2021-02-25 10:35:37', 1),
+(10, 2, 'Test Message For Ajax', 1, '2021-02-25 13:43:07', 1),
+(12, 2, 'Test message from admin                      ', 6, '2021-02-25 16:07:21', 1),
+(13, 2, 'Test Message', 6, '2021-02-26 22:58:13', 1),
+(14, 2, 'Test Message from test', 6, '2021-02-26 23:13:03', 1),
+(16, 2, 'Test Message from Admin', 6, '2021-02-26 23:40:18', 1),
+(17, 2, 'Test Message from Admin', 8, '2021-02-26 23:40:57', 1);
 
 -- --------------------------------------------------------
 
@@ -708,7 +746,8 @@ INSERT INTO `users` (`id`, `fullname`, `email`, `password`, `gender`, `phonenumb
 (2, 'Ahmed Ashraf', 'ashroof@gmail.com', '$2y$10$FA2aeY1CFahkSvcsLqihpeQEHChQRY/vp3e9dVJ6MCqZmuHIHtdPe', 1, '01158999145', 'user.png', 1),
 (3, 'Mohamed Ashraf', 'Mohamed1812470@miuegypt.edu.eg', '$2y$10$sHuj0QEnh06aq2RMhgWIBOpkC1TSEFTMEVWPvvQ.V5QcjbbCEnNR2', 1, '+201156052920', '1756500080400018700354_306553.jpg', 1),
 (4, 'Mohamed Ashraf2', 'Mohamed18124701@miuegypt.edu.eg', '$2y$10$FC6YOmSReylgww.62EDPMOlZoI2Ml.sTYft7v3Nx9Q5kM33m5hiu2', 1, '+201156052920', 'user.png', 2),
-(6, 'Abdelrahman Sayed', 'abdelrahman3aysh@hotmail.com', '$2y$10$mu25KwxW5SrAJfpvDMiwGeNvOxJ2tSVWMDHTW9G01wElFHIeQQUra', 1, '01158999135', 'user.png', 2);
+(6, 'Abdelrahman Sayed', 'abdelrahman3aysh@hotmail.com', '$2y$10$mu25KwxW5SrAJfpvDMiwGeNvOxJ2tSVWMDHTW9G01wElFHIeQQUra', 1, '01158999135', 'user.png', 3),
+(8, 'Admin Test', 'testmail@email.com', '$2y$10$a39EQpt7sqm4zj7aePDbE.m5Iffhp8ahhIapsFyBlAn23byiiWWla', 1, '1212749589', 'user.png', 4);
 
 -- --------------------------------------------------------
 
@@ -808,6 +847,16 @@ ALTER TABLE `messages`
   ADD KEY `contact_id` (`contact_id`);
 
 --
+-- Indexes for table `message_reports`
+--
+ALTER TABLE `message_reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auditor_id` (`auditor_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `message_id` (`message_id`),
+  ADD KEY `ticket_id` (`ticket_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -821,6 +870,14 @@ ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`order_id`),
   ADD KEY `hike_id` (`hike_id`);
+
+--
+-- Indexes for table `penalties`
+--
+ALTER TABLE `penalties`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `message_id` (`message_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `rating`
@@ -917,7 +974,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `currency`
 --
 ALTER TABLE `currency`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `faq`
@@ -947,13 +1004,19 @@ ALTER TABLE `hike_images`
 -- AUTO_INCREMENT for table `login_tokens`
 --
 ALTER TABLE `login_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `message_reports`
+--
+ALTER TABLE `message_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -966,6 +1029,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `penalties`
+--
+ALTER TABLE `penalties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -1007,13 +1076,13 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `tickets_messages`
 --
 ALTER TABLE `tickets_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_types`
@@ -1057,6 +1126,15 @@ ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`);
 
 --
+-- Constraints for table `message_reports`
+--
+ALTER TABLE `message_reports`
+  ADD CONSTRAINT `message_reports_ibfk_1` FOREIGN KEY (`auditor_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `message_reports_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `message_reports_ibfk_3` FOREIGN KEY (`message_id`) REFERENCES `tickets_messages` (`id`),
+  ADD CONSTRAINT `message_reports_ibfk_4` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
@@ -1068,6 +1146,13 @@ ALTER TABLE `orders`
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`hike_id`) REFERENCES `hikes` (`id`);
+
+--
+-- Constraints for table `penalties`
+--
+ALTER TABLE `penalties`
+  ADD CONSTRAINT `penalties_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `tickets_messages` (`id`),
+  ADD CONSTRAINT `penalties_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `rating`
