@@ -10,6 +10,7 @@ if (Login::isLoggedIn())
   if(!$user_info){
     //Logout
     die('User not found');
+    exit;
   }
 
   $image = $user_info[0]['image'];
@@ -64,7 +65,6 @@ function truncate($text, $length)
   }
   return($text);
 }
-
 function timeago($date) {
   $timestamp = strtotime($date);	
   
@@ -73,9 +73,9 @@ function timeago($date) {
 
   $currentTime = time();
   if($currentTime >= $timestamp) {
-   $diff     = time()- $timestamp;
+    $diff     = time()- $timestamp;
    for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
-   $diff = $diff / $length[$i];
+    $diff = $diff / $length[$i];
    }
 
    $diff = round($diff);

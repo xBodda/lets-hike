@@ -16,6 +16,7 @@ function createRatingStars(element){
     rating_count = Math.round(rating_count);
     rating_count = rating_count?rating_count:0;
     var stars = new Array(5);
+        
     // *for the data-rating's count create full stars
     for (let j = 0; j < rating_count; j++) {
         var star = document.createElement('div');
@@ -38,14 +39,12 @@ function createRatingStars(element){
     if(element.classList.contains('user-rating')){
         const element_hidden_input = document.createElement('input');
         element_hidden_input.setAttribute('type','text');
-        element_hidden_input.classList.add('hidden');
         element_hidden_input.setAttribute('name','rating[]');
         element_hidden_input.setAttribute('required','true');
         element_hidden_input.value = rating_count==0?"":rating_count;
         element.appendChild(element_hidden_input);
         const element_star = element.querySelectorAll('.star');
         for(let j = 0; j < element_star.length;j++){
-            console.log(element_star[j]);
             element_star[j].addEventListener('click',function(){
                 this.parentNode.setAttribute('data-rating',j+1);
                 createRatingStars(this.parentNode);
@@ -317,13 +316,12 @@ for(let i = 0; i<recomm_slide_items.length;i++){
 }
 
 // XMLHTTPRequest functions START
+
 function send_request(type, url, data, response_function = function(){}) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function () {
-
         if (this.readyState == 4) {
-
             var response = JSON.parse(this.responseText);
             if (this.status == 200) {
                 // console.log('success', response['message']);
@@ -346,4 +344,5 @@ function send_request(type, url, data, response_function = function(){}) {
 
     xhttp.send(params);
 }
+
 // XMLHTTPRequest functions END

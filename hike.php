@@ -1,14 +1,14 @@
 <?php
 include('includes/head.php');
 if (isset($_GET['id'])) {
+  
   if(!DB::query('SELECT * FROM hikes WHERE id=:id', array(':id' => $_GET['id'])))
   {
     http_response_code(404);
     include('404.php');
     exit;
   }
-
-
+  
   $hikeid = $_GET['id'];
   $hike_info = DB::query('SELECT h.*,c.name as country,
                                   COUNT(r.stars) as rating_count,
@@ -34,12 +34,10 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['add'])) {
-
   if (!Login::isLoggedIn()) {
     echo '<script>alert("You have to login to book")</script>';
     echo '<script>window.location="signin.php"</script>';
   } else {
-
     $date = date('Y-m-d H:i:s');
     $total_price = $_POST['total_price'];
     $start_date = $_POST['start_date'];
