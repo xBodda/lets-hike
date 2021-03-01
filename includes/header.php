@@ -4,10 +4,8 @@
   </div>
   <div class="navigation">
       <div> <a href="index.php">Home</a> </div>
-      <div> <a href="#">Destination</a> </div>
       <div> <a href="blog.php">Blog</a> </div>
       <div> <a href="currency.php">Currency <?php echo $_SESSION['currency']; ?></a> </div>
-      <div id="lang"> Lang </div>
       <div>
         <a href="cart.php">
             <i class="fas fa-shopping-basket"></i>
