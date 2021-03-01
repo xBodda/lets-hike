@@ -8,10 +8,11 @@ if (Login::isLoggedIn())
   $fullname = $user[0]['fullname'];
   $total_messages = DB::query('SELECT COUNT(id) AS cnt FROM tickets_messages WHERE user_id!=:user_id',array(':user_id'=>$userid))[0]['cnt'];
   $type = $user[0]['type'];
+  $image = $user[0]['image'];
   if($type == 1){
     header('Location:../');
     exit;
-  }
+  } 
 }else{
     header('Location:../signin.php');
     exit;

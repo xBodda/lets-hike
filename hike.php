@@ -1,6 +1,14 @@
 <?php
 include('includes/head.php');
 if (isset($_GET['id'])) {
+  if(!DB::query('SELECT * FROM hikes WHERE id=:id', array(':id' => $_GET['id'])))
+  {
+    http_response_code(404);
+    include('404.php');
+    exit;
+  }
+
+
   $hikeid = $_GET['id'];
   $hike_info = DB::query('SELECT h.*,c.name as country,
                                   COUNT(r.stars) as rating_count,
@@ -20,7 +28,9 @@ if (isset($_GET['id'])) {
     $hikeImage = "default.png";
   }
 } else {
-  die("Not Found");
+    http_response_code(404);
+    include('404.php');
+    exit;
 }
 
 if (isset($_POST['add'])) {

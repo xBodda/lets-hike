@@ -7,6 +7,7 @@ if (!Login::isLoggedIn()) {
 
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {
+    DB::query('DELETE FROM message_reports WHERE ticket_id=:id', array(':id' => $_GET["id"]));
     DB::query('DELETE FROM tickets_messages WHERE ticket_id=:id', array(':id' => $_GET["id"]));
     DB::query('DELETE FROM tickets WHERE id=:id', array(':id' => $_GET["id"]));
 
@@ -119,6 +120,12 @@ if (isset($_GET["action"])) {
                           <?php } ?>
                         </tbody>
                       </table>
+                      <?php
+                      if(!$user_info)
+                      {
+                          print '<h1 class="text-center m-3">Nothing to be shown</h1>';
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>

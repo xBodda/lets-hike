@@ -22,6 +22,49 @@ if (isset($_POST['message'])) {
 		)
 	);
 }
+
+if (isset($_GET['r']) && isset($_GET['ticket']))
+{
+	$read = 1;
+	DB::query(
+		'UPDATE tickets_messages SET _read=:_read WHERE ticket_id=:id',
+		array(
+			':_read' => $read,
+		  ':id' => $_GET['ticket']
+		)
+	  );
+}
+
+if(isset($_GET['ticket']) && isset($_GET['msg']))
+{
+	$reportedTicket = $_GET['ticket'];
+	$reportedMessage = $_GET['msg'];
+	$admin_id = DB::query('SELECT user_id FROM tickets_messages WHERE id=:id',array(':id'=>$reportedMessage))[0]['user_id'];
+	$date = date('Y-m-d H:i:s');
+	if (!DB::query('SELECT message_id FROM message_reports WHERE message_id=:message_id', array(':message_id' => $reportedMessage)))
+	{
+		DB::query(
+			'INSERT INTO message_reports VALUES(\'\',:message_id,:ticket_id,:user_id,:_date,:auditor_id)',
+			array(
+				':message_id' => $reportedMessage,
+				':ticket_id' => $reportedTicket,
+				':user_id' =>$admin_id,
+				':_date' => $date,
+				':auditor_id'=>$userid
+			)
+		);
+
+		echo '<script>alert("Message Reported")</script>';
+		echo '<script>window.location="view-conversations.php?ticket='.$ticket_id.'"</script>';
+	}
+	else
+	{
+		echo '<script>alert("Already Reported")</script>';
+		echo '<script>window.location="view-conversations.php?ticket='.$ticket_id.'"</script>';
+	}
+	
+}
+
 $ticketData = DB::query('SELECT t.* FROM tickets t WHERE id=:id', array(':id' => $ticket_id))[0];
 $messagesData = DB::query('SELECT * FROM tickets_messages WHERE ticket_id=:ticket_id', array(':ticket_id' => $ticket_id));
 ?>
@@ -35,8 +78,12 @@ $messagesData = DB::query('SELECT * FROM tickets_messages WHERE ticket_id=:ticke
 	<?php
 	include('includes/links.php');
 	?>
-
 </head>
+<style>
+	.fas.fa-flag {
+		color: red;
+	}
+</style>
 
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -71,13 +118,18 @@ $messagesData = DB::query('SELECT * FROM tickets_messages WHERE ticket_id=:ticke
 												$senderData = DB::query('SELECT * FROM users WHERE id=:id', array(':id' => $singleMessage['user_id']))[0];
 												$check_whos_message = "";
 												$check_admin = "";
+												$canFlag = "";
 												if ($singleMessage['user_id'] == $userid) {
 													$check_whos_message = "right";
-													$check_admin = "( Admin )";
+													$check_admin = " ( Admin )";
+												}
+												if ($type == 2 && $senderData['type'] == 4)
+												{
+													$canFlag = "<a title='Report Message' href='view-conversations.php?ticket=".$ticket_id."&msg=".$singleMessage['id']."'> &nbsp;&nbsp; <i class='fas fa-flag'></i> </a>";
 												}
 												echo '
 															<div class="direct-chat-msg ' . $check_whos_message . '">
-                                                                    <div class="direct-chat-infos clearfix"> <span class="direct-chat-name float-left">' . $senderData['fullname'] . $check_admin.'</span> <span class="direct-chat-timestamp float-right">'.date('d M h:i A',strtotime($singleMessage['_date'])).'</span> </div>
+                                                                    <div class="direct-chat-infos clearfix"> <span class="direct-chat-name float-left">' . $senderData['fullname'] . $check_admin.'</span> '. $canFlag .' <span class="direct-chat-timestamp float-right">'.date('d M h:i A',strtotime($singleMessage['_date'])).'</span> </div>
                                                                     <img class="direct-chat-img" src="../userImgs/' . $senderData['image'] . '" alt="Message User Image">
                                                                     <div class="direct-chat-text"> ' . $singleMessage['message'] . ' </div>
                                                                 </div>';

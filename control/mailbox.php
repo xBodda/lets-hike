@@ -48,7 +48,6 @@ if (!Login::isLoggedIn()) {
       <section class="content">
         <div class="row">
           <div class="col-md-3">
-            <a href="compose.php" class="btn btn-primary btn-block mb-3">Compose</a>
 
             <div class="card">
               <div class="card-header">
@@ -96,9 +95,9 @@ if (!Login::isLoggedIn()) {
                       foreach ($messages as $msg) 
                       {
                         $from_name = DB::query('SELECT * FROM users WHERE id=:id', array(':id' => $msg['user_id']))[0];
-                        if($from_name['id'] != $userid)
+                        if($from_name['id'] != $userid && $from_name['type'] == 1)
                         {
-                        $adminStr = "  ( Admin )";
+                          $adminStr = "  ( Admin )";
                         
                       ?>
                         <tr>
@@ -109,8 +108,25 @@ if (!Login::isLoggedIn()) {
                             </div>
                           </td>
                           <td class="mailbox-star"></td>
-                          <td class="mailbox-name"><a href="read-mail.php?m=<?php echo $msg['id'] ?>"><?php echo $from_name['fullname']; if($from_name['type'] != 1 ) echo $adminStr?></a></td>
-                          <td class="mailbox-subject"><?php echo truncate($msg['message'],60); ?></td>
+                          <td class="mailbox-name"><a href="view-conversations.php?r=1&ticket=<?php echo $msg['ticket_id'] ?>"><?php echo $from_name['fullname']; if($from_name['type'] != 1 ) echo $adminStr?></a></td>
+                          <?php
+                          
+                          if($msg['_read'] == 0)
+                          {
+                            print '
+                              <td class="mailbox-subject"><i>'.truncate($msg['message'],60).'</i></td>
+                            ';
+                          } else {
+                            print '
+                              <td class="mailbox-subject">'.truncate($msg['message'],60).'</td>
+                            ';
+                          }
+
+                          ?>
+
+                          
+
+
                           <td class="mailbox-attachment"></td>
                           <td class="mailbox-date"><?php echo timeago($msg['_date']); ?></td>
                         </tr>
@@ -121,43 +137,7 @@ if (!Login::isLoggedIn()) {
                 </div>
                 <!-- /.mail-box-messages -->
               </div>
-              <!-- /.card-body -->
-              <div class="card-footer p-0">
-                <div class="mailbox-controls">
-                  <!-- Check all button -->
-                  <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                    <i class="far fa-square"></i>
-                  </button>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-reply"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-share"></i>
-                    </button>
-                  </div>
-                  <!-- /.btn-group -->
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-sync-alt"></i>
-                  </button>
-                  <div class="float-right">
-                    1-50/<?php echo $total_messages; ?>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-chevron-left"></i>
-                      </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-chevron-right"></i>
-                      </button>
-                    </div>
-                    <!-- /.btn-group -->
-                  </div>
-                  <!-- /.float-right -->
-                </div>
-              </div>
+              
             </div>
             <!-- /.card -->
           </div>
@@ -176,7 +156,6 @@ if (!Login::isLoggedIn()) {
     </aside>
     <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>

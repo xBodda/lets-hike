@@ -212,7 +212,7 @@ if (isset($_GET["action"])) {
 												<!-- text input -->
 												<div class="form-group">
 													<label>Images Number</label>
-													<input type="number" name="images" id="countt" class="form-control" placeholder="Images Number..">
+													<input type="number" name="images" min="0" id="countt" class="form-control" placeholder="Images Number..">
 												</div>
 											</div>
 											<div class="col-sm-3">
