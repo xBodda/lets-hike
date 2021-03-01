@@ -1,6 +1,10 @@
 <?php
-  include('includes/head.php');
-
+include('includes/head.php');
+if (empty($_SESSION["cart"])) {
+  $subtotal = 0;
+  $tax = 0;
+  $total = 0;
+}
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {
     foreach ($_SESSION["cart"] as $keys => $values) {
