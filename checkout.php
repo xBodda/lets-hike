@@ -1,5 +1,13 @@
 <?php
 include('includes/head.php');
+if (empty($_SESSION["cart"])) {
+  $subtotal = 0;
+  $tax = 0;
+  $total = 0;
+  echo '<script>alert("Nothing In The Cart !")</script>';
+  echo '<script>window.location="index.php"</script>';
+}
+
 if (!empty($_SESSION["cart"])) {
   $total = 0;
   $subtotal = 0;
@@ -39,7 +47,7 @@ if (isset($_POST['checkout'])) {
       $order_id = DB::query('SELECT id FROM orders ORDER BY id DESC LIMIT 1')[0]['id'];
 
       DB::query(
-        'INSERT INTO order_items VALUES(\'\',:hike_id,:price,:start_date,:end_date,:persons,:order_id)',
+        'INSERT INTO order_items VALUES(\'\',:hike_id,:price,:start_date,:end_date,:persons,:order_id,0)',
         array(':hike_id' => $hikeid, ':price' => $total, ':start_date' => $values['start_date'], ':end_date' => $values['end_date'], ':persons' => $values['persons'], ':order_id' => $order_id)
       );
       unset($_SESSION["cart"][$keys]);

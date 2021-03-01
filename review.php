@@ -1,19 +1,22 @@
 <?php
   include_once('includes/head.php');
 
-
-  if(!isset($_GET['id']) || !Login::isLoggedIn()){
-    header('Location:./');
+  if(!isset($_GET['id']) || !isset($_GET['order']) || !Login::isLoggedIn()){
+    http_response_code(404);
+    include('404.php');
     exit;
   }
   $order_id = $_GET['id'];
+
+  $order_item = $_GET['order'];
 
   $hike_details = DB::query('SELECT h.id, h.name,o.persons,o.price,o.start_date,o.end_date,i.image
                              FROM hikes h, order_items o,hike_images i
                              WHERE h.id=o.hike_id AND i.hike_id=h.id AND o.id=:id',array(':id'=>$order_id));
                              
   if(!$hike_details){
-    header('Location:./');
+    http_response_code(404);
+    include('404.php');
     exit;
   }
   $hike = $hike_details[0];
@@ -21,17 +24,25 @@
   if(isset($_POST['submit'])){
     $rating = $_POST['rating'];
     $comment = $_POST['comment'];
+    $date = date('Y-m-d H:i:s');
     $final_rating = array_sum($rating)/count($rating);
     if($final_rating>5) $final_rating = 5;
 
-    DB::query('INSERT INTO reviews VALUES(\'\',:hike_id,:rating,:comment,:stars,:user_id)',
+    DB::query('INSERT INTO reviews VALUES(\'\',:hike_id,:rating,:comment,:stars,:_date,:user_id)',
     array(
       ':hike_id'=>$hike['id'],
       ':rating'=>"",
+      ':_date'=>$date,
       ':comment'=>$comment,
       ':stars'=>$final_rating,
       ':user_id'=>Login::isLoggedIn()
     ));
+
+    DB::query('UPDATE order_items SET is_rated=1 WHERE id=:id AND order_id=:order_id',
+        array(':id'=>$order_id,
+                ':order_id'=>$order_item));
+
+    echo '<script>alert("Thanks For Your Review !")</script>';
     header('Location:./');
     exit;
   }
@@ -140,8 +151,13 @@
               <div class="rev-prop mb-10 flex">
                 <i class="fas fa-user"></i> <?php echo $hike['persons']; ?> Person<?php echo ($hike['persons']>1)?'s':''; ?>
               </div>
-              <div class="rev-prop mb-10 flex">
-                <i class="fas fa-dollar-sign"></i> <?php echo $hike['price']; ?> USD
+              <style>
+              .hike-image .pricee::before{
+                content:"<?php echo $_SESSION['currency']; ?>";
+              }
+            </style>
+              <div class="rev-prop mb-10 flex pricee">
+                 &nbsp <?php echo round($hike['price'] * $getCurrencyValue); ?>
               </div>
               <div class="rev-prop mb-10 flex">
                 <i class="far fa-clock"></i> <?php echo date('Y/m/d h:i A',strtotime($hike['start_date'])); ?>

@@ -45,7 +45,7 @@ function createRatingStars(element){
         element.appendChild(element_hidden_input);
         const element_star = element.querySelectorAll('.star');
         for(let j = 0; j < element_star.length;j++){
-            console.log(element_star[j]);
+            // console.log(element_star[j]);
             element_star[j].addEventListener('click',function(){
                 this.parentNode.setAttribute('data-rating',j+1);
                 createRatingStars(this.parentNode);

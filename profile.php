@@ -17,6 +17,18 @@
     die('User not found');
   }
   $user = $user[0];
+
+  if(isset($_GET['signout']))
+  {
+    if (isset($_COOKIE['USR']))
+    {
+      DB::query('DELETE FROM login_tokens WHERE token=:token', array(':token'=>sha1($_COOKIE['USR'])));
+      echo '<script>alert("Signed Out !")</script>';
+      echo '<script>window.location="index.php"</script>';
+    }
+    setcookie('USR', '1', time()-3600);
+    setcookie('USR_', '1', time()-3600);
+  }
   ?>
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
@@ -59,7 +71,8 @@
         </div>
         <div class="user-buttons">
           <?php if($user['id'] == $userid){ ?>
-          <a href="edit-profile.php"><div class="xbutton secondary center mt-20">Edit Profile</div></a>
+          <a href="edit-profile.php"><div class="xbutton secondary center mt-20x">Edit Profile</div></a>
+          <a href="profile.php?signout"><div class="xbutton center mt-20x">Signout</div></a>
           <?php } ?>
         </div>
       </div>
@@ -77,45 +90,40 @@
         <!-- Hikes Groups START -->
         <div class="hikes-preview">
           <div class="flex-container wrap j-sa">
-            <a href="hike.php?id=1">
+            <?php
+              $myOrders = DB::query('SELECT * FROM orders WHERE user_id=:user_id',array(':user_id'=>$userid));
+              foreach($myOrders as $myOrder)
+              {
+                $myHikes = DB::query('SELECT * FROM order_items WHERE order_id=:id',array(':id'=>$myOrder['id']));
+                foreach($myHikes as $myHike)
+                {
+                  $hikeDetails = DB::query('SELECT * FROM hikes WHERE id=:id',array(':id'=>$myHike['hike_id']))[0];
+                  $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$hikeDetails['id']))[0]['image'];
+                  $ratingValue = CalculateRating($hikeDetails['id']);
+            ?>
+            <a href="hike.php?id=<?php echo $hikeDetails['id']; ?>">
               <div class="item">
-                <div class="image"> <img src="uploads/1.png"> </div>
-                <div class="title">Salkantay Traditional</div>
-                <div class="rev fl-1 flex rating" data-rating="4">
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star nostar"></div>
+                <div class="image"> <img src="uploads/<?php echo $hikeImage; ?>"> </div>
+                <div class="title"><?php echo $hikeDetails['name'] ?></div>
+                <div class="rev fl-1 flex rating" data-rating="<?php echo $ratingValue; ?>">
                 </div>
+                <?php
+                if($myHike['is_rated'] == 0) {
+                  echo '<a href="review.php?id='.$myHike['id'].'&order='.$myOrder['id'].'"><div class="xbutton mt-20x">Rate Now</div></a>';
+                }
+              ?>
               </div>
+              
             </a>
-            <a href="hike.php?id=2">
-              <div class="item">
-                <div class="image"> <img src="uploads/2.png"> </div>
-                <div class="title">Everest Base Camp Trek</div>
-                <div class="rev fl-1 flex rating" data-rating="4">
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star"></div>
-                  <div class="star nostar"></div>
-                </div>
-              </div>
-            </a>
-            <a href="hike.php?id=8">
-              <div class="item">
-                <div class="image"> <img src="uploads/1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png"> </div>
-                <div class="title">Ultimate Salkantay Trek</div>
-                <div class="rev fl-1 flex rating" data-rating="0">
-                  <div class="star nostar"></div>
-                  <div class="star nostar"></div>
-                  <div class="star nostar"></div>
-                  <div class="star nostar"></div>
-                  <div class="star nostar"></div>
-                </div>
-              </div>
-            </a>
+
+                  <?php
+                  
+                }
+              }
+              ?>
+
+
+
             <div class="item extra"></div>
             <div class="item extra"></div>
             <div class="item extra"></div>

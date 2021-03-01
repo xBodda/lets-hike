@@ -58,6 +58,7 @@ if (isset($_GET["action"])) {
           foreach ($_SESSION["cart"] as $keys => $values) {
             $hikeid = $values['hike_id'];
             $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id', array(':id' => $hikeid))[0];
+            $hike_country = DB::query('SELECT iso3 FROM country WHERE id=:id', array(':id' => $hike_info['location']))[0]['iso3'];
             $ratingValue = CalculateRating($hikeid);
             $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id', array(':hike_id' => $hikeid))[0]['cnt'];
             $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid))[0]['image'];
@@ -67,7 +68,7 @@ if (isset($_GET["action"])) {
               <table>
                 <tr>
                   <td>
-                    <div class="title"><?php echo $hike_info['name'] . ', ' . $hike_info['location']; ?></div>
+                    <div class="title"><?php echo $hike_info['name'] . ', ' . $hike_country; ?></div>
                   </td>
                 </tr>
                 <tr>
@@ -144,12 +145,13 @@ if (isset($_GET["action"])) {
             foreach ($_SESSION["cart"] as $keys => $values) {
               $hikeid = $values['hike_id'];
               $hike_info = DB::query('SELECT * FROM hikes WHERE id=:id', array(':id' => $hikeid))[0];
+              $hike_country = DB::query('SELECT iso3 FROM country WHERE id=:id', array(':id' => $hike_info['location']))[0]['iso3'];
               $ratingValue = CalculateRating($hikeid);
               $total_ratings = DB::query('SELECT COUNT(id) AS cnt FROM reviews WHERE hike_id=:hike_id', array(':hike_id' => $hikeid))[0]['cnt'];
               $hikeImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $hikeid))[0]['image'];
           ?>
               <div class="payment-details">
-                <div class="flex mb-10"> <b class="fl-1"><?php echo $hike_info['name'] . ', ' . $hike_info['location']; ?></b>
+                <div class="flex mb-10"> <b class="fl-1"><?php echo $hike_info['name'] . ', ' . $hike_country; ?></b>
                   <p class="fl-1 ta-r"><?php echo number_format(($values['total_price'] * $getCurrencyValue), 2); ?> <?php echo $_SESSION['currency']; ?></p>
                 </div>
               </div>
