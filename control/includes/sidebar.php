@@ -57,12 +57,12 @@
                   <p>View Groups</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="./view-blogs.php" class="nav-link">
                 <i class="fas fa-pencil-alt nav-icon"></i>
                   <p>Blog</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li class="nav-header">MORE</li>
@@ -155,13 +155,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./recover-password.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Recover Password</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./signout.php" class="nav-link">
+                <a href="./index.php?signout" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sign Out</p>
                 </a>
