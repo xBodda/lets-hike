@@ -4,8 +4,13 @@ include('includes/head.php');
 if (isset($_GET['ticket'])) {
     $ticketid = $_GET['ticket'];
     $ticketInfo = DB::query('SELECT * FROM tickets WHERE id=:id', array(':id' => $ticketid))[0];
-
+} else {
+    http_response_code(404);
+    include('404.php');
+    exit;
 }
+
+
 if ($ticketInfo['user_id'] != Login::isLoggedIn()) {
     http_response_code(404);
     include('404.php');
