@@ -7,10 +7,7 @@ if (!isset($_GET['id'])) {
 $survey_taken = false;
 
 $survey_id = $_GET['id'];
-
-
 $survey_info = DB::query('SELECT s.name,s.description FROM survey s WHERE s.id=:id ', array(':id' => $survey_id));
-
 
 if (!$survey_info) {
   include('404.php');
@@ -81,7 +78,7 @@ if(!$survey_taken){
           $i = 1;
           if($survey_taken)
             echo "<h1>Thank you for your time</h1>";
-          else{
+          else{ 
           foreach ($survey_questions as $question) {
           ?>
             <p class="question-numbering-grey-shaded" style="font-size:15px;">

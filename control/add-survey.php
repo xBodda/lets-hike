@@ -1,6 +1,6 @@
 <?php
 include('includes/head.php');
-if (!Login::isLoggedIn()) {
+if (!Login::isLoggedIn()|| $type != 2) {
     echo '<script>window.location="404.php"</script>';
 }
 
@@ -12,27 +12,27 @@ if (isset($_POST['submit'])) {
     $option_questions = $_POST['options_question'];
     $option_questions = array_count_values($option_questions);
     $j = 0;
-    DB::query('INSERT INTO survey VALUES(\'\',:name,:description)',array(':name'=>$title,':description'=>$description));
-    $survey_id = DB::query('SELECT id FROM survey WHERE name=:name ORDER BY id DESC LIMIT 1',array(':name'=>$title))[0]['id'];
-    for($i=1; $i<=count($questions); $i++){
-        $options_count = $option_questions[$i];
-        DB::query('INSERT INTO survey_questions VALUES(\'\',:name,:survey_id)', array(':name' => $questions[$i-1], ':survey_id' => $survey_id));
+    DB::query('INSERT INTO survey VALUES(\'\',:name,:description)', array(':name' => $title, ':description' => $description));
+    $survey_id = DB::query('SELECT id FROM survey WHERE name=:name ORDER BY id DESC LIMIT 1', array(':name' => $title))[0]['id'];
+    $counter=0;
+    for ($i = 1; $i <= count($questions); $i++) {
+        $options_count = $option_questions[$i]+$counter;
+        DB::query('INSERT INTO survey_questions VALUES(\'\',:name,:survey_id)', array(':name' => $questions[$i - 1], ':survey_id' => $survey_id));
         $question_id = DB::query('SELECT id FROM survey_questions WHERE name=:name ORDER BY id DESC LIMIT 1', array(':name' => $questions[$i - 1]))[0]['id'];
 
-        for ($j = 0; $j < $options_count; $j++) {
+        for ($j = $counter; $j < $options_count; $j++) {
             DB::query('INSERT INTO survey_options VALUES(\'\',:name,:survey_id)', array(':name' => $options[$j], ':survey_id' => $question_id));
+            $counter++;
         }
     }
     echo '<script>alert("Survey Added")</script>';
-
 }
 if (isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
-        DB::query('DELETE FROM hike_images WHERE hike_id=:hike_id', array(':hike_id' => $_GET["id"]));
-        DB::query('DELETE FROM hikes WHERE id=:id', array(':id' => $_GET["id"]));
-
-        echo '<script>alert("Group Removed")</script>';
-        echo '<script>window.location="view-groups.php"</script>';
+        DB::query('DELETE FROM survey_questions WHERE survey_id=:id', array(':id' => $_GET["id"]));
+        DB::query('DELETE FROM survey WHERE id=:id', array(':id' => $_GET["id"]));
+        echo '<script>alert("Survey Removed")</script>';
+        echo '<script>window.location="add-survey.php"</script>';
     }
 }
 ?>
@@ -89,7 +89,7 @@ if (isset($_GET["action"])) {
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <form method="POST" >
+                                    <form method="POST">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <!-- text input -->
@@ -174,6 +174,7 @@ if (isset($_GET["action"])) {
 
                                                             option_clone.querySelector('label').innerHTML = "Option " + parseInt(options_count);
                                                             option_clone.querySelector('input').placeholder = "Option " + parseInt(options_count);
+                                                            option_clone.querySelector('input').value = "";
                                                             option_clone.querySelector('input+input').value = parseInt(question);
                                                             option_clone.querySelector('.remove').addEventListener('click', function() {
                                                                 removeOption(this);
@@ -196,6 +197,7 @@ if (isset($_GET["action"])) {
                                                             for (let j = 0; j < getOptions.length; j++) {
                                                                 if (j == 0) {
                                                                     getOptions[j].querySelector('input+input').value = parseInt(questions_count);
+                                                                    getOptions[j].querySelector('input').value = "";
                                                                     continue;
                                                                 }
                                                                 getOptions[j].parentNode.removeChild(getOptions[j]);
@@ -203,6 +205,7 @@ if (isset($_GET["action"])) {
                                                             question_clone.querySelector('.options-container').setAttribute('data-question', questions_count);
                                                             question_clone.querySelector('label').innerHTML = "Question " + parseInt(questions_count);
                                                             question_clone.querySelector('input').placeholder = "Question " + parseInt(questions_count);
+                                                            question_clone.querySelector('input').value = "";
                                                             question_clone.querySelector('.remove').addEventListener('click', function() {
                                                                 removeField(this);
                                                             });
@@ -250,11 +253,7 @@ if (isset($_GET["action"])) {
                         <div class="col-md-8" style="margin: 0 auto;">
                             <div class="card card-danger">
                                 <div class="card-header border-transparent">
-                                    <h3 class="card-title">All Groups</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i> </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"> <i class="fas fa-times"></i> </button>
-                                    </div>
+                                    <h3 class="card-title">All Surveys</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
@@ -270,8 +269,7 @@ if (isset($_GET["action"])) {
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Name</th>
-                                                    <th>Location</th>
-                                                    <th>Rating</th>
+                                                    <th>Description</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -284,7 +282,7 @@ if (isset($_GET["action"])) {
                                             </style>
                                             <tbody>
                                                 <?php
-                                                $faq_data = DB::query('SELECT * FROM hikes');
+                                                $faq_data = DB::query('SELECT * FROM survey');
                                                 foreach ($faq_data as $fd) {
                                                 ?>
                                                     <tr>
@@ -292,12 +290,12 @@ if (isset($_GET["action"])) {
                                                             <?php echo $fd['id'] ?>
                                                         </td>
                                                         <td><abbr title="<?php echo $fd['name']; ?>"><?php echo truncate($fd['name'], 35); ?></abbr></td>
-                                                        <td><abbr title="<?php echo $fd['location']; ?>"><?php echo truncate($fd['location'], 35); ?></abbr></td>
+                                                        <td><abbr title="<?php echo $fd['description']; ?>"><?php echo truncate($fd['description'], 35); ?></abbr></td>
                                                         <td><?php echo CalculateRating($fd['id']); ?></td>
                                                         <td>
-                                                            <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-groups.php?action=delete&id=<?php echo $fd["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
+                                                            <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='add-survey.php?action=delete&id=<?php echo $fd["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
                                                             &nbsp;&nbsp;
-                                                            <button class="btn btn-outline-primary btn-sm" onClick="(function(){window.location='edit-group.php?us=<?php echo $fd['id']; ?>';return false;})();return false;"><i class="fas fa-cog"></i></button>
+                                                            <button class="btn btn-outline-primary btn-sm" onClick="(function(){window.location='view-survey.php?id=<?php echo $fd['id']; ?>';return false;})();return false;"><i class="fas fa-eye"></i></button>
                                                             &nbsp;&nbsp;
                                                         </td>
                                                     </tr>

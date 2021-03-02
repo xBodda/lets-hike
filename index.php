@@ -110,7 +110,8 @@
   <!-- Hike Slider Description -->
   <?php
     $premiumHike = DB::query('SELECT * FROM hikes')[0];
-    $premiumImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$premiumHike['id']))[0]['image'];
+    $premiumImage = DB::query('SELECT image FROM hike_images WHERE hike_id=:hike_id',array(':hike_id'=>$premiumHike['id']));
+    $premiumImage = $premiumImage?$premiumImage[0]['image']:"default.png";
   ?>
   <div class="hike-s-description">
     <div class="background-text" id="h-bg-text">

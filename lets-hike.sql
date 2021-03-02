@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2021 at 11:22 PM
+-- Generation Time: Mar 02, 2021 at 12:01 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -387,7 +387,8 @@ INSERT INTO `currency` (`id`, `name`, `value`, `_date`) VALUES
 (14, 'USD', 0.063637, '2021-03-01 18:44:09'),
 (15, 'USD', 0.063637, '2021-03-01 20:17:37'),
 (16, 'EUR', 0.052671, '2021-03-01 20:23:34'),
-(17, 'EUR', 0.052671, '2021-03-01 21:26:16');
+(17, 'EUR', 0.052671, '2021-03-01 21:26:16'),
+(18, 'GBP', 0.045817, '2021-03-02 11:45:19');
 
 -- --------------------------------------------------------
 
@@ -481,7 +482,6 @@ CREATE TABLE `hike_images` (
 --
 
 INSERT INTO `hike_images` (`id`, `hike_id`, `image`) VALUES
-(3, 1, '1.png'),
 (4, 2, '2.png'),
 (9, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png'),
 (13, 8, '1537844230The-Ultimate-Salkantay-Trek-Trekexperience-1.png'),
@@ -496,7 +496,7 @@ INSERT INTO `hike_images` (`id`, `hike_id`, `image`) VALUES
 (22, 10, '147102107Hikers-to-Kilimanjaro.png'),
 (23, 10, '1370272469IMG-20170618-WA0024.jpg'),
 (24, 10, '838798416IMG-20170606-WA0003.jpg'),
-(25, 11, '71713276Classic-Inca-Trail-Trek-Trexperience-8.jpg'),
+(25, 1, '71713276Classic-Inca-Trail-Trek-Trexperience-8.jpg'),
 (26, 11, '529236653Classic-Inca-Trail-Trek-Trexperience-7.jpg'),
 (27, 11, '104095180Classic-Inca-Trail-Trek-Trexperience-6.jpg'),
 (28, 11, '64618208Classic-Inca-Trail-Trek-Trexperience-4.jpg'),
@@ -541,7 +541,8 @@ INSERT INTO `login_tokens` (`id`, `token`, `user_id`, `date`) VALUES
 (12, '898b74a9ec38326983ff2890cedca8f0bb2c29bc', 6, '2021-02-27 00:16:57'),
 (13, '59881e83847caadcd945aa5fb12d0866a6926da6', 8, '2021-02-27 00:40:45'),
 (14, '2214b9f10ac8207a96e0b4f995e49511327df944', 6, '2021-02-27 00:44:48'),
-(16, '1dc8df978f36a2bf25fc1fe579f57aa194d3b8a0', 1, '2021-03-01 20:16:45');
+(16, '1dc8df978f36a2bf25fc1fe579f57aa194d3b8a0', 1, '2021-03-01 20:16:45'),
+(17, '4a4c7e6f5f2ca050e7903eb3e13492cf83372c94', 4, '2021-03-02 11:57:30');
 
 -- --------------------------------------------------------
 
@@ -636,6 +637,13 @@ CREATE TABLE `penalties` (
   `message_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `penalties`
+--
+
+INSERT INTO `penalties` (`id`, `user_id`, `_date`, `message_id`) VALUES
+(3, 8, '2021-03-02 10:58:21', 17);
+
 -- --------------------------------------------------------
 
 --
@@ -691,6 +699,70 @@ CREATE TABLE `survey` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`id`, `name`, `description`) VALUES
+(2, 'Test', 'Test'),
+(3, 'Survey Sample', 'Test Survey'),
+(4, 'fff', 'fffffffffffffffffffffff'),
+(5, 'Test', 'Testtt'),
+(6, 'Test', 'Testtt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_answers`
+--
+
+CREATE TABLE `survey_answers` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `option_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_answers`
+--
+
+INSERT INTO `survey_answers` (`id`, `survey_id`, `question_id`, `option_id`, `user_id`, `_date`) VALUES
+(1, 2, 3, 6, 4, '2021-03-02 12:36:53'),
+(2, 2, 4, 12, 4, '2021-03-02 12:36:53'),
+(3, 6, 13, 46, 4, '2021-03-02 12:58:35'),
+(4, 6, 14, 47, 4, '2021-03-02 12:58:35'),
+(5, 6, 15, 51, 4, '2021-03-02 12:58:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_dismiss`
+--
+
+CREATE TABLE `survey_dismiss` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_dismiss`
+--
+
+INSERT INTO `survey_dismiss` (`id`, `survey_id`, `user_id`) VALUES
+(1, 2, 4),
+(2, 2, 4),
+(3, 2, 4),
+(4, 3, 4),
+(5, 4, 4),
+(6, 3, 4),
+(7, 5, 4),
+(8, 6, 4),
+(9, 6, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -703,6 +775,62 @@ CREATE TABLE `survey_options` (
   `question_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `survey_options`
+--
+
+INSERT INTO `survey_options` (`id`, `name`, `question_id`) VALUES
+(1, 'test1', 1),
+(2, 'test2', 1),
+(3, 'test3', 1),
+(4, 'test1', 2),
+(5, 'test2', 2),
+(6, 'Test2', 3),
+(7, 'Test3', 3),
+(8, 'Test4', 3),
+(9, 'Test5', 3),
+(10, 'Test6', 3),
+(11, 'Test2', 4),
+(12, 'Test3', 4),
+(13, 'Test4', 4),
+(16, 'Yes', 5),
+(17, 'No', 5),
+(18, 'Facebook', 6),
+(19, 'Youtube', 6),
+(20, 'A friend', 6),
+(21, 'Google', 6),
+(22, 'Yes', 7),
+(23, 'No', 7),
+(24, 'Facebook', 7),
+(25, 'Youtube', 7),
+(26, 'A friend', 7),
+(27, 'Yes', 8),
+(28, 'No', 8),
+(29, 'Facebook', 8),
+(30, 'Youtube', 8),
+(31, 'A friend', 8),
+(32, 'ffffffffffffff', 9),
+(33, 'ffffffffffff', 9),
+(34, 'fffffffffffffffffffffffff', 9),
+(35, 'q1-o1', 10),
+(36, 'q1-o2', 10),
+(37, 'q1-o3', 10),
+(38, 'q1-o1', 11),
+(39, 'q1-o2', 11),
+(40, 'q1-o3', 11),
+(41, 'q1-o1', 12),
+(42, 'q1-o2', 12),
+(43, 'q1-o3', 12),
+(44, 'q1-o1', 13),
+(45, 'q1-o2', 13),
+(46, 'q1-o3', 13),
+(47, 'q2-o1', 14),
+(48, 'q2-o2', 14),
+(49, 'q2-o3', 14),
+(50, 'q3-o1', 15),
+(51, 'q3-o2', 15),
+(52, 'q3-o3', 15);
+
 -- --------------------------------------------------------
 
 --
@@ -714,6 +842,25 @@ CREATE TABLE `survey_questions` (
   `name` varchar(50) NOT NULL,
   `survey_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_questions`
+--
+
+INSERT INTO `survey_questions` (`id`, `name`, `survey_id`) VALUES
+(3, 'Test1', 2),
+(4, 'Test3', 2),
+(5, 'Have you ever purchased a product from our website', 3),
+(6, 'How did you hear about us?', 3),
+(7, 'How do you rate our services? (From 1 to 5)', 3),
+(8, 'Select your age group', 3),
+(9, 'fffffff', 4),
+(10, 'q1', 5),
+(11, 'q2', 5),
+(12, 'q3', 5),
+(13, 'q1', 6),
+(14, 'q2', 6),
+(15, 'q3', 6);
 
 -- --------------------------------------------------------
 
@@ -948,6 +1095,24 @@ ALTER TABLE `survey`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_answers_ibfk_1` (`option_id`),
+  ADD KEY `survey_answers_ibfk_2` (`question_id`),
+  ADD KEY `survey_answers_ibfk_3` (`survey_id`),
+  ADD KEY `survey_answers_ibfk_4` (`user_id`);
+
+--
+-- Indexes for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_id` (`survey_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `survey_options`
 --
 ALTER TABLE `survey_options`
@@ -1020,7 +1185,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `currency`
 --
 ALTER TABLE `currency`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `faq`
@@ -1050,7 +1215,7 @@ ALTER TABLE `hike_images`
 -- AUTO_INCREMENT for table `login_tokens`
 --
 ALTER TABLE `login_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -1062,7 +1227,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `message_reports`
 --
 ALTER TABLE `message_reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -1080,7 +1245,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `penalties`
 --
 ALTER TABLE `penalties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -1098,19 +1263,31 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `survey_options`
 --
 ALTER TABLE `survey_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `survey_questions`
 --
 ALTER TABLE `survey_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tickets`
@@ -1213,6 +1390,22 @@ ALTER TABLE `rating`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`hike_id`) REFERENCES `hikes` (`id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `survey_answers`
+--
+ALTER TABLE `survey_answers`
+  ADD CONSTRAINT `survey_answers_ibfk_1` FOREIGN KEY (`option_id`) REFERENCES `survey_options` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `survey_answers_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `survey_questions` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `survey_answers_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `survey_answers_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `survey_dismiss`
+--
+ALTER TABLE `survey_dismiss`
+  ADD CONSTRAINT `survey_dismiss_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `survey_dismiss_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `tickets`
