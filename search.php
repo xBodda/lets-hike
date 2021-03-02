@@ -5,10 +5,6 @@ include('includes/head.php');
 $msg = false;
 $price_min = 0;
 $price_max = 99999;
-$bathrooms = 0;
-$bedrooms = 0;
-$beds = 0;
-$livingrooms = 0;
 if (isset($_GET['country']) && isset($_GET['start-date']) && isset($_GET['end-date'])) 
 {
   $location = $_GET['country'];
@@ -116,7 +112,7 @@ $hikes = DB::query(
               </div>
               <h1><?php echo $hike['name']; ?></h1>
               <div class="price">
-                Starting at: <?php echo $hike['price']; ?> EGP
+                Starting at: <?php echo round($hike['price']*$getCurrencyValue) . " " . $_SESSION['currency']; ?> 
               </div>
             </div>
           </div>
