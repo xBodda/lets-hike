@@ -82,26 +82,18 @@ if($check_survey){
     <div class="links">
       <div class="col">
         <ul>
-          <li><a href="about-us.php">About Us</a></li>
-          <li><a href="take-the-tour.php">Take The Tour</a></li>
-          <li><a href="plans.php">Plans & Pricing</a></li>
-        </ul>
-      </div>
-      <div class="col">
-        <ul>
           <li><a href='terms.php'>Terms & Conditions</a></li>
           <li><a href='privacy.php'>Privacy Policy</a></li>
           <li><a href='faq.php'>FAQ</a></li>
-          <li><a href='returns.php'>Returns Policy</a></li>
           <li><a href='support.php'>Support</a></li>
         </ul>
       </div>
       <div class="col">
         <ul>
-          <li><a href='advertise.php'>Advertise</a></li>
-          <li><a href='afilliates.php'>Afilliates</a></li>
-          <li><a href='careers.php'>Careers</a></li>
           <li><a href='contact.php'>Contact Us</a></li>
+          <li><a href='blog.php'>Blog</a></li>
+          <li><a href="currency.php">Currency <?php echo $_SESSION['currency']; ?></a></li>
+          <li><a href="my-tickets.php?t">My Tickets</a></li>
         </ul>
       </div>
     </div>
@@ -122,3 +114,4 @@ if($check_survey){
   var currency = '<?php echo $_SESSION['currency']; ?>';
 </script>
 <script type="text/javascript" src="layout/js/all.js"></script>
+<script type="text/javascript" src="layout/js/smooth.js"></script>

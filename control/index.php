@@ -1,5 +1,18 @@
 <?php
 include('includes/head.php');
+
+
+if(isset($_GET['signout']))
+{
+  if (isset($_COOKIE['USR']))
+  {
+    DB::query('DELETE FROM login_tokens WHERE token=:token', array(':token'=>sha1($_COOKIE['USR'])));
+    echo '<script>alert("Signed Out !")</script>';
+    echo '<script>window.location="../index.php"</script>';
+  }
+  setcookie('USR', '1', time()-3600);
+  setcookie('USR_', '1', time()-3600);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

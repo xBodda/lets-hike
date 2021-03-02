@@ -92,6 +92,10 @@
           <div class="flex-container wrap j-sa">
             <?php
               $myOrders = DB::query('SELECT * FROM orders WHERE user_id=:user_id',array(':user_id'=>$userid));
+              if(!$myOrders)
+              {
+                print '<p>Nothing To Be Shown</p>';
+              }
               foreach($myOrders as $myOrder)
               {
                 $myHikes = DB::query('SELECT * FROM order_items WHERE order_id=:id',array(':id'=>$myOrder['id']));
@@ -113,11 +117,8 @@
                 }
               ?>
               </div>
-              
             </a>
-
                   <?php
-                  
                 }
               }
               ?>

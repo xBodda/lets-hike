@@ -4,7 +4,6 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {
     DB::query('DELETE FROM message_reports WHERE ticket_id=:id', array(':id' => $_GET["id"]));
@@ -12,6 +11,11 @@ if (isset($_GET["action"])) {
     DB::query('DELETE FROM tickets WHERE id=:id', array(':id' => $_GET["id"]));
 
     echo '<script>alert("Ticket Removed")</script>';
+    echo '<script>window.location="view-tickets.php"</script>';
+  } else if ($_GET["action"] == "solved") {
+    DB::query('UPDATE tickets SET status=1 WHERE id=:id', array(':id' => $_GET["id"]));
+
+    echo '<script>alert("Ticket Solved")</script>';
     echo '<script>window.location="view-tickets.php"</script>';
   }
 }
@@ -113,8 +117,17 @@ if (isset($_GET["action"])) {
                               }
                               ?>
                               <td>
-                                <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-tickets.php?action=delete&id=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;
-                                <!-- <button class="btn btn-outline-success btn-sm"><i class="fas fa-comment"></i></button> -->
+
+                              <?php
+                                if($ui['status'] == 0) {
+                                  print '
+                                  <button class="btn  btn-outline-success btn-sm" onClick="(function(){window.location="view-tickets.php?action=solved&id='.$ui['id'].'";return false;})();return false;">Mark As Solved</button>&nbsp;&nbsp;
+                                  ';
+                                }
+                              ?>
+                              
+                              
+                              <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-tickets.php?action=delete&id=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>&nbsp;&nbsp;
                               </td>
                             </tr>
                           <?php } ?>

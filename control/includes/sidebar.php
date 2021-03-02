@@ -17,24 +17,24 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item " <?php if ($type != 2) echo 'style="display:none;"'; ?>>
-      <a href="#" class="nav-link ">
-        <i class="nav-icon fas fa-eye"></i>
+    <li class="nav-item" <?php if ($type != 2) echo "style='display:none;'"; ?>>
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-pen"></i>
         <p>
-          Surveys
+          Survey
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
           <a href="./add-survey.php" class="nav-link">
-            <i class="fas fa-pen nav-icon"></i>
-            <p>Add/View Surveys</p>
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add/View surveys</p>
           </a>
         </li>
       </ul>
     </li>
-    <li class="nav-item" <?php if ($type != 4) echo 'style="display:none;"'; ?>>
+    <li class="nav-item" <?php if ($type != 4) echo "style='display:none;'"; ?>>
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-edit"></i>
         <p>
@@ -74,6 +74,12 @@
             <p>View Groups</p>
           </a>
         </li>
+        <!-- <li class="nav-item">
+                <a href="./view-blogs.php" class="nav-link">
+                <i class="fas fa-pencil-alt nav-icon"></i>
+                  <p>Blog</p>
+                </a>
+              </li> -->
       </ul>
     </li>
     <li class="nav-header">MORE</li>
@@ -105,18 +111,25 @@
             <p>View Conversations</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="./view-reports.php" class="nav-link">
-            <i class="nav-icon fas fa-exclamation-triangle"></i>
-            <p>View Reports</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./view-penalties.php" class="nav-link">
-            <i class="nav-icon fas fa-fire"></i>
-            <p>View Penalties</p>
-          </a>
-        </li>
+        <?php
+        if ($type == 3) {
+          print '
+                        <li class="nav-item">
+                        <a href="./view-reports.php" class="nav-link">
+                        <i class="nav-icon fas fa-exclamation-triangle"></i>
+                        <p>View Reports</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="./view-penalties.php" class="nav-link">
+                        <i class="nav-icon fas fa-fire"></i>
+                        <p>View Penalties</p>
+                        </a>
+                      </li>
+                      ';
+        }
+
+        ?>
       </ul>
     </li>
     <li class="nav-item">
@@ -146,19 +159,19 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
+          <a href="../edit-profile.php" class="nav-link">
+            <i class="fas fa-cog nav-icon"></i>
+            <p>Edit Profile</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="./register.php" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>Register</p>
+            <p>Register An Admin</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="./recover-password.php" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Recover Password</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./signout.php" class="nav-link">
+          <a href="./index.php?signout" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Sign Out</p>
           </a>
