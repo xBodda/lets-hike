@@ -15,10 +15,10 @@ if (isset($_POST['submit'])) {
 	$images = $_POST['images'];
 
 	if (strlen($name) >= 3 && strlen($name) < 128) {
-			if (strlen($overview) >= 3 && strlen($overview) < 1000) {
-				if (strlen($route) >= 3 && strlen($route) < 1000) {
-					if (strlen($safety) >= 3 && strlen($safety) < 1000) {
-						if (strlen($howtobook) >= 3 && strlen($howtobook) < 1000) {
+			if (strlen($overview) >= 3 && strlen($overview) < 2000) {
+				if (strlen($route) >= 3 && strlen($route) < 2000) {
+					if (strlen($safety) >= 3 && strlen($safety) < 2000) {
+						if (strlen($howtobook) >= 3 && strlen($howtobook) < 2000) {
 							if (strlen($price) >= 1 && strlen($price) <= 5) {
 								DB::query(
 									'INSERT INTO hikes VALUES(\'\',:name,:location,:overview,:route,:safety,:howtobook,:price)',
@@ -302,13 +302,14 @@ if (isset($_GET["action"])) {
 												<?php
 												$faq_data = DB::query('SELECT * FROM hikes');
 												foreach ($faq_data as $fd) {
+													$country = DB::query('SELECT name FROM country WHERE id=:id',array(':id'=>$fd['location']))[0]['name'];
 												?>
 													<tr>
 														<td>
 															<?php echo $fd['id'] ?>
 														</td>
 														<td><abbr title="<?php echo $fd['name']; ?>"><?php echo truncate($fd['name'], 35); ?></abbr></td>
-														<td><abbr title="<?php echo $fd['location']; ?>"><?php echo truncate($fd['location'], 35); ?></abbr></td>
+														<td><abbr title="<?php echo $country; ?>"><?php echo truncate($country, 35); ?></abbr></td>
 														<td><?php echo CalculateRating($fd['id']); ?></td>
 														<td>
 															<button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-groups.php?action=delete&id=<?php echo $fd["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>

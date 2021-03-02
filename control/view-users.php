@@ -109,7 +109,7 @@ if (isset($_GET["activate"])) {
                         </thead>
                         <tbody>
                           <?php
-                          $user_info = DB::query('SELECT * FROM users');
+                          $user_info = DB::query('SELECT * FROM users WHERE type = 1');
                           foreach ($user_info as $ui) {
                             $gender = $ui['gender'];
                             if ($gender == 1) {
@@ -129,13 +129,7 @@ if (isset($_GET["activate"])) {
                               <td>
                                 <button class="btn  btn-outline-danger btn-sm" onClick="(function(){window.location='view-users.php?action=delete&id=<?php echo $ui["id"]; ?>';return false;})();return false;"><i class="fas fa-trash"></i></button>
                                 &nbsp;&nbsp;
-                                <button class="btn btn-outline-success btn-sm" onClick="(function(){window.location='compose-users.php?to=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-comment"></i></button>
-                                &nbsp;&nbsp;
                                 <button class="btn btn-outline-primary btn-sm" onClick="(function(){window.location='edit-user.php?us=<?php echo $ui['id']; ?>';return false;})();return false;"><i class="fas fa-cog"></i></button>
-                                &nbsp;&nbsp;
-                                <button id="dect" class="btn btn-outline-danger btn-sm" onClick="(function(){window.location='view-users.php?deactivate=<?php echo $ui['id']; ?>';return false;})();return false;">Deactivate</button>
-                                &nbsp;&nbsp;
-                                <button id="act" class="btn btn-outline-success btn-sm" onClick="(function(){window.location='view-users.php?activate=<?php echo $ui['id']; ?>';return false;})();return false;">Activate</button>
                               </td>
                             </tr>
                           <?php } ?>
