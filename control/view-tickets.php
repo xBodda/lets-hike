@@ -4,7 +4,6 @@ if (!Login::isLoggedIn()) {
   echo '<script>window.location="404.php"</script>';
 }
 
-
 if (isset($_GET["action"])) {
   if ($_GET["action"] == "delete") {
     DB::query('DELETE FROM message_reports WHERE ticket_id=:id', array(':id' => $_GET["id"]));

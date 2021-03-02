@@ -122,3 +122,4 @@ if($check_survey){
   var currency = '<?php echo $_SESSION['currency']; ?>';
 </script>
 <script type="text/javascript" src="layout/js/all.js"></script>
+<script type="text/javascript" src="layout/js/smooth.js"></script>
