@@ -10,6 +10,11 @@ if (isset($_GET['ticket'])) {
     exit;
 }
 
+if (!Login::isLoggedIn()) {
+    echo '<script>alert("You have to login to book")</script>';
+    echo '<script>window.location="signin.php"</script>';
+  }
+
 
 if ($ticketInfo['user_id'] != Login::isLoggedIn()) {
     http_response_code(404);

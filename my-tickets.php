@@ -4,6 +4,12 @@
 		header('Location:./control/view-tickets.php');
 		exit;
 	}
+
+	if (!Login::isLoggedIn()) {
+		echo '<script>alert("You have to login to book")</script>';
+		echo '<script>window.location="signin.php"</script>';
+	  }
+	  
     if(isset($_POST["send"]))  
     {
         $name = $_POST['name'];
